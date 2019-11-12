@@ -1,0 +1,8 @@
+{
+  "name": "ez",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ez-fe/ez.git",
+  "author": "Day <daychongyang@gmail.com>",
+  "license": "MIT"
+}
