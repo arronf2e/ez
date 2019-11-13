@@ -1,7 +1,10 @@
 {
   "name": "ez",
   "version": "1.0.0",
-  "main": "index.js",
+  "scripts": {
+    "clean": "lerna clean",
+    "bootstrap": "lerna bootstrap"
+  },
   "repository": "git@github.com:ez-fe/ez.git",
   "author": "Day <daychongyang@gmail.com>",
   "license": "MIT",
