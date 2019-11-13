@@ -1,0 +1,10 @@
+{
+  "packages": ["packages/*"],
+  "command": {
+    "publish": {
+      "conventionalCommits": true
+    }
+  },
+  "version": "1.0.0",
+  "npmClient": "yarn"
+}
