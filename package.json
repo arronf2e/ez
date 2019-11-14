@@ -40,7 +40,6 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "module-alias": "^2.2.2",
     "semver": "^6.3.0"
   }
 }
