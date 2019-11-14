@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2017",
+    "declaration": false,
+    "outDir": "lib",
+    "rootDirs": ["src", "tests"]
+  },
+  "exclude": ["tests", "lib", "**/__tests__"]
+}

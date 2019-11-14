@@ -1,10 +1,21 @@
 {
-  "name": "cli",
+  "name": "ez-cli",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "./lib/index.js",
+  "bin": {
+    "ez": "./bin/ez"
   },
-  "license": "ISC"
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "yargs": "^14.2.0"
+  },
+  "devDependencies": {
+    "@types/yargs": "^13.0.3"
+  }
 }
