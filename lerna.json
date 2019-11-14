@@ -3,6 +3,9 @@
   "command": {
     "publish": {
       "conventionalCommits": true
+    },
+    "run": {
+      "npmClient": "yarn"
     }
   },
   "version": "1.0.0",

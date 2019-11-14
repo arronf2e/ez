@@ -2,6 +2,7 @@
   "name": "ez",
   "version": "1.0.0",
   "scripts": {
+    "dev": "lerna run dev --parallel",
     "clean": "lerna clean",
     "bootstrap": "lerna bootstrap"
   },
