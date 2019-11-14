@@ -1,7 +1,7 @@
 import { command } from 'yargs';
 
 command({
-  command: 'info',
+  command: ['info'],
   describe: 'Diagnostics env info',
   handler: () => {
     console.log('info');
