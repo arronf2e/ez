@@ -1,11 +1,7 @@
 import yargs from 'yargs';
-import { satisfies } from 'semver';
-import { em, error } from './utils';
+import { em, checkVersion } from './helper';
 
-if (!satisfies(process.version, '>= 8.0.0')) {
-  console.error(error('\n ✘ Only work with Node v8.0.0 and up!'));
-  process.exit(1);
-}
+checkVersion();
 
 yargs
   .usage(`Usage: ${em('$0 <command> [options]')}`)
