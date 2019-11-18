@@ -1,6 +1,6 @@
 import { command } from 'yargs';
 import { prompt } from 'inquirer';
-import { getGenerators } from './generator';
+import { getGeneratorList } from './generator';
 
 command({
   command: 'init',
@@ -11,7 +11,7 @@ command({
         name: 'type',
         message: 'Select the boilerplate type',
         type: 'list',
-        choices: getGenerators(),
+        choices: getGeneratorList(),
       },
     ]);
 

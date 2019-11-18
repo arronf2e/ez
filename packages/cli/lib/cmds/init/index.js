@@ -12,7 +12,7 @@ yargs_1.command({
                 name: 'type',
                 message: 'Select the boilerplate type',
                 type: 'list',
-                choices: generator_1.getGenerators(),
+                choices: generator_1.getGeneratorList(),
             },
         ]);
         console.log(answers);
