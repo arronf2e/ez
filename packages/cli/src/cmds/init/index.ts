@@ -11,7 +11,7 @@ command({
         name: 'type',
         message: 'Select the boilerplate type',
         type: 'list',
-        choices: getGeneratorList(),
+        choices: await getGeneratorList(),
       },
     ]);
 
