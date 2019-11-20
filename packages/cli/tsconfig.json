@@ -7,5 +7,6 @@
     "outDir": "lib",
     "rootDirs": ["src", "tests"]
   },
-  "exclude": ["tests", "lib", "**/__tests__"]
+  "include": ["src"],
+  "exclude": ["tests", "lib", "**/__tests__", "templates"]
 }
