@@ -9,12 +9,8 @@ export interface Meta {
 
 export type GeneratorMeta = Pick<Meta, 'boilerplateType'>;
 
-export abstract class Generator<T> {
-  meta: GeneratorMeta;
-
-  constructor(meta: GeneratorMeta) {
-    this.meta = meta;
-  }
+export abstract class BasicGenerator<T> {
+  abstract meta: GeneratorMeta;
 
   abstract prompt(): T;
 

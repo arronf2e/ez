@@ -1,13 +1,13 @@
 import { command } from 'yargs';
 import { prompt } from 'inquirer';
 import { getGeneratorList } from './get-generator-list';
-import { AppGenerator } from '@/generators/app';
+import { getGenerator } from './get-generator';
 
 command({
   command: 'init',
   describe: 'Init a project with default templete',
   handler: async () => {
-    const answers = await prompt([
+    const { boilerplateType } = await prompt([
       {
         name: 'boilerplateType',
         message: 'Select the boilerplate type',
@@ -15,6 +15,7 @@ command({
         choices: await getGeneratorList(),
       },
     ]);
-    new AppGenerator(answers).prompt();
+    const generator = await getGenerator(boilerplateType);
+    generator.build();
   },
 });
