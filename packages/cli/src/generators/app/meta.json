@@ -1,5 +1,6 @@
 {
   "name": "app",
+  "boilerplateType": "app",
   "description": "create project with a simple boilerplate.",
   "inquirer": []
 }

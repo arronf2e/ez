@@ -1,11 +1,18 @@
+import { Question } from 'inquirer';
+
 export interface Meta {
+  name: string;
   boilerplateType: string;
+  description?: string;
+  inquirer: Question[];
 }
 
-export abstract class Generator<T> {
-  meta: Meta;
+export type GeneratorMeta = Pick<Meta, 'boilerplateType'>;
 
-  constructor(meta: Meta) {
+export abstract class Generator<T> {
+  meta: GeneratorMeta;
+
+  constructor(meta: GeneratorMeta) {
     this.meta = meta;
   }
 

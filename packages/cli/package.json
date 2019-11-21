@@ -25,13 +25,11 @@
     "metalsmith": "^2.3.0",
     "module-alias": "^2.2.2",
     "semver": "^6.3.0",
-    "yargs": "^14.2.0",
-    "yeoman-generator": "^4.2.0"
+    "yargs": "^14.2.0"
   },
   "devDependencies": {
     "@types/inquirer": "^6.5.0",
     "@types/metalsmith": "^2.3.0",
-    "@types/yargs": "^13.0.3",
-    "@types/yeoman-generator": "^3.1.4"
+    "@types/yargs": "^13.0.3"
   }
 }

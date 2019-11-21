@@ -23,9 +23,7 @@ const addMetaInformation = async ({ generatorsDir, target }: TargetPathInfo) => 
     const targetMetaPath = resolve(generatorsDir, target, 'meta.json');
     const hasMetaData = statSync(targetMetaPath).isFile();
     if (hasMetaData) {
-      const {
-        default: { name, description },
-      } = await import(targetMetaPath);
+      const { name, description } = await import(targetMetaPath);
 
       return {
         name: `${name} ${info(description)}`,

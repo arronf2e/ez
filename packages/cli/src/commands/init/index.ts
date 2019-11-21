@@ -15,7 +15,6 @@ command({
         choices: await getGeneratorList(),
       },
     ]);
-    console.log(answers);
     new AppGenerator(answers).prompt();
   },
 });

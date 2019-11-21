@@ -1,17 +1,20 @@
+import { resolve } from 'path';
 // import { prompt } from 'inquirer';
-import { Generator, Meta } from '@/generators';
+import { Generator, Meta, GeneratorMeta } from '@/generators';
 // import { message } from '@/helpers';
+import { dynamicImport } from '@/helpers';
 
 interface Data {}
 
 export class AppGenerator extends Generator<Data> {
-  constructor(meta: Meta) {
+  constructor(meta: GeneratorMeta) {
     super(meta);
   }
 
   async prompt() {
     try {
-      await import('./meta.json');
+      const a = await dynamicImport<Meta>(resolve(__dirname, './meta.json'));
+      console.log(a);
     } catch (e) {
       return {};
     }
