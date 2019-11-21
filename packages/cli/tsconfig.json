@@ -3,10 +3,14 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "ES2017",
+    "resolveJsonModule": true,
     "declaration": false,
     "outDir": "lib",
-    "rootDirs": ["src", "tests"]
+    "rootDirs": ["src", "tests"],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["src"],
-  "exclude": ["tests", "lib", "**/__tests__", "templates"]
+  "include": ["src", "src/**/*.json"]
 }

@@ -1,7 +1,7 @@
 import { command } from 'yargs';
 import { prompt } from 'inquirer';
-import { getTamplateList } from './get-template-list';
-import { Generator } from './generator';
+import { getGeneratorList } from './get-generator-list';
+import { AppGenerator } from '@/generators/app';
 
 command({
   command: 'init',
@@ -9,13 +9,13 @@ command({
   handler: async () => {
     const answers = await prompt([
       {
-        name: 'type',
+        name: 'boilerplateType',
         message: 'Select the boilerplate type',
         type: 'list',
-        choices: await getTamplateList(),
+        choices: await getGeneratorList(),
       },
     ]);
     console.log(answers);
-    new Generator('a', {}).run();
+    new AppGenerator(answers).prompt();
   },
 });
