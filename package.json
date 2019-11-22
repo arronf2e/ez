@@ -41,7 +41,5 @@
     "prettier": "^1.19.1",
     "typescript": "^3.7.2"
   },
-  "dependencies": {
-    "semver": "^6.3.0"
-  }
+  "dependencies": {}
 }
