@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { readdirSync, statSync, existsSync } from 'fs';
-import { info } from '@/helpers';
+import { info, message } from '@/helpers';
 
 interface TargetPathInfo {
   generatorsDir: string;
@@ -48,7 +48,7 @@ export const getGeneratorList = async () => {
         .map(async target => await addMetaInformation({ generatorsDir, target }))
     );
   } catch (e) {
-    console.error(e);
-    return [];
+    message.error(e);
+    process.exit(-1);
   }
 };
