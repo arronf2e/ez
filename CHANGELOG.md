@@ -30,16 +30,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * log message ([64bcabe](https://github.com/ez-fe/ez/commit/64bcabea1982624bde25a44e2201bae3d3068059))
 * npmignore ([2b8f41a](https://github.com/ez-fe/ez/commit/2b8f41aa2fa357b32b41b2369cc74e4de87646cf))
 * prepare for repo temp ([5fd61af](https://github.com/ez-fe/ez/commit/5fd61afe4ce1da76c01351dd77b3b7eec09cb7c0))
+* printWidth ([f210bbd](https://github.com/ez-fe/ez/commit/f210bbd803d8813bb0b586b67a055b846026fa7b))
 * remove useless ([3b26335](https://github.com/ez-fe/ez/commit/3b2633511f9e47b34675d2f293bd61e47bff6d84))
+* remove useless module ([6861ce5](https://github.com/ez-fe/ez/commit/6861ce58553022f03858be4ab16733e988f6127c))
 * replace console ([945790c](https://github.com/ez-fe/ez/commit/945790c1af09a795f0403292ec660042ffe381cf))
 * update dependencies ([e82bbff](https://github.com/ez-fe/ez/commit/e82bbffbb7e6eabe37da1dff269a47f0dec14faf))
+* update scripts ([60233b7](https://github.com/ez-fe/ez/commit/60233b7fecec6c1ed3cc335bffb380b665e3298a))
 * verion check ([12ca7d7](https://github.com/ez-fe/ez/commit/12ca7d7f22f370576e6bea6cc21c7735bf78e986))
+* 更新脚本名称 ([c183082](https://github.com/ez-fe/ez/commit/c183082a5610a6da3cd699d379af0c196e28c638))
 * 目录划分 ([f5e47ee](https://github.com/ez-fe/ez/commit/f5e47ee2fe453b6c89cb21b45a3b4b937f5e0201))
-
-
-
-
-
-
-
-**Note:** Version bump only for package @ez-fe/ez-cli
