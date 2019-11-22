@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0](https://github.com/ez-fe/ez/compare/v0.0.5...v0.1.0) (2019-11-22)
+
+
+### Features
+
+* remove useless ([3b26335](https://github.com/ez-fe/ez/commit/3b2633511f9e47b34675d2f293bd61e47bff6d84))
+
+
+
+
+
 ## [0.0.5](https://github.com/ez-fe/ez/compare/v0.0.3...v0.0.5) (2019-11-22)
 
 
