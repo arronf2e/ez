@@ -20,5 +20,5 @@ yargs
   .fail((msg, err) => {
     if (err) throw err;
     message.error(msg);
-    message.info(`Specify ${em('--help1')} for available commands.`);
+    message.info(`Specify ${em('--help')} for available commands.`);
   }).argv;
