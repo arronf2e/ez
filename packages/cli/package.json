@@ -16,6 +16,14 @@
     "Webpack",
     "CLI"
   ],
+  "files": [
+    "./bin",
+    "./lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ez-fe/ez.git"
+  },
   "author": "daychongyang",
   "license": "ISC",
   "dependencies": {

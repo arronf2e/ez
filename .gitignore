@@ -95,7 +95,10 @@ public/
 # DynamoDB Local files
 .dynamodb/
 
+# Dependency lock
+yarn.lock
 
+# packages
 packages/*/yarn.lock
 packages/*/package-lock.json
 
