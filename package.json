@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "lerna run dev --parallel",
     "clean": "lerna clean",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "prerelease": "npm run lint && npm run test && lerna exec -- rm -rf lib && lerna run build"
   },
   "repository": "git@github.com:ez-fe/ez.git",
   "author": "Day <daychongyang@gmail.com>",

@@ -103,6 +103,4 @@ package-lock.json
 packages/*/yarn.lock
 packages/*/package-lock.json
 
-packages/*/lib/
-
 # End of https://www.gitignore.io/api/node
