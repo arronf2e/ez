@@ -16,7 +16,7 @@ yargs
   .showHelpOnFail(true)
   .detectLocale(false)
   .epilog(`run ${em('ez [command] --help')} for usage of a specific command.`)
-  .demandCommand(1, error('You need at least one command before!'))
+  .demandCommand(1, error('You need at least one command!'))
   .fail((msg, err) => {
     if (err) throw err;
     message.error(msg);
