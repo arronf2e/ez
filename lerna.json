@@ -1,15 +1,14 @@
 {
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "command": {
     "publish": {
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "registry": "https://npm.pkg.github.com"
     },
     "run": {
       "npmClient": "yarn"
     }
   },
-  "version": "1.0.1",
+  "version": "1.0.0",
   "npmClient": "yarn"
 }
