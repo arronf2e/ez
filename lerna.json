@@ -1,7 +1,5 @@
 {
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "command": {
     "publish": {
       "conventionalCommits": true
@@ -10,6 +8,6 @@
       "npmClient": "yarn"
     }
   },
-  "version": "1.0.2",
+  "version": "1.0.0",
   "npmClient": "yarn"
 }
