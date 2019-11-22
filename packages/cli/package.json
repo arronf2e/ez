@@ -46,6 +46,7 @@
   "devDependencies": {
     "@types/inquirer": "^6.5.0",
     "@types/metalsmith": "^2.3.0",
+    "@types/semver": "^6.2.0",
     "@types/yargs": "^13.0.3"
   },
   "gitHead": "bc7a27527d8324b47a55e9d5ca5f4f1cc0456b31"
