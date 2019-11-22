@@ -1,6 +1,6 @@
 {
   "name": "ez-cli",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "Create Ez apps with no build configuration.",
   "bin": {
     "ez": "./bin/ez"
@@ -39,5 +39,6 @@
     "@types/inquirer": "^6.5.0",
     "@types/metalsmith": "^2.3.0",
     "@types/yargs": "^13.0.3"
-  }
+  },
+  "gitHead": "ead2b1bcdb38f64a23a0eae508aad640cce9bfe5"
 }
