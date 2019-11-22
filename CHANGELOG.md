@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.4](https://github.com/ez-fe/ez/compare/v0.0.3...v0.0.4) (2019-11-22)
+
+
+### Features
+
+* add lib ([4b5f018](https://github.com/ez-fe/ez/commit/4b5f0189a673041fd109367a6ed77ee90e86e99e))
+
+
+
+
+
 ## [0.0.3](https://github.com/ez-fe/ez/compare/v0.0.2...v0.0.3) (2019-11-22)
 
 
