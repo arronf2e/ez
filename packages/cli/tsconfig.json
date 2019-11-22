@@ -6,7 +6,7 @@
     "resolveJsonModule": true,
     "declaration": false,
     "outDir": "lib",
-    "rootDirs": ["src", "tests"],
+    "rootDir": "src",
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]

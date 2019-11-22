@@ -11,6 +11,7 @@ export async function getGenerator(boilerplateType: string): Promise<Generator |
     return new Generator({ boilerplateType });
   } catch (e) {
     message.error(e);
+    throw e;
     process.exit(-1);
   }
 }
