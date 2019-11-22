@@ -1,6 +1,6 @@
 {
   "name": "ez",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "scripts": {
     "dev": "lerna run dev --parallel",
     "clean": "lerna clean",
