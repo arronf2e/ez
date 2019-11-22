@@ -1,8 +1,8 @@
 import 'module-alias/register';
 import yargs from 'yargs';
-import { em, checkVersion, error, message } from '@/helpers';
+import { em, checkNodeVersion, error, message } from '@/helpers';
 
-checkVersion();
+checkNodeVersion();
 
 yargs
   .scriptName('ez')

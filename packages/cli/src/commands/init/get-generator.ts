@@ -10,8 +10,7 @@ export async function getGenerator(boilerplateType: string): Promise<Generator |
     const { Generator } = await dynamicImport<{ Generator: TemplateGenerator }>(`@/generators/${boilerplateType}`);
     return new Generator({ boilerplateType });
   } catch (e) {
-    message.error(e);
+    message.error('Generator not found!');
     throw e;
-    process.exit(-1);
   }
 }

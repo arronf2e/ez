@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { readdirSync, statSync } from 'fs';
+import { readdirSync, statSync, existsSync } from 'fs';
 import { info } from '@/helpers';
 
 interface TargetPathInfo {
@@ -10,7 +10,7 @@ interface TargetPathInfo {
 /** 过滤非文件夹与隐藏文件 */
 const filterSpecified = ({ generatorsDir, target }: TargetPathInfo) => {
   const targetPath = resolve(generatorsDir, target);
-  if (statSync(targetPath).isDirectory() && !target.startsWith('.')) {
+  if (existsSync(targetPath) && statSync(targetPath).isDirectory() && !target.startsWith('.')) {
     return true;
   }
 
@@ -19,8 +19,9 @@ const filterSpecified = ({ generatorsDir, target }: TargetPathInfo) => {
 
 /** 补充元信息 */
 const addMetaInformation = async ({ generatorsDir, target }: TargetPathInfo) => {
-  try {
-    const targetMetaPath = resolve(generatorsDir, target, 'meta.json');
+  const targetMetaPath = resolve(generatorsDir, target, 'meta.json');
+
+  if (existsSync(targetMetaPath)) {
     const hasMetaData = statSync(targetMetaPath).isFile();
     if (hasMetaData) {
       const { name, description } = await import(targetMetaPath);
@@ -30,12 +31,6 @@ const addMetaInformation = async ({ generatorsDir, target }: TargetPathInfo) => 
         value: target,
       };
     }
-  } catch (e) {
-    console.error(e);
-    return {
-      name: target,
-      value: target,
-    };
   }
 
   return {

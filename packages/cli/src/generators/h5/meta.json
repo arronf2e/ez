@@ -1,7 +1,7 @@
 {
-  "name": "app",
-  "boilerplateType": "app",
-  "description": "react admin.",
+  "name": "h5",
+  "boilerplateType": "h5",
+  "description": "H5",
   "inquirer": [
     {
       "name": "typescript",

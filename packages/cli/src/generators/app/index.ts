@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import { prompt } from 'inquirer';
+import { existsSync } from 'fs';
 import { BasicGenerator, Meta, GeneratorMeta } from '@/generators';
 import { dynamicImport } from '@/helpers';
 
@@ -14,17 +15,19 @@ export class Generator extends BasicGenerator<Data> {
   }
 
   async prompt() {
-    try {
-      const metaPath = resolve(__dirname, './meta.json');
+    const metaPath = resolve(__dirname, './meta.json');
+
+    if (existsSync(metaPath)) {
       const { inquirer } = await dynamicImport<Meta>(metaPath);
       return await prompt(inquirer);
-    } catch (e) {
-      return {};
     }
+
+    return {};
   }
 
   async build() {
     const data = await this.prompt();
+
     console.log(data);
   }
 }
