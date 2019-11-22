@@ -16,10 +16,17 @@
     "Webpack",
     "CLI"
   ],
+  "directories": {
+    "bin": "./bin",
+    "lib": "./lib"
+  },
   "files": [
-    "./bin",
-    "./lib"
+    "bin",
+    "lib"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ez-fe/ez.git"
