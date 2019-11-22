@@ -1,6 +1,6 @@
 {
-  "name": "ez",
-  "version": "0.0.1",
+  "name": "@ez-fe/ez",
+  "version": "0.0.2",
   "scripts": {
     "dev": "lerna run dev --parallel",
     "clean": "lerna clean",
@@ -40,7 +40,6 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "axios": "^0.19.0",
     "semver": "^6.3.0"
   }
 }
