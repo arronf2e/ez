@@ -97,6 +97,7 @@ public/
 
 # Dependency lock
 yarn.lock
+package-lock.json
 
 # packages
 packages/*/yarn.lock

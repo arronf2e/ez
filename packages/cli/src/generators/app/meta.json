@@ -7,10 +7,10 @@
       "name": "typescript",
       "type": "confirm",
       "message": "Do you want to use typescript?",
-      "default": false
+      "default": true
     },
     {
-      "name": "reactFeatures",
+      "name": "features",
       "message": "What functionality do you want to enable?",
       "type": "checkbox",
       "choices": [
