@@ -1,6 +1,6 @@
 {
   "name": "ez-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Create Ez apps with no build configuration.",
   "bin": {
     "ez": "./bin/ez"
