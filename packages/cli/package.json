@@ -40,5 +40,5 @@
     "@types/metalsmith": "^2.3.0",
     "@types/yargs": "^13.0.3"
   },
-  "gitHead": "ead2b1bcdb38f64a23a0eae508aad640cce9bfe5"
+  "gitHead": "5c6bdacbc75428d304ed820654f1e308bef136d4"
 }
