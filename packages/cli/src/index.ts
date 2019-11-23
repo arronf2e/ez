@@ -1,12 +1,14 @@
 import 'module-alias/register';
 import yargs from 'yargs';
-import { em, checkNodeVersion, error, message } from '@/helpers';
+import { message, em, error, checkNodeVersion, checkUpdate } from '@/helpers';
 
 checkNodeVersion();
 
+checkUpdate();
+
 yargs
   .scriptName('ez')
-  .strict()
+  .version()
   .usage(`Usage: ${em('$0 <command> [options]')}`)
   .commandDir('commands', { recurse: true })
   .alias({
@@ -17,8 +19,8 @@ yargs
   .detectLocale(false)
   .epilog(`run ${em('ez [command] --help')} for usage of a specific command.`)
   .demandCommand(1, error('You need at least one command!'))
+  .recommendCommands()
   .fail((msg, err) => {
     if (err) throw err;
     message.error(msg);
-    message.info(`Specify ${em('--help')} for available commands.`);
   }).argv;

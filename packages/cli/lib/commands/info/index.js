@@ -5,6 +5,7 @@ yargs_1.command({
     command: ['info'],
     describe: 'Diagnostics env info',
     handler: () => {
+        console.log(yargs_1.env().config());
         console.log('info');
     },
 });
