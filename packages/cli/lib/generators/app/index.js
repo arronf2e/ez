@@ -32,13 +32,15 @@ class Generator extends generators_1.BasicGenerator {
         const git = promise_1.default(templatePath);
         if (!hasTemplate) {
             await git.init();
+            /** https://gitee.com/ez-fe/react-admin-template.git */
             await git.addRemote('origin', 'https://gitee.com/ez-fe/react-admin-template.git');
         }
-        const spinner = ora_1.default(helpers_1.info('Updating template'));
+        const spinner = ora_1.default(helpers_1.info(hasTemplate ? 'Updating template...' : 'Downloading template...'));
         try {
             spinner.start();
             await git.pull('origin', 'master', { '--rebase': 'true' });
             spinner.stop();
+            helpers_1.message.success(hasTemplate ? 'Template update completed!' : 'Template download completed!');
         }
         catch (e) {
             spinner.stop();
@@ -48,7 +50,6 @@ class Generator extends generators_1.BasicGenerator {
     async build() {
         const data = await this.prompt();
         await this.updateTemplate();
-        helpers_1.message.success('Template update completed!');
         console.log(data);
     }
 }
