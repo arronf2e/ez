@@ -3,14 +3,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const inquirer_1 = require("inquirer");
 const fs_1 = require("fs");
+const inquirer_1 = require("inquirer");
 const ora_1 = __importDefault(require("ora"));
 const promise_1 = __importDefault(require("simple-git/promise"));
 const helpers_1 = require("@/helpers");
 class BasicGenerator {
     constructor(meta) {
         this.meta = meta;
+    }
+    async prompt({ metaPath }) {
+        if (fs_1.existsSync(metaPath)) {
+            const { inquirer } = await helpers_1.dynamicImport(metaPath);
+            return await inquirer_1.prompt(inquirer);
+        }
+        return {};
     }
     async updateTemplate({ templatePath, remoteUrl }) {
         const hasTemplate = fs_1.existsSync(templatePath);
@@ -25,7 +32,9 @@ class BasicGenerator {
         const spinner = ora_1.default(helpers_1.info(hasTemplate ? 'Updating template...' : 'Downloading template...'));
         try {
             spinner.start();
-            await git.pull('origin', 'master', { '--rebase': 'true' });
+            await git.pull('origin', 'master', {
+                '--rebase': 'true',
+            });
             spinner.stop();
             helpers_1.message.success(hasTemplate ? 'Template update completed!' : 'Template download completed!');
         }
@@ -33,13 +42,6 @@ class BasicGenerator {
             spinner.stop();
             helpers_1.message.error(e);
         }
-    }
-    async prompt({ metaPath }) {
-        if (fs_1.existsSync(metaPath)) {
-            const { inquirer } = await helpers_1.dynamicImport(metaPath);
-            return await inquirer_1.prompt(inquirer);
-        }
-        return {};
     }
 }
 exports.BasicGenerator = BasicGenerator;

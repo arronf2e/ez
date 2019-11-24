@@ -17,6 +17,6 @@ yargs_1.command({
             },
         ]);
         const generator = await get_generator_1.getGenerator(boilerplateType);
-        generator.build();
+        generator.run();
     },
 });

@@ -16,6 +16,6 @@ command({
       },
     ]);
     const generator = await getGenerator(boilerplateType);
-    generator.build();
+    generator.run();
   },
 });
