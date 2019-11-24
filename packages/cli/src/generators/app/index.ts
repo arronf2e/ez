@@ -1,5 +1,4 @@
 import { resolve } from 'path';
-
 import { BasicGenerator, GeneratorMeta } from '@/generators';
 
 export class Generator extends BasicGenerator {
