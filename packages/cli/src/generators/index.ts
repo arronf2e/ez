@@ -1,4 +1,9 @@
+import { prompt } from 'inquirer';
+import { existsSync, mkdirSync } from 'fs';
+import ora from 'ora';
+import Git from 'simple-git/promise';
 import { Question } from 'inquirer';
+import { dynamicImport, message, info } from '@/helpers';
 
 export interface Meta {
   name: string;
@@ -11,14 +16,50 @@ export type GeneratorMeta = Pick<Meta, 'boilerplateType'>;
 
 export interface Generator {
   meta: GeneratorMeta;
-  prompt(): any;
+  prompt({ metaPath }: { metaPath: string }): object;
   build(): void;
 }
 
-export abstract class BasicGenerator<T> implements Generator {
-  abstract meta: GeneratorMeta;
+export abstract class BasicGenerator implements Generator {
+  meta: GeneratorMeta;
 
-  abstract prompt(): T;
+  constructor(meta: GeneratorMeta) {
+    this.meta = meta;
+  }
+
+  async updateTemplate({ templatePath, remoteUrl }: { templatePath: string; remoteUrl: string }) {
+    const hasTemplate = existsSync(templatePath);
+    if (!hasTemplate) {
+      mkdirSync(templatePath);
+    }
+
+    const git = Git(templatePath);
+
+    if (!hasTemplate) {
+      await git.init();
+      await git.addRemote('origin', remoteUrl);
+    }
+    const spinner = ora(info(hasTemplate ? 'Updating template...' : 'Downloading template...'));
+
+    try {
+      spinner.start();
+      await git.pull('origin', 'master', { '--rebase': 'true' });
+      spinner.stop();
+      message.success(hasTemplate ? 'Template update completed!' : 'Template download completed!');
+    } catch (e) {
+      spinner.stop();
+      message.error(e);
+    }
+  }
+
+  async prompt({ metaPath }: { metaPath: string }): Promise<object> {
+    if (existsSync(metaPath)) {
+      const { inquirer } = await dynamicImport<Meta>(metaPath);
+      return await prompt(inquirer);
+    }
+
+    return {};
+  }
 
   abstract build(): void;
 }
