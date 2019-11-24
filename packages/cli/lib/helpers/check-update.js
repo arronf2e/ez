@@ -10,7 +10,7 @@ function checkUpdate() {
     const pkg = read_pkg_up_1.default.sync();
     const notifier = update_notifier_1.default({
         pkg: (_a = pkg) === null || _a === void 0 ? void 0 : _a.packageJson,
-        updateCheckInterval: 1000 * 60 * 10,
+        updateCheckInterval: 0,
     });
     notifier.notify();
 }

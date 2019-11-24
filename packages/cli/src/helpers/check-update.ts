@@ -5,7 +5,7 @@ export function checkUpdate() {
   const pkg = readPkgUp.sync();
   const notifier = updateNotifier({
     pkg: pkg?.packageJson,
-    updateCheckInterval: 1000 * 60 * 10,
+    updateCheckInterval: 0,
   });
 
   notifier.notify();
