@@ -1,6 +1,6 @@
 {
   "name": "@ez-fe/create-ez",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Creates a ez application using the command line.",
   "bin": {
     "create-ez": "./bin/create-ez"
