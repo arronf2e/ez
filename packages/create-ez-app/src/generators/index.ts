@@ -2,24 +2,22 @@ import { resolve } from 'path';
 import { existsSync, mkdirSync } from 'fs';
 import ora from 'ora';
 import Git from 'simple-git/promise';
+// import Metalsmith from 'metalsmith';
 import { prompt, Question } from 'inquirer';
 import { dynamicImport, message, info } from '@/helpers';
-import Metalsmith from 'metalsmith';
 
 export interface Meta {
   name: string;
-  boilerplateType: string;
   description?: string;
-  inquirer: Question[];
+  boilerplateType: string;
 }
 
 export type GeneratorMeta = Pick<Meta, 'boilerplateType'>;
 
 export interface Generator {
   meta: GeneratorMeta;
-  questionsPath: string;
   templatePath: string;
-  prompt(): object;
+  queryFeatures(): object;
   updateTemplate({ templatePath, remoteUrl }: { templatePath: string; remoteUrl: string }): void;
   run(): void;
 }
@@ -27,27 +25,13 @@ export interface Generator {
 export abstract class BasicGenerator implements Generator {
   meta: GeneratorMeta;
 
-  questionsPath: string;
-
   templatePath: string;
 
   constructor(meta: GeneratorMeta) {
     const { boilerplateType } = meta;
 
     this.meta = meta;
-    this.questionsPath = resolve(__dirname, boilerplateType, 'questions');
     this.templatePath = resolve(__dirname, boilerplateType, 'template');
-  }
-
-  async prompt(): Promise<object> {
-    const { questionsPath } = this;
-    try {
-      const { questions } = await dynamicImport<{ questions: Question[] }>(questionsPath);
-      return await prompt(questions);
-    } catch (e) {
-      message.error(e);
-      return {};
-    }
   }
 
   async updateTemplate({ remoteUrl }: { remoteUrl: string }) {
@@ -69,28 +53,33 @@ export abstract class BasicGenerator implements Generator {
 
     try {
       spinner.start();
-      await git.pull('origin', 'master', {
-        '--rebase': 'true',
-      });
-      spinner.stop();
-      message.success(hasTemplate ? 'Template update completed!' : 'Template download completed!');
+      await git.checkout('master');
+      await git.reset('hard');
+      await git.pull('origin', 'master');
     } catch (e) {
-      spinner.stop();
       message.error(e);
+      process.exit(-1);
+    }
+    spinner.stop();
+    message.success(hasTemplate ? 'Template update completed!' : 'Template download completed!');
+  }
+
+  async queryFeatures(): Promise<object> {
+    const { templatePath } = this;
+    try {
+      const { features } = await dynamicImport<{ features: Question[] }>(resolve(templatePath, 'features'));
+      return await prompt(features);
+    } catch (e) {
+      message.error(e);
+      return {};
     }
   }
 
   async render() {
     const { templatePath } = this;
-    console.log(process.cwd());
-    Metalsmith(process.cwd())
-      .metadata({
-        name: 'test',
-        description: 'ddd',
-      })
-      .source(templatePath)
-      // .destination()
-      .clean(false);
+    const features = await this.queryFeatures();
+    console.log(templatePath);
+    console.log(features);
   }
 
   abstract run(): void;
