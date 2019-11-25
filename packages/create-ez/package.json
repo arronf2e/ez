@@ -35,7 +35,7 @@
   "author": "daychongyang",
   "license": "ISC",
   "dependencies": {
-    "@ez-fe/helper": "^0.3.1",
+    "@ez-fe/helper": "file:../helper",
     "chalk": "^3.0.0",
     "inquirer": "^7.0.0",
     "log-symbols": "^3.0.0",
