@@ -1,5 +1,8 @@
 {
-  "packages": ["packages/cli", "packages/helper"],
+  "packages": [
+    "packages/cli",
+    "packages/helper"
+  ],
   "command": {
     "publish": {
       "conventionalCommits": true,
@@ -9,6 +12,6 @@
       "npmClient": "yarn"
     }
   },
-  "version": "0.2.0",
+  "version": "0.3.0",
   "npmClient": "yarn"
 }
