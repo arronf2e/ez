@@ -1,7 +1,5 @@
 {
-  "packages": [
-    "packages/helper"
-  ],
+  "packages": ["packages/cli", "packages/helper"],
   "command": {
     "publish": {
       "conventionalCommits": true,
