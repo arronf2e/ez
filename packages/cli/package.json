@@ -34,8 +34,8 @@
   "author": "daychongyang",
   "license": "ISC",
   "dependencies": {
-    "@ez-fe/create-ez": "file:../create-ez",
-    "@ez-fe/helper": "file:../helper",
+    "@ez-fe/create-ez": "^0.5.2",
+    "@ez-fe/helper": "^0.5.1",
     "axios": "^0.19.0",
     "chalk": "^3.0.0",
     "inquirer": "^7.0.0",
@@ -57,5 +57,5 @@
     "@types/update-notifier": "^2.5.0",
     "@types/yargs": "^13.0.3"
   },
-  "gitHead": "a7eaf36742cc707340da81a4f2a74e070cf8e5b2"
+  "gitHead": "5bba293fbeadd6d44a85345d6dcdcad28b26fe8d"
 }
