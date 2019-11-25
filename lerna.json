@@ -1,8 +1,5 @@
 {
-  "packages": [
-    "packages/cli",
-    "packages/helper"
-  ],
+  "packages": ["packages/cli", "packages/create-ez", "packages/helper"],
   "command": {
     "publish": {
       "conventionalCommits": true,

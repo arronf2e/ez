@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "lerna run dev --parallel",
     "clean": "lerna clean",
+    "build": "lerna run build",
     "bootstrap": "lerna bootstrap",
     "prerelease": "npm run lint && npm run test && lerna exec -- rm -rf lib && lerna run build"
   },

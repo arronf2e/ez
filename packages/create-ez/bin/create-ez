@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+const yargs = require('yargs');
+const { checkNodeVersion, checkUpdate, em } = require('@ez-fe/helper');
+const { create } = require('../lib');
+
+checkNodeVersion();
+
+checkUpdate();
+
+yargs
+  .scriptName('create-ez')
+  .version()
+  .usage(`Usage: ${em('$0')}`)
+  .command('$0', 'Init a project with default templete', () => {}, create)
+  .alias({
+    h: 'help',
+    v: 'version',
+  })
+  .showHelpOnFail(true)
+  .detectLocale(false)
+  .recommendCommands()
+  .fail((msg, err) => {
+    if (err) throw err;
+    message.error(msg);
+  }).argv;

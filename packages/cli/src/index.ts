@@ -1,6 +1,6 @@
 import 'module-alias/register';
 import yargs from 'yargs';
-import { message, em, error, checkNodeVersion, checkUpdate } from '@/helpers';
+import { message, em, error, checkNodeVersion, checkUpdate } from '@ez-fe/helper';
 
 checkNodeVersion();
 
