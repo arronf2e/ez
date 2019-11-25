@@ -1,7 +1,7 @@
 {
   "name": "@ez-fe/cli",
   "version": "0.5.3",
-  "description": "Create Ez apps with no build configuration.",
+  "description": "Cli for Ez.",
   "bin": {
     "ez": "./bin/ez"
   },
@@ -57,5 +57,5 @@
     "@types/update-notifier": "^2.5.0",
     "@types/yargs": "^13.0.3"
   },
-  "gitHead": "5bba293fbeadd6d44a85345d6dcdcad28b26fe8d"
+  "gitHead": "9f8b7e5c452674b0a95a48d753c5b64fb031503f"
 }

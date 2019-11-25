@@ -1,7 +1,7 @@
 {
   "name": "@ez-fe/helper",
   "version": "0.5.1",
-  "description": "Create Ez apps with no build configuration.",
+  "description": "Utils for Ez",
   "main": "./lib/index.js",
   "scripts": {
     "dev": "tsc -w",

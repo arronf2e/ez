@@ -1,13 +1,9 @@
 {
-  "packages": [
-    "packages/cli",
-    "packages/create-ez",
-    "packages/helper"
-  ],
+  "packages": ["packages/cli", "packages/create-ez", "packages/helper"],
   "command": {
     "publish": {
       "conventionalCommits": true,
-      "registry": "https://npm.pkg.github.com"
+      "registry": "https://registry.npmjs.org/"
     },
     "run": {
       "npmClient": "yarn"
