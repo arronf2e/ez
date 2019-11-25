@@ -47,5 +47,5 @@
     "@types/update-notifier": "^2.5.0",
     "@types/yargs": "^13.0.3"
   },
-  "gitHead": "bc7a27527d8324b47a55e9d5ca5f4f1cc0456b31"
+  "gitHead": "9ae44e0407c0c22db202bbca62e1aab37c94013a"
 }
