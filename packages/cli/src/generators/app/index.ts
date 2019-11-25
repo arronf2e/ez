@@ -1,4 +1,3 @@
-import { resolve } from 'path';
 import { BasicGenerator, GeneratorMeta } from '@/generators';
 
 export class Generator extends BasicGenerator {
@@ -7,14 +6,11 @@ export class Generator extends BasicGenerator {
   }
 
   async run() {
-    const templatePath = resolve(__dirname, 'template');
-    const metaPath = resolve(__dirname, './meta.json');
-
-    const data = await this.prompt({ metaPath });
+    const data = await this.prompt();
     await this.updateTemplate({
-      templatePath,
       remoteUrl: 'https://gitee.com/ez-fe/react-admin-template.git',
     });
+    this.render();
     console.log(data);
   }
 }

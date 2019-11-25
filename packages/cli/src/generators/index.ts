@@ -1,9 +1,10 @@
+import { resolve } from 'path';
 import { existsSync, mkdirSync } from 'fs';
-import { prompt } from 'inquirer';
 import ora from 'ora';
 import Git from 'simple-git/promise';
-import { Question } from 'inquirer';
+import { prompt, Question } from 'inquirer';
 import { dynamicImport, message, info } from '@/helpers';
+import Metalsmith from 'metalsmith';
 
 export interface Meta {
   name: string;
@@ -16,7 +17,9 @@ export type GeneratorMeta = Pick<Meta, 'boilerplateType'>;
 
 export interface Generator {
   meta: GeneratorMeta;
-  prompt({ metaPath }: { metaPath: string }): object;
+  questionsPath: string;
+  templatePath: string;
+  prompt(): object;
   updateTemplate({ templatePath, remoteUrl }: { templatePath: string; remoteUrl: string }): void;
   run(): void;
 }
@@ -24,20 +27,32 @@ export interface Generator {
 export abstract class BasicGenerator implements Generator {
   meta: GeneratorMeta;
 
+  questionsPath: string;
+
+  templatePath: string;
+
   constructor(meta: GeneratorMeta) {
+    const { boilerplateType } = meta;
+
     this.meta = meta;
+    this.questionsPath = resolve(__dirname, boilerplateType, 'questions');
+    this.templatePath = resolve(__dirname, boilerplateType, 'template');
   }
 
-  async prompt({ metaPath }: { metaPath: string }): Promise<object> {
-    if (existsSync(metaPath)) {
-      const { inquirer } = await dynamicImport<Meta>(metaPath);
-      return await prompt(inquirer);
+  async prompt(): Promise<object> {
+    const { questionsPath } = this;
+    try {
+      const { questions } = await dynamicImport<{ questions: Question[] }>(questionsPath);
+      return await prompt(questions);
+    } catch (e) {
+      message.error(e);
+      return {};
     }
-
-    return {};
   }
 
-  async updateTemplate({ templatePath, remoteUrl }: { templatePath: string; remoteUrl: string }) {
+  async updateTemplate({ remoteUrl }: { remoteUrl: string }) {
+    const { templatePath } = this;
+
     const hasTemplate = existsSync(templatePath);
     if (!hasTemplate) {
       mkdirSync(templatePath);
@@ -49,6 +64,7 @@ export abstract class BasicGenerator implements Generator {
       await git.init();
       await git.addRemote('origin', remoteUrl);
     }
+
     const spinner = ora(info(hasTemplate ? 'Updating template...' : 'Downloading template...'));
 
     try {
@@ -62,6 +78,19 @@ export abstract class BasicGenerator implements Generator {
       spinner.stop();
       message.error(e);
     }
+  }
+
+  async render() {
+    const { templatePath } = this;
+    console.log(process.cwd());
+    Metalsmith(process.cwd())
+      .metadata({
+        name: 'test',
+        description: 'ddd',
+      })
+      .source(templatePath)
+      // .destination()
+      .clean(false);
   }
 
   abstract run(): void;
