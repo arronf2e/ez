@@ -1,6 +1,6 @@
 {
   "name": "@ez-fe/cli",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Cli for Ez.",
   "bin": {
     "ez": "./bin/ez"
@@ -34,8 +34,8 @@
   "author": "daychongyang",
   "license": "ISC",
   "dependencies": {
-    "@ez-fe/create-ez": "^0.5.3",
-    "@ez-fe/helper": "^0.5.1",
+    "@ez-fe/create-ez": "^0.5.4",
+    "@ez-fe/helper": "^0.5.4",
     "axios": "^0.19.0",
     "chalk": "^3.0.0",
     "inquirer": "^7.0.0",

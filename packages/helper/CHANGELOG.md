@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.4](https://github.com/ez-fe/ez/compare/v0.5.3...v0.5.4) (2019-11-25)
+
+
+### Bug Fixes
+
+* register ([3ebe921](https://github.com/ez-fe/ez/commit/3ebe92158e2001eab62dc0530908fb0283ea01d0))
+
+
+
+
+
 ## [0.5.1](https://github.com/ez-fe/ez/compare/v0.5.0...v0.5.1) (2019-11-25)
 
 

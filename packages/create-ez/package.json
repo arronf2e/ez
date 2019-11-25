@@ -1,6 +1,6 @@
 {
   "name": "@ez-fe/create-ez",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Creates a ez application using the command line.",
   "bin": {
     "create-ez": "./bin/create-ez"
@@ -35,7 +35,7 @@
   "author": "daychongyang",
   "license": "ISC",
   "dependencies": {
-    "@ez-fe/helper": "^0.5.1",
+    "@ez-fe/helper": "^0.5.4",
     "chalk": "^3.0.0",
     "inquirer": "^7.0.0",
     "log-symbols": "^3.0.0",
