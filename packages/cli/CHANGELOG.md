@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/ez-fe/ez/compare/v0.2.0...v0.3.0) (2019-11-25)
+
+
+### Features
+
+* [@helper](https://github.com/helper) ([d0b091e](https://github.com/ez-fe/ez/commit/d0b091eb8acd5c7e38759917997bb73c1d2b5d10))
+* add [@types](https://github.com/types) ([e91cf03](https://github.com/ez-fe/ez/commit/e91cf03118d130ae02ee300a3b0cb1f55a0793da))
+* app template update spinner ([3689575](https://github.com/ez-fe/ez/commit/3689575c0fae32841d8f1b0cef2beb97f25891b6))
+* change question position ([2724f74](https://github.com/ez-fe/ez/commit/2724f74aee5aaecbb9b620f54c97b3e11b0f7372))
+* check update ([d991f73](https://github.com/ez-fe/ez/commit/d991f730160186634287b31310955f58077a0842))
+* custom run method ([842511b](https://github.com/ez-fe/ez/commit/842511bc59c15d893a749fafe9b4c18d22bd4343))
+* extract common ([cca4022](https://github.com/ez-fe/ez/commit/cca4022d0867fbc3acbfa6aaddd71681697474ec))
+* npm repo check ([fb6b94a](https://github.com/ez-fe/ez/commit/fb6b94aea5110ba65c5c828b31cdeb120cdd0e83))
+* update Template ([cb70918](https://github.com/ez-fe/ez/commit/cb7091870769967df5c28244a19d676cb8fa77bd))
+
+
+
+
+
 # 0.2.0 (2019-11-22)
 
 
