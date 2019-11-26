@@ -14,6 +14,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+## [0.5.5](https://github.com/ez-fe/ez/compare/v0.5.4...v0.5.5) (2019-11-26)
+
+
+### Features
+
+* checkUpdate ([dcd7a23](https://github.com/ez-fe/ez/commit/dcd7a23c904bf681f8adcf2fd79de783600839a2))
+
+
+
+
+
 ## [0.5.4](https://github.com/ez-fe/ez/compare/v0.5.3...v0.5.4) (2019-11-25)
 
 
