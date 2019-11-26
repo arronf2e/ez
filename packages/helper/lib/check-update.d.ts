@@ -1,1 +1,1 @@
-export declare function checkUpdate(): void;
+export declare function checkUpdate(cwd: string): void;

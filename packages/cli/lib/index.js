@@ -4,10 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("module-alias/register");
+const path_1 = require("path");
 const yargs_1 = __importDefault(require("yargs"));
 const helper_1 = require("@ez-fe/helper");
 helper_1.checkNodeVersion();
-helper_1.checkUpdate();
+helper_1.checkUpdate(path_1.resolve(__dirname, '..'));
 yargs_1.default
     .scriptName('ez')
     .version()

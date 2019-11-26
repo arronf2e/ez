@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 const yargs = require('yargs');
+const { resolve } = require('path');
 const { checkNodeVersion, checkUpdate, em } = require('@ez-fe/helper');
 const { create } = require('../lib');
 
 checkNodeVersion();
 
-checkUpdate();
+checkUpdate(resolve(__dirname, '..'));
 
 yargs
   .scriptName('create-ez')

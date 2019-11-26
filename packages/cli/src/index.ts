@@ -1,10 +1,11 @@
 import 'module-alias/register';
+import { resolve } from 'path';
 import yargs from 'yargs';
 import { message, em, error, checkNodeVersion, checkUpdate } from '@ez-fe/helper';
 
 checkNodeVersion();
 
-checkUpdate();
+checkUpdate(resolve(__dirname, '..'));
 
 yargs
   .scriptName('ez')

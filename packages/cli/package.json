@@ -35,7 +35,7 @@
   "license": "ISC",
   "dependencies": {
     "@ez-fe/create-ez": "^0.5.4",
-    "@ez-fe/helper": "^0.5.4",
+    "@ez-fe/helper": "../helper",
     "axios": "^0.19.0",
     "chalk": "^3.0.0",
     "inquirer": "^7.0.0",
