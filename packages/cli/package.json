@@ -34,8 +34,8 @@
   "author": "daychongyang",
   "license": "ISC",
   "dependencies": {
-    "@ez-fe/create-ez": "file:../create-ez",
-    "@ez-fe/helper": "file:../helper",
+    "@ez-fe/create-ez": "^0.5.7",
+    "@ez-fe/helper": "^0.5.7",
     "inquirer": "^7.0.0",
     "module-alias": "^2.2.2",
     "yargs": "^14.2.0"
