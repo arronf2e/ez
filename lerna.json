@@ -1,9 +1,5 @@
 {
-  "packages": [
-    "packages/cli",
-    "packages/create-ez",
-    "packages/helper"
-  ],
+  "packages": ["packages/cli", "packages/create-ez", "packages/helper"],
   "command": {
     "publish": {
       "conventionalCommits": true,
@@ -13,6 +9,6 @@
       "npmClient": "yarn"
     }
   },
-  "version": "0.5.5",
+  "version": "0.5.4",
   "npmClient": "yarn"
 }
