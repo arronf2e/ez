@@ -1,7 +1,7 @@
 {
   "name": "@ez-fe/cli",
   "version": "0.5.9",
-  "description": "Cli for Ez.",
+  "description": "Scaffold for Ez.",
   "bin": {
     "ez": "./bin/ez"
   },

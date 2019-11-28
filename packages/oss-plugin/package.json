@@ -1,0 +1,8 @@
+{
+  "name": "@ez-fe/oss-plugin",
+  "version": "0.0.1",
+  "description": "OSS plugin for Ez.",
+  "main": "index.js",
+  "author": "daychongyang",
+  "license": "MIT"
+}

@@ -1,7 +1,7 @@
 {
   "name": "@ez-fe/helper",
   "version": "0.5.7",
-  "description": "Utils for Ez",
+  "description": "Nodejs Utils for Ez",
   "main": "./lib/index.js",
   "scripts": {
     "dev": "tsc -w",
