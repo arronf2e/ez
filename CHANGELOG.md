@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.9](https://github.com/ez-fe/ez/compare/v0.5.8...v0.5.9) (2019-11-28)
+
+
+### Features
+
+* create-ez-app ([c76954b](https://github.com/ez-fe/ez/commit/c76954b2fcf72d7c506c74e8215dfefbec25afd8))
+* d.ts ([819d671](https://github.com/ez-fe/ez/commit/819d6712acff27aa82435af8d5f7b83ef4b1b83a))
+* declaration ([4ae7baa](https://github.com/ez-fe/ez/commit/4ae7baabcf5e3837af5e4e804f291fbac6532656))
+* ez init ([d13a66d](https://github.com/ez-fe/ez/commit/d13a66d2a1c9c9eb7b95f74e8d7c4d6fbfc917bc))
+
+
+
+
+
 ## [0.5.8](https://github.com/ez-fe/ez/compare/v0.5.7...v0.5.8) (2019-11-26)
 
 
