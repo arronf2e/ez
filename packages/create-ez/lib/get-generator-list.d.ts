@@ -1,4 +1,6 @@
-export declare const getGeneratorList: () => Promise<{
+export declare const getGeneratorList: () => Promise<
+  {
     name: string;
     value: string;
-}[] | undefined>;
+  }[]
+>;

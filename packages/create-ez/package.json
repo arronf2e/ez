@@ -36,13 +36,16 @@
   "license": "ISC",
   "dependencies": {
     "@ez-fe/helper": "^0.5.7",
+    "consolidate": "^0.15.1",
     "inquirer": "^7.0.0",
     "metalsmith": "^2.3.0",
     "module-alias": "^2.2.2",
+    "ora": "^4.0.3",
     "simple-git": "^1.126.0",
     "yargs": "^14.2.0"
   },
   "devDependencies": {
+    "@types/consolidate": "^0.14.0",
     "@types/inquirer": "^6.5.0",
     "@types/metalsmith": "^2.3.0",
     "@types/semver": "^6.2.0",
