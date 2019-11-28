@@ -1,15 +1,16 @@
-import { BasicGenerator, GeneratorMeta } from '@/generators';
+import { BasicGenerator, Meta } from '@/generators';
+import { remoteUrl } from './meta.json';
 
 export class Generator extends BasicGenerator {
-  constructor(meta: GeneratorMeta) {
+  constructor(meta: Meta) {
     super(meta);
   }
 
   async run() {
     await this.updateTemplate({
-      remoteUrl: 'https://gitee.com/ez-fe/react-admin-template.git',
+      remoteUrl,
     });
 
-    this.render();
+    this.build();
   }
 }

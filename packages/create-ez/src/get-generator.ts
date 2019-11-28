@@ -1,14 +1,15 @@
 import { dynamicImport, message } from '@ez-fe/helper';
-import { Generator } from '@/generators';
+import { Generator, Meta } from '@/generators';
 
 interface TemplateGenerator extends Generator {
-  new (meta: { boilerplateType: string }): TemplateGenerator;
+  new (meta: Meta): TemplateGenerator;
 }
 
-export async function getGenerator(boilerplateType: string): Promise<Generator | never> {
+export async function getGenerator(meta: Meta): Promise<Generator | never> {
   try {
+    const { boilerplateType } = meta;
     const { Generator } = await dynamicImport<{ Generator: TemplateGenerator }>(`@/generators/${boilerplateType}`);
-    return new Generator({ boilerplateType });
+    return new Generator(meta);
   } catch (e) {
     message.error('Generator not found!');
     throw e;

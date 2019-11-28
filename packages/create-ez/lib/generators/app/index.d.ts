@@ -1,5 +1,5 @@
-import { BasicGenerator, GeneratorMeta } from '@/generators';
+import { BasicGenerator, Meta } from '@/generators';
 export declare class Generator extends BasicGenerator {
-  constructor(meta: GeneratorMeta);
-  run(): Promise<void>;
+    constructor(meta: Meta);
+    run(): Promise<void>;
 }

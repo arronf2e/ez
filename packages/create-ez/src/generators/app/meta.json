@@ -1,5 +1,6 @@
 {
   "name": "app",
   "boilerplateType": "app",
-  "description": "react admin."
+  "description": "react admin.",
+  "remoteUrl": "git@github.com:ez-fe/react-admin-template.git"
 }

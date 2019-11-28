@@ -2,9 +2,10 @@ import { resolve } from 'path';
 import { existsSync, mkdirSync } from 'fs';
 import ora from 'ora';
 import Git from 'simple-git/promise';
-// import Metalsmith from 'metalsmith';
+import Metalsmith, { Plugin, Callback } from 'metalsmith';
+import { handlebars } from 'consolidate';
 import { prompt, Question } from 'inquirer';
-import { dynamicImport, message, info } from '@ez-fe/helper';
+import { dynamicImport, message, info, em } from '@ez-fe/helper';
 
 export interface Meta {
   name: string;
@@ -12,22 +13,25 @@ export interface Meta {
   boilerplateType: string;
 }
 
-export type GeneratorMeta = Pick<Meta, 'boilerplateType'>;
-
 export interface Generator {
-  meta: GeneratorMeta;
+  meta: Meta;
   templatePath: string;
   queryFeatures(): object;
   updateTemplate({ templatePath, remoteUrl }: { templatePath: string; remoteUrl: string }): void;
+  build(): void;
   run(): void;
 }
 
 export abstract class BasicGenerator implements Generator {
-  meta: GeneratorMeta;
+  meta: Meta;
 
   templatePath: string;
 
-  constructor(meta: GeneratorMeta) {
+  ignores: RegExp[] = [/^.git\/\w*/, /^features.js$/];
+
+  renderSpinner = ora(info('Rendering'));
+
+  constructor(meta: Meta) {
     const { boilerplateType } = meta;
 
     this.meta = meta;
@@ -58,8 +62,8 @@ export abstract class BasicGenerator implements Generator {
       message.error(e);
       process.exit(-1);
     }
-    spinner.stop();
-    message.success(hasTemplate ? 'Template update completed!' : 'Template download completed!');
+    spinner.succeed();
+    // message.success(hasTemplate ? 'Template update completed!' : 'Template download completed!');
   }
 
   async queryFeatures(): Promise<object> {
@@ -68,16 +72,63 @@ export abstract class BasicGenerator implements Generator {
       const { features } = await dynamicImport<{ features: Question[] }>(resolve(templatePath, 'features'));
       return await prompt(features);
     } catch (e) {
-      message.error(e);
       return {};
     }
   }
 
-  async render() {
-    const { templatePath } = this;
+  renderTemplate = () => {
+    const render: Plugin = async (files: any, metalsmith: any, done: Callback): Promise<void> => {
+      const fileList = Object.keys(files);
+      const metalsmithMetadata = metalsmith.metadata();
+      const { ignores } = this;
+      await Promise.all(
+        fileList.map((fileName: string) => {
+          const fileContent = files[fileName].contents.toString();
+          const isIgnored = ignores.some(regex => regex.test(fileName));
+          const needRender = /{{([^{}]+)}}/g.test(fileContent);
+
+          if (isIgnored) {
+            delete files[fileName];
+          }
+
+          if (!isIgnored && needRender) {
+            handlebars.render(fileContent, metalsmithMetadata, (err: Error, res: string) => {
+              if (err) {
+                message.error(`${em(`[${fileName}]`)} ${info(err.message)}`);
+                done(err, files, metalsmith);
+              }
+              files[fileName].contents = Buffer.from(res, 'utf-8');
+            });
+          }
+        })
+      );
+
+      this.renderSpinner.succeed();
+      done(null, files, metalsmith);
+    };
+
+    return render;
+  };
+
+  async build() {
+    const { cwd } = process;
+    const currentWorkDir = cwd();
+    const { templatePath, meta } = this;
+    const { name } = meta;
     const features = await this.queryFeatures();
-    console.log(templatePath);
-    console.log(features);
+    this.renderSpinner.start();
+    Metalsmith(__dirname)
+      .metadata({ ...features, ...meta })
+      .source(templatePath)
+      .destination(name === '.' ? currentWorkDir : resolve(currentWorkDir, name))
+      .clean(true)
+      .use(this.renderTemplate())
+      .build((err: Error | null) => {
+        if (err) {
+          message.error(err.message);
+          process.exit(-1);
+        }
+      });
   }
 
   abstract run(): void;

@@ -1,2 +1,2 @@
-import { Generator } from '@/generators';
-export declare function getGenerator(boilerplateType: string): Promise<Generator | never>;
+import { Generator, Meta } from '@/generators';
+export declare function getGenerator(meta: Meta): Promise<Generator | never>;
