@@ -31,5 +31,6 @@
   "license": "MIT",
   "dependencies": {
     "@ez-fe/core": "^0.6.2"
-  }
+  },
+  "gitHead": "a17a4f7a8558049c0ab37adee5729e6b513511ee"
 }

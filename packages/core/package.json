@@ -28,5 +28,6 @@
     "url": "git+https://github.com/ez-fe/ez.git"
   },
   "author": "daychongyang",
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "a17a4f7a8558049c0ab37adee5729e6b513511ee"
 }
