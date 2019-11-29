@@ -21,6 +21,10 @@ async function create() {
             type: 'input',
         },
         {
+            name: 'author',
+            type: 'input',
+        },
+        {
             name: 'boilerplateType',
             message: 'Select the boilerplate type',
             type: 'list',

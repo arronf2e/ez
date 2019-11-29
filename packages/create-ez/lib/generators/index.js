@@ -14,7 +14,7 @@ const helper_1 = require("@ez-fe/helper");
 class BasicGenerator {
     constructor(meta) {
         this.ignores = [/^.git\/\w*/, /^features.js$/];
-        this.renderSpinner = ora_1.default(helper_1.info('Rendering'));
+        this.renderSpinner = ora_1.default(helper_1.info('rendering'));
         this.renderTemplate = () => {
             const render = async (files, metalsmith, done) => {
                 const fileList = Object.keys(files);
@@ -81,28 +81,17 @@ class BasicGenerator {
             return {};
         }
     }
-    async checkFolderIsEmpty() {
-        const { cwd } = process;
-        const targetPath = cwd();
-        const hasChildren = fs_1.readdirSync(targetPath).length;
+    async checkFolderIsEmpty({ destination }) {
+        const existed = fs_1.existsSync(destination);
+        if (!existed)
+            return true;
+        const hasChildren = fs_1.readdirSync(destination).length;
         if (hasChildren) {
             const { overWrite } = await inquirer_1.prompt([
                 {
                     name: 'overWrite',
-                    message: 'Select the boilerplate type',
-                    type: 'expand',
-                    choices: [
-                        {
-                            key: 'y',
-                            name: 'Overwrite',
-                            value: 'overwrite',
-                        },
-                        {
-                            key: 'n',
-                            name: 'Abort',
-                            value: 'abort',
-                        },
-                    ],
+                    message: 'The destination folder is not empty, whether to overwrite?',
+                    type: 'confirm',
                 },
             ]);
             return overWrite;
@@ -113,16 +102,19 @@ class BasicGenerator {
         const currentWorkDir = cwd();
         const { templatePath, meta } = this;
         let { name } = meta;
-        const features = await this.queryFeatures();
         let destination = path_1.resolve(currentWorkDir, name);
         if (name === '.') {
             /** 针对当前文件夹初始化特殊处理 */
             destination = currentWorkDir;
             Object.assign(this.meta, { name: 'react-admin' });
-            await this.checkFolderIsEmpty();
         }
+        const overWrite = await this.checkFolderIsEmpty({ destination });
+        if (!overWrite) {
+            helper_1.message.info('operation cancelled!');
+            process.exit(-1);
+        }
+        const features = await this.queryFeatures();
         this.renderSpinner.start();
-        console.log(path_1.resolve(currentWorkDir, name));
         metalsmith_1.default(__dirname)
             .metadata(Object.assign(Object.assign({}, features), meta))
             .source(templatePath)

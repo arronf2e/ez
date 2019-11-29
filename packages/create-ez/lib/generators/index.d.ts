@@ -21,7 +21,7 @@ export declare abstract class BasicGenerator implements Generator {
   constructor(meta: Meta);
   updateTemplate({ remoteUrl }: { remoteUrl: string }): Promise<void>;
   queryFeatures(): Promise<object>;
-  checkFolderIsEmpty(): Promise<any>;
+  checkFolderIsEmpty({ destination }: { destination: string }): Promise<any>;
   renderTemplate: () => Metalsmith.Plugin;
   build(): Promise<void>;
   abstract run(): void;

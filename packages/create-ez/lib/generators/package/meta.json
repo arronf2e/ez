@@ -1,0 +1,6 @@
+{
+    "name": "package",
+    "boilerplateType": "package",
+    "description": "Create package.json and readme for the new package",
+    "remoteUrl": "git@github.com:ez-fe/package-template.git"
+}

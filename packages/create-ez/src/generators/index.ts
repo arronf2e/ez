@@ -29,7 +29,7 @@ export abstract class BasicGenerator implements Generator {
 
   ignores: RegExp[] = [/^.git\/\w*/, /^features.js$/];
 
-  renderSpinner = ora(info('Rendering'));
+  renderSpinner = ora(info('rendering'));
 
   constructor(meta: Meta) {
     const { boilerplateType } = meta;
@@ -75,28 +75,17 @@ export abstract class BasicGenerator implements Generator {
     }
   }
 
-  async checkFolderIsEmpty() {
-    const { cwd } = process;
-    const targetPath = cwd();
-    const hasChildren = readdirSync(targetPath).length;
+  async checkFolderIsEmpty({ destination }: { destination: string }) {
+    const existed = existsSync(destination);
+    if (!existed) return true;
+
+    const hasChildren = readdirSync(destination).length;
     if (hasChildren) {
       const { overWrite } = await prompt([
         {
           name: 'overWrite',
-          message: 'Select the boilerplate type',
-          type: 'expand',
-          choices: [
-            {
-              key: 'y',
-              name: 'Overwrite',
-              value: 'overwrite',
-            },
-            {
-              key: 'n',
-              name: 'Abort',
-              value: 'abort',
-            },
-          ],
+          message: 'The destination folder is not empty, whether to overwrite?',
+          type: 'confirm',
         },
       ]);
 
@@ -143,20 +132,25 @@ export abstract class BasicGenerator implements Generator {
     const currentWorkDir = cwd();
     const { templatePath, meta } = this;
     let { name } = meta;
-    const features = await this.queryFeatures();
     let destination = resolve(currentWorkDir, name);
 
     if (name === '.') {
       /** 针对当前文件夹初始化特殊处理 */
       destination = currentWorkDir;
       Object.assign(this.meta, { name: 'react-admin' });
-
-      await this.checkFolderIsEmpty();
     }
+
+    const overWrite = await this.checkFolderIsEmpty({ destination });
+
+    if (!overWrite) {
+      message.info('operation cancelled!');
+      process.exit(-1);
+    }
+
+    const features = await this.queryFeatures();
 
     this.renderSpinner.start();
 
-    console.log(resolve(currentWorkDir, name));
     Metalsmith(__dirname)
       .metadata({ ...features, ...meta })
       .source(templatePath)
