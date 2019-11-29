@@ -2,7 +2,28 @@
   "name": "@ez-fe/oss-plugin",
   "version": "0.6.2",
   "description": "OSS plugin for Ez.",
-  "main": "index.js",
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc"
+  },
+  "keywords": [
+    "Webpack",
+    "CLI"
+  ],
+  "directories": {
+    "lib": "./lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ez-fe/ez.git"
+  },
   "author": "daychongyang",
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "a17a4f7a8558049c0ab37adee5729e6b513511ee"
 }
