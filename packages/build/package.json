@@ -2,7 +2,34 @@
   "name": "@ez-fe/build",
   "version": "0.0.1",
   "description": "Building application using ez.",
-  "main": "index.js",
+  "main": "./lib/index.js",
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc"
+  },
+  "_moduleAliases": {
+    "@": "lib"
+  },
+  "keywords": [
+    "Webpack",
+    "CLI"
+  ],
+  "directories": {
+    "lib": "./lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ez-fe/ez.git"
+  },
   "author": "daychongyang",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@ez-fe/core": "^0.0.1"
+  }
 }

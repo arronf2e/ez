@@ -1,7 +1,7 @@
 {
-  "name": "@ez-fe/dev",
+  "name": "@ez-fe/core",
   "version": "0.0.1",
-  "description": "Running application using ez.",
+  "description": "Ez core.",
   "main": "./lib/index.js",
   "scripts": {
     "dev": "tsc -w",
@@ -28,8 +28,5 @@
     "url": "git+https://github.com/ez-fe/ez.git"
   },
   "author": "daychongyang",
-  "license": "MIT",
-  "dependencies": {
-    "@ez-fe/core": "^0.0.1"
-  }
+  "license": "MIT"
 }

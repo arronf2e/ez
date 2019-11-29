@@ -8,3 +8,4 @@ __export(require("./check-update"));
 __export(require("./dynamic-import"));
 __export(require("./highlights"));
 __export(require("./message"));
+__export(require("./win"));

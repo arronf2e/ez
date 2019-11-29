@@ -32,9 +32,11 @@
     "url": "git+https://github.com/ez-fe/ez.git"
   },
   "author": "daychongyang",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
+    "@ez-fe/build": "^0.0.1",
     "@ez-fe/create-ez": "^0.6.1",
+    "@ez-fe/dev": "^0.0.1",
     "@ez-fe/helper": "^0.6.1",
     "inquirer": "^7.0.0",
     "module-alias": "^2.2.2",

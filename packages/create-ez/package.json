@@ -33,7 +33,7 @@
     "url": "git+https://github.com/ez-fe/ez.git"
   },
   "author": "daychongyang",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@ez-fe/helper": "^0.6.1",
     "consolidate": "^0.15.1",
