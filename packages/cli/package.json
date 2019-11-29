@@ -1,6 +1,6 @@
 {
   "name": "@ez-fe/cli",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Scaffold for Ez.",
   "bin": {
     "ez": "./bin/ez"
@@ -34,10 +34,10 @@
   "author": "daychongyang",
   "license": "MIT",
   "dependencies": {
-    "@ez-fe/build": "^0.6.2",
-    "@ez-fe/create-ez": "^0.6.2",
-    "@ez-fe/dev": "^0.6.2",
-    "@ez-fe/helper": "^0.6.2",
+    "@ez-fe/build": "^0.6.3",
+    "@ez-fe/create-ez": "^0.6.3",
+    "@ez-fe/dev": "^0.6.3",
+    "@ez-fe/helper": "^0.6.3",
     "inquirer": "^7.0.0",
     "module-alias": "^2.2.2",
     "yargs": "^14.2.0"
