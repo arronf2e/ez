@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { existsSync, mkdirSync } from 'fs';
+import { existsSync, mkdirSync, readdirSync } from 'fs';
 import ora from 'ora';
 import Git from 'simple-git/promise';
 import Metalsmith, { Plugin, Callback } from 'metalsmith';
@@ -75,6 +75,35 @@ export abstract class BasicGenerator implements Generator {
     }
   }
 
+  async checkFolderIsEmpty() {
+    const { cwd } = process;
+    const targetPath = cwd();
+    const hasChildren = readdirSync(targetPath).length;
+    if (hasChildren) {
+      const { overWrite } = await prompt([
+        {
+          name: 'overWrite',
+          message: 'Select the boilerplate type',
+          type: 'expand',
+          choices: [
+            {
+              key: 'y',
+              name: 'Overwrite',
+              value: 'overwrite',
+            },
+            {
+              key: 'n',
+              name: 'Abort',
+              value: 'abort',
+            },
+          ],
+        },
+      ]);
+
+      return overWrite;
+    }
+  }
+
   renderTemplate = () => {
     const render: Plugin = async (files: any, metalsmith: any, done: Callback): Promise<void> => {
       const fileList = Object.keys(files);
@@ -113,14 +142,26 @@ export abstract class BasicGenerator implements Generator {
     const { cwd } = process;
     const currentWorkDir = cwd();
     const { templatePath, meta } = this;
-    const { name } = meta;
+    let { name } = meta;
     const features = await this.queryFeatures();
+    let destination = resolve(currentWorkDir, name);
+
+    if (name === '.') {
+      /** 针对当前文件夹初始化特殊处理 */
+      destination = currentWorkDir;
+      Object.assign(this.meta, { name: 'react-admin' });
+
+      await this.checkFolderIsEmpty();
+    }
+
     this.renderSpinner.start();
+
+    console.log(resolve(currentWorkDir, name));
     Metalsmith(__dirname)
       .metadata({ ...features, ...meta })
       .source(templatePath)
-      .destination(name === '.' ? currentWorkDir : resolve(currentWorkDir, name))
-      .clean(true)
+      .destination(destination)
+      .clean(false)
       .use(this.renderTemplate())
       .build((err: Error | null) => {
         if (err) {

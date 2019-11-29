@@ -37,7 +37,7 @@ class BasicGenerator {
                         });
                     }
                 }));
-                this.renderSpinner.succeed();
+                this.renderSpinner.succeed('template rendered successfully!');
                 done(null, files, metalsmith);
             };
             return render;
@@ -53,7 +53,7 @@ class BasicGenerator {
             fs_1.mkdirSync(templatePath);
         }
         const git = promise_1.default(templatePath);
-        const spinner = ora_1.default(helper_1.info(hasTemplate ? 'Updating template...' : 'Downloading template...'));
+        const spinner = ora_1.default(helper_1.info(hasTemplate ? 'updating template...' : 'downloading template...'));
         try {
             spinner.start();
             if (!hasTemplate) {
@@ -69,8 +69,7 @@ class BasicGenerator {
             helper_1.message.error(e);
             process.exit(-1);
         }
-        spinner.succeed();
-        // message.success(hasTemplate ? 'Template update completed!' : 'Template download completed!');
+        spinner.succeed(hasTemplate ? 'template update completed!' : 'template download completed!');
     }
     async queryFeatures() {
         const { templatePath } = this;
@@ -82,18 +81,53 @@ class BasicGenerator {
             return {};
         }
     }
+    async checkFolderIsEmpty() {
+        const { cwd } = process;
+        const targetPath = cwd();
+        const hasChildren = fs_1.readdirSync(targetPath).length;
+        if (hasChildren) {
+            const { overWrite } = await inquirer_1.prompt([
+                {
+                    name: 'overWrite',
+                    message: 'Select the boilerplate type',
+                    type: 'expand',
+                    choices: [
+                        {
+                            key: 'y',
+                            name: 'Overwrite',
+                            value: 'overwrite',
+                        },
+                        {
+                            key: 'n',
+                            name: 'Abort',
+                            value: 'abort',
+                        },
+                    ],
+                },
+            ]);
+            return overWrite;
+        }
+    }
     async build() {
         const { cwd } = process;
         const currentWorkDir = cwd();
         const { templatePath, meta } = this;
-        const { name } = meta;
+        let { name } = meta;
         const features = await this.queryFeatures();
+        let destination = path_1.resolve(currentWorkDir, name);
+        if (name === '.') {
+            /** 针对当前文件夹初始化特殊处理 */
+            destination = currentWorkDir;
+            Object.assign(this.meta, { name: 'react-admin' });
+            await this.checkFolderIsEmpty();
+        }
         this.renderSpinner.start();
+        console.log(path_1.resolve(currentWorkDir, name));
         metalsmith_1.default(__dirname)
             .metadata(Object.assign(Object.assign({}, features), meta))
             .source(templatePath)
-            .destination(name === '.' ? currentWorkDir : path_1.resolve(currentWorkDir, name))
-            .clean(true)
+            .destination(destination)
+            .clean(false)
             .use(this.renderTemplate())
             .build((err) => {
             if (err) {

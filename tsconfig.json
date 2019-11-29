@@ -6,6 +6,7 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "noUnusedLocals": true,
+    "baseUrl": "./",
     "paths": {
       "@ez-fe/*": ["packges/*"]
     }
