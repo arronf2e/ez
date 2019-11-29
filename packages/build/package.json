@@ -1,0 +1,8 @@
+{
+  "name": "@ez-fe/build",
+  "version": "0.0.1",
+  "description": "Building application using ez.",
+  "main": "index.js",
+  "author": "daychongyang",
+  "license": "MIT"
+}
