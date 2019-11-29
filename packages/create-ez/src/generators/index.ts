@@ -98,6 +98,7 @@ export abstract class BasicGenerator implements Generator {
       const fileList = Object.keys(files);
       const metalsmithMetadata = metalsmith.metadata();
       const { ignores } = this;
+
       await Promise.all(
         fileList.map((fileName: string) => {
           const fileContent = files[fileName].contents.toString();
@@ -109,12 +110,15 @@ export abstract class BasicGenerator implements Generator {
           }
 
           if (!isIgnored && needRender) {
+            this.renderSpinner.start();
             handlebars.render(fileContent, metalsmithMetadata, (err: Error, res: string) => {
               if (err) {
                 message.error(`${em(`[${fileName}]`)} ${info(err.message)}`);
                 done(err, files, metalsmith);
               }
               files[fileName].contents = Buffer.from(res, 'utf-8');
+              this.renderSpinner.stop();
+              message.success(fileName);
             });
           }
         })
@@ -148,8 +152,6 @@ export abstract class BasicGenerator implements Generator {
     }
 
     const features = await this.queryFeatures();
-
-    this.renderSpinner.start();
 
     Metalsmith(__dirname)
       .metadata({ ...features, ...meta })

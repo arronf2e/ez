@@ -1,0 +1,6 @@
+{
+  "name": "readme",
+  "boilerplateType": "readme",
+  "description": "Generates beautiful README.md files",
+  "remoteUrl": "git@github.com:ez-fe/readme-template.git"
+}

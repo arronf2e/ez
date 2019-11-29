@@ -28,12 +28,15 @@ class BasicGenerator {
                         delete files[fileName];
                     }
                     if (!isIgnored && needRender) {
+                        this.renderSpinner.start();
                         consolidate_1.handlebars.render(fileContent, metalsmithMetadata, (err, res) => {
                             if (err) {
                                 helper_1.message.error(`${helper_1.em(`[${fileName}]`)} ${helper_1.info(err.message)}`);
                                 done(err, files, metalsmith);
                             }
                             files[fileName].contents = Buffer.from(res, 'utf-8');
+                            this.renderSpinner.stop();
+                            helper_1.message.success(fileName);
                         });
                     }
                 }));
@@ -114,7 +117,6 @@ class BasicGenerator {
             process.exit(-1);
         }
         const features = await this.queryFeatures();
-        this.renderSpinner.start();
         metalsmith_1.default(__dirname)
             .metadata(Object.assign(Object.assign({}, features), meta))
             .source(templatePath)
