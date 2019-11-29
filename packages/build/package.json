@@ -1,6 +1,6 @@
 {
   "name": "@ez-fe/build",
-  "version": "0.0.1",
+  "version": "0.6.2",
   "description": "Building application using ez.",
   "main": "./lib/index.js",
   "scripts": {
@@ -30,6 +30,6 @@
   "author": "daychongyang",
   "license": "MIT",
   "dependencies": {
-    "@ez-fe/core": "^0.0.1"
+    "@ez-fe/core": "^0.6.2"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@ez-fe/core",
-  "version": "0.0.1",
+  "version": "0.6.2",
   "description": "Ez core.",
   "main": "./lib/index.js",
   "scripts": {

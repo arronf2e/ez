@@ -1,6 +1,6 @@
 {
   "name": "@ez-fe/create-ez",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Creates a ez application using the command line.",
   "bin": {
     "create-ez": "./bin/create-ez"
@@ -35,7 +35,7 @@
   "author": "daychongyang",
   "license": "MIT",
   "dependencies": {
-    "@ez-fe/helper": "^0.6.1",
+    "@ez-fe/helper": "^0.6.2",
     "consolidate": "^0.15.1",
     "inquirer": "^7.0.0",
     "metalsmith": "^2.3.0",
