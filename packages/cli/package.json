@@ -44,5 +44,5 @@
     "@types/inquirer": "^6.5.0",
     "@types/yargs": "^13.0.3"
   },
-  "gitHead": "9f8b7e5c452674b0a95a48d753c5b64fb031503f"
+  "gitHead": "a2d0e06995f8335b43b5b768102e425fe6dea0d8"
 }
