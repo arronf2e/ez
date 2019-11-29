@@ -12,6 +12,7 @@ yargs
   .version()
   .usage(`Usage: ${em('$0 <command> [options]')}`)
   .commandDir('commands', { recurse: true })
+
   .alias({
     h: 'help',
     v: 'version',

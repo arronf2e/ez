@@ -47,7 +47,7 @@ export abstract class BasicGenerator implements Generator {
     }
 
     const git = Git(templatePath);
-    const spinner = ora(info(hasTemplate ? 'Updating template...' : 'Downloading template...'));
+    const spinner = ora(info(hasTemplate ? 'updating template...' : 'downloading template...'));
 
     try {
       spinner.start();
@@ -62,8 +62,7 @@ export abstract class BasicGenerator implements Generator {
       message.error(e);
       process.exit(-1);
     }
-    spinner.succeed();
-    // message.success(hasTemplate ? 'Template update completed!' : 'Template download completed!');
+    spinner.succeed(hasTemplate ? 'template update completed!' : 'template download completed!');
   }
 
   async queryFeatures(): Promise<object> {
@@ -103,7 +102,7 @@ export abstract class BasicGenerator implements Generator {
         })
       );
 
-      this.renderSpinner.succeed();
+      this.renderSpinner.succeed('template rendered successfully!');
       done(null, files, metalsmith);
     };
 
