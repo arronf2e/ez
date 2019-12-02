@@ -1,9 +1,22 @@
-import Symbols from 'log-symbols';
-import { error, info, success, warning } from './highlights';
+import { Signale } from 'signale';
+
+const options = {
+  disabled: false,
+  interactive: false,
+  stream: process.stdout,
+  config: {
+    displayTimestamp: true,
+  },
+};
+
+const { success, info, warn, error, pending, complete, start } = new Signale(options);
 
 export const message = {
-  success: (msg: string) => console.log(Symbols.success, success(msg)),
-  info: (msg: string) => console.log(Symbols.info, info(msg)),
-  warning: (msg: string) => console.log(Symbols.info, warning(msg)),
-  error: (msg: string) => console.log(Symbols.error, error(msg)),
+  success: (msg: string) => success(msg),
+  info: (msg: string) => info(msg),
+  warning: (msg: string) => warn(msg),
+  error: (msg: string) => error(msg),
+  start: (msg: string) => start(msg),
+  pending: (msg: string) => pending(msg),
+  complete: (msg: string) => complete(msg),
 };

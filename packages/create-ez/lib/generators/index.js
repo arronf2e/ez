@@ -19,8 +19,17 @@ class BasicGenerator {
             const render = async (files, metalsmith, done) => {
                 const fileList = Object.keys(files);
                 const metalsmithMetadata = metalsmith.metadata();
+                const total = fileList.length;
                 const { ignores } = this;
                 await Promise.all(fileList.map((fileName) => {
+                    const fileRenderer = new helper_1.Signale({
+                        interactive: true,
+                        disabled: false,
+                        stream: process.stdout,
+                        config: {
+                            displayTimestamp: true,
+                        },
+                    });
                     const fileContent = files[fileName].contents.toString();
                     const isIgnored = ignores.some(regex => regex.test(fileName));
                     const needRender = /{{([^{}]+)}}/g.test(fileContent);
@@ -28,19 +37,18 @@ class BasicGenerator {
                         delete files[fileName];
                     }
                     if (!isIgnored && needRender) {
-                        this.renderSpinner.start();
+                        fileRenderer.await(fileName);
                         consolidate_1.handlebars.render(fileContent, metalsmithMetadata, (err, res) => {
                             if (err) {
                                 helper_1.message.error(`${helper_1.em(`[${fileName}]`)} ${helper_1.info(err.message)}`);
                                 done(err, files, metalsmith);
                             }
                             files[fileName].contents = Buffer.from(res, 'utf-8');
-                            this.renderSpinner.stop();
-                            helper_1.message.success(fileName);
+                            fileRenderer.success(fileName);
                         });
                     }
                 }));
-                this.renderSpinner.succeed('template rendered successfully!');
+                helper_1.message.success('template rendered successfully!');
                 done(null, files, metalsmith);
             };
             return render;
@@ -50,15 +58,22 @@ class BasicGenerator {
         this.templatePath = path_1.resolve(__dirname, boilerplateType, 'template');
     }
     async updateTemplate({ remoteUrl }) {
+        const template = new helper_1.Signale({
+            interactive: true,
+            disabled: false,
+            stream: process.stdout,
+            config: {
+                displayTimestamp: true,
+            },
+        });
         const { templatePath } = this;
         const hasTemplate = fs_1.existsSync(templatePath);
         if (!hasTemplate) {
             fs_1.mkdirSync(templatePath);
         }
         const git = promise_1.default(templatePath);
-        const spinner = ora_1.default(helper_1.info(hasTemplate ? 'updating template...' : 'downloading template...'));
         try {
-            spinner.start();
+            template.await(`[%d/2] - ${hasTemplate ? 'updating template' : 'downloading template'}`, 1);
             if (!hasTemplate) {
                 await git.clone(remoteUrl, templatePath);
             }
@@ -69,10 +84,10 @@ class BasicGenerator {
             }
         }
         catch (e) {
-            helper_1.message.error(e);
+            template.error(`[%d/2] - ${e}`, 2);
             process.exit(-1);
         }
-        spinner.succeed(hasTemplate ? 'template update completed!' : 'template download completed!');
+        template.success(`[%d/2] - ${hasTemplate ? 'template update completed!' : 'template download completed!'}`, 2);
     }
     async queryFeatures() {
         const { templatePath } = this;
@@ -88,7 +103,7 @@ class BasicGenerator {
         const existed = fs_1.existsSync(destination);
         if (!existed)
             return true;
-        const hasChildren = fs_1.readdirSync(destination).length;
+        const hasChildren = existed || fs_1.readdirSync(destination).length;
         if (hasChildren) {
             const { overWrite } = await inquirer_1.prompt([
                 {

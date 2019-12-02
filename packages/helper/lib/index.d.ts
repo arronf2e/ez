@@ -1,3 +1,4 @@
+export { Signale } from 'signale';
 export * from './check-version';
 export * from './check-update';
 export * from './dynamic-import';

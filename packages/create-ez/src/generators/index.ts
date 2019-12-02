@@ -5,7 +5,7 @@ import Git from 'simple-git/promise';
 import Metalsmith, { Plugin, Callback } from 'metalsmith';
 import { handlebars } from 'consolidate';
 import { prompt, Question } from 'inquirer';
-import { dynamicImport, message, info, em } from '@ez-fe/helper';
+import { dynamicImport, message, info, em, Signale } from '@ez-fe/helper';
 
 export interface Meta {
   name: string;
@@ -39,6 +39,14 @@ export abstract class BasicGenerator implements Generator {
   }
 
   async updateTemplate({ remoteUrl }: { remoteUrl: string }) {
+    const template = new Signale({
+      interactive: true,
+      disabled: false,
+      stream: process.stdout,
+      config: {
+        displayTimestamp: true,
+      },
+    });
     const { templatePath } = this;
 
     const hasTemplate = existsSync(templatePath);
@@ -47,10 +55,9 @@ export abstract class BasicGenerator implements Generator {
     }
 
     const git = Git(templatePath);
-    const spinner = ora(info(hasTemplate ? 'updating template...' : 'downloading template...'));
 
     try {
-      spinner.start();
+      template.await(`[%d/2] - ${hasTemplate ? 'updating template' : 'downloading template'}`, 1);
       if (!hasTemplate) {
         await git.clone(remoteUrl, templatePath);
       } else {
@@ -59,10 +66,10 @@ export abstract class BasicGenerator implements Generator {
         await git.pull('origin', 'master');
       }
     } catch (e) {
-      message.error(e);
+      template.error(`[%d/2] - ${e}`, 2);
       process.exit(-1);
     }
-    spinner.succeed(hasTemplate ? 'template update completed!' : 'template download completed!');
+    template.success(`[%d/2] - ${hasTemplate ? 'template update completed!' : 'template download completed!'}`, 2);
   }
 
   async queryFeatures(): Promise<object> {
@@ -79,7 +86,7 @@ export abstract class BasicGenerator implements Generator {
     const existed = existsSync(destination);
     if (!existed) return true;
 
-    const hasChildren = readdirSync(destination).length;
+    const hasChildren = existed || readdirSync(destination).length;
     if (hasChildren) {
       const { overWrite } = await prompt([
         {
@@ -97,10 +104,20 @@ export abstract class BasicGenerator implements Generator {
     const render: Plugin = async (files: any, metalsmith: any, done: Callback): Promise<void> => {
       const fileList = Object.keys(files);
       const metalsmithMetadata = metalsmith.metadata();
+      const total = fileList.length;
       const { ignores } = this;
 
       await Promise.all(
         fileList.map((fileName: string) => {
+          const fileRenderer = new Signale({
+            interactive: true,
+            disabled: false,
+            stream: process.stdout,
+            config: {
+              displayTimestamp: true,
+            },
+          });
+
           const fileContent = files[fileName].contents.toString();
           const isIgnored = ignores.some(regex => regex.test(fileName));
           const needRender = /{{([^{}]+)}}/g.test(fileContent);
@@ -110,21 +127,20 @@ export abstract class BasicGenerator implements Generator {
           }
 
           if (!isIgnored && needRender) {
-            this.renderSpinner.start();
+            fileRenderer.await(fileName);
             handlebars.render(fileContent, metalsmithMetadata, (err: Error, res: string) => {
               if (err) {
                 message.error(`${em(`[${fileName}]`)} ${info(err.message)}`);
                 done(err, files, metalsmith);
               }
               files[fileName].contents = Buffer.from(res, 'utf-8');
-              this.renderSpinner.stop();
-              message.success(fileName);
+              fileRenderer.success(fileName);
             });
           }
         })
       );
 
-      this.renderSpinner.succeed('template rendered successfully!');
+      message.success('template rendered successfully!');
       done(null, files, metalsmith);
     };
 

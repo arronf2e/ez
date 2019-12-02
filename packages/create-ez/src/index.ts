@@ -29,8 +29,8 @@ async function create() {
       choices: await getGeneratorList(),
     },
   ]);
-
   const generator = await getGenerator(baseInfo);
+
   generator.run();
 }
 

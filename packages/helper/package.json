@@ -32,6 +32,7 @@
     "module-alias": "^2.2.2",
     "read-pkg-up": "^7.0.0",
     "semver": "^6.3.0",
+    "signale": "^1.4.0",
     "slash": "^3.0.0",
     "update-notifier": "^3.0.1"
   },
@@ -39,6 +40,7 @@
     "@types/inquirer": "^6.5.0",
     "@types/read-pkg-up": "^6.0.0",
     "@types/semver": "^6.2.0",
+    "@types/signale": "^1.2.1",
     "@types/update-notifier": "^2.5.0"
   },
   "gitHead": "a17a4f7a8558049c0ab37adee5729e6b513511ee"
