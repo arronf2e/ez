@@ -9,5 +9,6 @@ __export(require("./check-version"));
 __export(require("./check-update"));
 __export(require("./dynamic-import"));
 __export(require("./highlights"));
+__export(require("./get-pkg"));
 __export(require("./message"));
 __export(require("./win"));
