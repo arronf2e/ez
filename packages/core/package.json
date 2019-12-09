@@ -29,5 +29,10 @@
   },
   "author": "daychongyang",
   "license": "MIT",
-  "gitHead": "a17a4f7a8558049c0ab37adee5729e6b513511ee"
+  "gitHead": "a17a4f7a8558049c0ab37adee5729e6b513511ee",
+  "devDependencies": {
+    "@types/debug": "^4.1.5",
+    "debug": "^4.1.1"
+  },
+  "dependencies": {}
 }

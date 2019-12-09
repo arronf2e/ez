@@ -104,7 +104,6 @@ export abstract class BasicGenerator implements Generator {
     const render: Plugin = async (files: any, metalsmith: any, done: Callback): Promise<void> => {
       const fileList = Object.keys(files);
       const metalsmithMetadata = metalsmith.metadata();
-      const total = fileList.length;
       const { ignores } = this;
 
       await Promise.all(

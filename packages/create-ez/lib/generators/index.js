@@ -19,7 +19,6 @@ class BasicGenerator {
             const render = async (files, metalsmith, done) => {
                 const fileList = Object.keys(files);
                 const metalsmithMetadata = metalsmith.metadata();
-                const total = fileList.length;
                 const { ignores } = this;
                 await Promise.all(fileList.map((fileName) => {
                     const fileRenderer = new helper_1.Signale({
