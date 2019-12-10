@@ -16,6 +16,6 @@ export function getConfigPaths({ cwd, isWin }: { cwd: string; isWin: boolean }) 
   return configPaths;
 }
 
-export function getUserConfig(configPaths: string[]): Config {
+export async function getUserConfig(configPaths: string[]): Promise<Partial<Config>> {
   return {};
 }

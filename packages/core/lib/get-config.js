@@ -15,7 +15,7 @@ function getConfigPaths({ cwd, isWin }) {
     return configPaths;
 }
 exports.getConfigPaths = getConfigPaths;
-function getUserConfig(configPaths) {
+async function getUserConfig(configPaths) {
     return {};
 }
 exports.getUserConfig = getUserConfig;

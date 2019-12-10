@@ -14,38 +14,42 @@ export default class Ez {
   /** 当前工作路径 */
   private cwd: string;
   /** 配置文件路径集合 */
-  private configPaths: string[];
+  private configPaths: string[] = [];
   /** 当前项目信息 */
   private pkgInfo: PkgInfo['packageJson'];
   /** 项目源码路径 */
-  private sourcePath: string;
+  private sourcePath: string = '';
   /** 项目配置 */
-  private config: Config;
+  private config: Partial<Config> = {};
 
   constructor() {
-    const cwd = process.cwd();
-
-    this.cwd = cwd;
+    this.cwd = process.cwd();
     this.isWin = isWin();
-    this.pkgInfo = this.loadPkgInfo();
-    this.sourcePath = this.resolveSource();
-    this.configPaths = getConfigPaths({ cwd, isWin: this.isWin });
-    this.config = getUserConfig(this.configPaths);
+
+    this.init();
   }
 
-  loadPkgInfo(): PkgInfo['packageJson'] {
-    const pkg = getPkgInfo({ cwd: this.cwd });
-    debug(`pkgInfo:${pkg!.packageJson}`);
-
-    return pkg!.packageJson;
+  async init() {
+    const { cwd, isWin } = this;
+    this.loadPkgInfo();
+    this.resolveSource();
+    this.configPaths = await getConfigPaths({ cwd, isWin });
+    this.config = await getUserConfig(this.configPaths);
+    debug(`config:${JSON.stringify(this.config)}`);
   }
 
-  resolveSource(): string {
+  async loadPkgInfo() {
+    const pkgInfo = await getPkgInfo({ cwd: this.cwd });
+    this.pkgInfo = pkgInfo;
+    debug(`pkgInfo:${JSON.stringify(this.pkgInfo)}`);
+  }
+
+  resolveSource() {
     const { cwd } = this;
     const normalSource = resolve(cwd, 'src');
     const source = existsSync(normalSource) ? normalSource : cwd;
-    debug(`sourcePath: ${source}`);
 
-    return source;
+    this.sourcePath = source;
+    debug(`sourcePath: ${this.sourcePath}`);
   }
 }

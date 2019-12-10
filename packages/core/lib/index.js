@@ -11,25 +11,35 @@ const get_config_1 = require("./get-config");
 const debug = debug_1.default('ez:core');
 class Ez {
     constructor() {
-        const cwd = process.cwd();
-        this.cwd = cwd;
+        /** 配置文件路径集合 */
+        this.configPaths = [];
+        /** 项目源码路径 */
+        this.sourcePath = '';
+        /** 项目配置 */
+        this.config = {};
+        this.cwd = process.cwd();
         this.isWin = helper_1.isWin();
-        this.pkgInfo = this.loadPkgInfo();
-        this.sourcePath = this.resolveSource();
-        this.configPaths = get_config_1.getConfigPaths({ cwd, isWin: this.isWin });
-        this.config = get_config_1.getUserConfig(this.configPaths);
+        this.init();
     }
-    loadPkgInfo() {
-        const pkg = helper_1.getPkgInfo({ cwd: this.cwd });
-        debug(`pkgInfo:${pkg.packageJson}`);
-        return pkg.packageJson;
+    async init() {
+        const { cwd, isWin } = this;
+        this.loadPkgInfo();
+        this.resolveSource();
+        this.configPaths = await get_config_1.getConfigPaths({ cwd, isWin });
+        this.config = await get_config_1.getUserConfig(this.configPaths);
+        debug(`config:${JSON.stringify(this.config)}`);
+    }
+    async loadPkgInfo() {
+        const pkgInfo = await helper_1.getPkgInfo({ cwd: this.cwd });
+        this.pkgInfo = pkgInfo;
+        debug(`pkgInfo:${JSON.stringify(this.pkgInfo)}`);
     }
     resolveSource() {
         const { cwd } = this;
         const normalSource = path_1.resolve(cwd, 'src');
         const source = fs_1.existsSync(normalSource) ? normalSource : cwd;
-        debug(`sourcePath: ${source}`);
-        return source;
+        this.sourcePath = source;
+        debug(`sourcePath: ${this.sourcePath}`);
     }
 }
 exports.default = Ez;

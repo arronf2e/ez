@@ -1,4 +1,3 @@
-import { PkgInfo } from '@ez-fe/helper';
 export default class Ez {
   /** isWin */
   private isWin;
@@ -13,6 +12,7 @@ export default class Ez {
   /** 项目配置 */
   private config;
   constructor();
-  loadPkgInfo(): PkgInfo['packageJson'];
-  resolveSource(): string;
+  init(): Promise<void>;
+  loadPkgInfo(): Promise<void>;
+  resolveSource(): void;
 }
