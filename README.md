@@ -5,10 +5,9 @@ For easier.
 ## Features
 
 ### Init
-
-[x] app (react-admin)
-[x] package
-[x] readme
+- [x] app (react-admin)
+- [x] package
+- [x] readme
 
 ### Dev
 
