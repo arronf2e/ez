@@ -5,7 +5,7 @@ const options = {
   interactive: false,
   stream: process.stdout,
   config: {
-    displayTimestamp: true,
+    displayTimestamp: false,
   },
 };
 

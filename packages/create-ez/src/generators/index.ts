@@ -44,7 +44,7 @@ export abstract class BasicGenerator implements Generator {
       disabled: false,
       stream: process.stdout,
       config: {
-        displayTimestamp: true,
+        displayTimestamp: false,
       },
     });
     const { templatePath } = this;
@@ -57,7 +57,7 @@ export abstract class BasicGenerator implements Generator {
     const git = Git(templatePath);
 
     try {
-      template.await(`[%d/2] - ${hasTemplate ? 'updating template' : 'downloading template'}`, 1);
+      template.pending(`${hasTemplate ? 'updating template' : 'downloading template'}`);
       if (!hasTemplate) {
         await git.clone(remoteUrl, templatePath);
       } else {
@@ -66,10 +66,10 @@ export abstract class BasicGenerator implements Generator {
         await git.pull('origin', 'master');
       }
     } catch (e) {
-      template.error(`[%d/2] - ${e}`, 2);
+      template.fatal(e);
       process.exit(-1);
     }
-    template.success(`[%d/2] - ${hasTemplate ? 'template update completed!' : 'template download completed!'}`, 2);
+    template.complete(`${hasTemplate ? 'template update completed!' : 'template download completed!'}`);
   }
 
   async queryFeatures(): Promise<object> {
@@ -101,45 +101,34 @@ export abstract class BasicGenerator implements Generator {
   }
 
   renderTemplate = () => {
+    const { ignores } = this;
+
     const render: Plugin = async (files: any, metalsmith: any, done: Callback): Promise<void> => {
-      const fileList = Object.keys(files);
+      const fileList = Object.keys(files).filter(fileName => {
+        const isIgnored = ignores.some(regex => regex.test(fileName));
+        if (isIgnored) {
+          delete files[fileName];
+        }
+
+        return !isIgnored;
+      });
+
       const metalsmithMetadata = metalsmith.metadata();
-      const { ignores } = this;
 
-      await Promise.all(
-        fileList.map((fileName: string) => {
-          const fileRenderer = new Signale({
-            interactive: true,
-            disabled: false,
-            stream: process.stdout,
-            config: {
-              displayTimestamp: true,
-            },
+      fileList.forEach(fileName => {
+        const fileContent = files[fileName].contents.toString();
+        const needRender = /{{([^{}]+)}}/g.test(fileContent);
+        if (needRender) {
+          handlebars.render(fileContent, metalsmithMetadata, (err: Error, res: string) => {
+            if (err) {
+              message.error(`${em(`[${fileName}]`)} ${info(err.message)}`);
+              done(err, files, metalsmith);
+            }
+            files[fileName].contents = Buffer.from(res, 'utf-8');
           });
+        }
+      });
 
-          const fileContent = files[fileName].contents.toString();
-          const isIgnored = ignores.some(regex => regex.test(fileName));
-          const needRender = /{{([^{}]+)}}/g.test(fileContent);
-
-          if (isIgnored) {
-            delete files[fileName];
-          }
-
-          if (!isIgnored && needRender) {
-            fileRenderer.await(fileName);
-            handlebars.render(fileContent, metalsmithMetadata, (err: Error, res: string) => {
-              if (err) {
-                message.error(`${em(`[${fileName}]`)} ${info(err.message)}`);
-                done(err, files, metalsmith);
-              }
-              files[fileName].contents = Buffer.from(res, 'utf-8');
-              fileRenderer.success(fileName);
-            });
-          }
-        })
-      );
-
-      message.success('template rendered successfully!');
       done(null, files, metalsmith);
     };
 
@@ -168,6 +157,7 @@ export abstract class BasicGenerator implements Generator {
 
     const features = await this.queryFeatures();
 
+    this.renderSpinner.start();
     Metalsmith(__dirname)
       .metadata({ ...features, ...meta })
       .source(templatePath)
@@ -180,6 +170,7 @@ export abstract class BasicGenerator implements Generator {
           process.exit(-1);
         }
       });
+    this.renderSpinner.succeed('template rendered successfully!');
   }
 
   abstract run(): void;

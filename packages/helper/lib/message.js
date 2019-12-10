@@ -6,7 +6,7 @@ const options = {
     interactive: false,
     stream: process.stdout,
     config: {
-        displayTimestamp: true,
+        displayTimestamp: false,
     },
 };
 const { success, info, warn, error, pending, complete, start } = new signale_1.Signale(options);
