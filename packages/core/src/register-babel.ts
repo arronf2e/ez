@@ -4,18 +4,20 @@ import { EZ } from './interface';
 export const registerBabel = (ez: EZ) => {
 	const { babelRegisterFiles } = ez;
 	register({
-		only: [(filePath: string) => babelRegisterFiles.includes(filePath)],
-		cache: true,
+		only: [(fileName: string) => babelRegisterFiles.includes(fileName)],
+		extensions: ['.es6', '.es', '.jsx', '.js', '.mjs', '.ts', '.tsx'],
+		babelrc: false,
+		cache: false,
+		ignore: [/node_modules/],
 		presets: [
 			[
-				'@babel/preset-env',
+				require.resolve('@babel/preset-env'),
 				{
-					modules: false,
 					useBuiltIns: 'entry',
 					corejs: 3,
 				},
 			],
-			'@babel/preset-typescript',
+			require.resolve('@babel/preset-typescript'),
 		],
 	});
 };

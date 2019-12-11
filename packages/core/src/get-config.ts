@@ -20,17 +20,18 @@ export function getConfigPaths({ cwd, isWin }: { cwd: string; isWin: boolean }) 
 
 async function getConfig(configPath: string) {
 	/** 存在校验 */
+	let config = {};
 	if (!existsSync(configPath)) {
 		message.error(`No basic configuration(${em(configPath)}) found!`);
 		process.exit(-1);
 	}
 
-	const config = await dynamicImport(configPath);
+	config = await dynamicImport(configPath);
 
 	return config;
 }
 
-export async function getUserConfig(ez: EZ): Promise<Partial<Config>> {
+export function getUserConfig(ez: EZ): Partial<Config> {
 	const { cwd, isWin, config: baseConfig } = ez;
 	const configPaths = getConfigPaths({ cwd, isWin });
 
