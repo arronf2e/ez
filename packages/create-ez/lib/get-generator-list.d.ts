@@ -1,6 +1,6 @@
 export declare const getGeneratorList: () => Promise<
-  {
-    name: string;
-    value: string;
-  }[]
+	{
+		name: string;
+		value: string;
+	}[]
 >;
