@@ -24,12 +24,12 @@
 		]
 	},
 	"lint-staged": {
-		"*json,md": [
-			"prettier --write --config ./.prettierrc",
+		"*.js,json,md": [
+			"prettier --write",
 			"git add"
 		],
 		"*.ts": [
-			"prettier --parser=typescript --write --config ./.prettierrc",
+			"prettier --parser=typescript --write",
 			"git add"
 		]
 	},

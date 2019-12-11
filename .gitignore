@@ -105,5 +105,6 @@ packages/*/package-lock.json
 
 # template
 packages/cli/**/template/
+packages/*/lib/
 
 # End of https://www.gitignore.io/api/node
