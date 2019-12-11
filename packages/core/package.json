@@ -32,11 +32,15 @@
   "gitHead": "a17a4f7a8558049c0ab37adee5729e6b513511ee",
   "devDependencies": {
     "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-typescript": "^7.7.4",
     "@babel/register": "^7.7.4",
     "@types/debug": "^4.1.5",
+    "@types/extend": "^3.0.1",
     "debug": "^4.1.1"
   },
   "dependencies": {
-    "@ez-fe/helper": "^0.6.3"
+    "@ez-fe/helper": "^0.6.3",
+    "extend": "^3.0.2"
   }
 }
