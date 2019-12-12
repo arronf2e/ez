@@ -41,6 +41,7 @@ export default class Ez implements EZ {
 		debug(`config:${JSON.stringify(this.config)}`);
 	}
 
+	/** 加载包信息 */
 	async loadPkgInfo() {
 		try {
 			const pkgInfo = await getPkgInfo({ cwd: this.cwd });
@@ -51,6 +52,7 @@ export default class Ez implements EZ {
 		}
 	}
 
+	/** 解析源文件夹 */
 	resolveSource() {
 		const { cwd } = this;
 		const normalSource = resolve(cwd, 'src');
@@ -60,6 +62,7 @@ export default class Ez implements EZ {
 		debug(`sourcePath: ${this.sourcePath}`);
 	}
 
+	/** 注册 babel 文件 */
 	registerBabel() {
 		this.babelRegisterFiles = Array.prototype.concat([], getConfigPaths(this));
 		registerBabel(this);

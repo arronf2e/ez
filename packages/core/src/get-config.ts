@@ -20,7 +20,6 @@ export function getConfigPaths({ cwd, isWin }: { cwd: string; isWin: boolean }) 
 }
 
 async function getConfig(configPath: string) {
-	/** 存在校验 */
 	let config = {};
 	if (!existsSync(configPath)) {
 		message.error(`No basic configuration(${em(configPath)}) found!`);
@@ -41,3 +40,5 @@ export async function getUserConfig(ez: EZ): Promise<Partial<Config>> {
 		return extend(true, baseConfig, config);
 	}, baseConfig);
 }
+
+export async function getWebpackConfig() {}
