@@ -1,10 +1,8 @@
 {
-	"name": "@ez-fe/cli",
+	"name": "@ez-fe/init",
 	"version": "0.6.3",
-	"description": "Scaffold for Ez.",
-	"bin": {
-		"ez": "./bin/ez"
-	},
+	"description": "Init a project/readme/package with templete.",
+	"main": "./lib/index.js",
 	"scripts": {
 		"dev": "tsc -w",
 		"build": "tsc"
@@ -34,16 +32,20 @@
 	"author": "daychongyang",
 	"license": "MIT",
 	"dependencies": {
-		"@ez-fe/build": "^0.6.3",
-		"@ez-fe/dev": "^0.6.3",
 		"@ez-fe/helper": "^0.6.3",
-		"@ez-fe/init": "^0.6.3",
+		"consolidate": "^0.15.1",
 		"inquirer": "^7.0.0",
+		"metalsmith": "^2.3.0",
 		"module-alias": "^2.2.2",
+		"ora": "^4.0.3",
+		"simple-git": "^1.126.0",
 		"yargs": "^14.2.0"
 	},
 	"devDependencies": {
+		"@types/consolidate": "^0.14.0",
 		"@types/inquirer": "^6.5.0",
+		"@types/metalsmith": "^2.3.0",
+		"@types/semver": "^6.2.0",
 		"@types/yargs": "^13.0.3"
 	},
 	"gitHead": "a17a4f7a8558049c0ab37adee5729e6b513511ee"
