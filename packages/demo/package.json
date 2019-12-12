@@ -1,0 +1,14 @@
+{
+	"name": "ddd",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"dev": "ez dev",
+		"debug": "DEBUG=ez:core ez dev"
+	},
+	"license": "MIT",
+	"dependencies": {},
+	"devDependencies": {
+		"@ez-fe/config": "^0.0.1"
+	}
+}

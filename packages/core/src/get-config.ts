@@ -2,8 +2,9 @@ import { join } from 'path';
 import { existsSync } from 'fs';
 import createDebug from 'debug';
 import extend from 'extend';
+import { Config } from '@ez-fe/config';
 import { formatWinPath, message, dynamicImport, em } from '@ez-fe/helper';
-import { Config, EZ } from './interface';
+import { EZ } from './interface';
 
 const debug = createDebug('ez:core');
 
@@ -31,11 +32,12 @@ async function getConfig(configPath: string) {
 	return config;
 }
 
-export function getUserConfig(ez: EZ): Partial<Config> {
+export async function getUserConfig(ez: EZ): Promise<Partial<Config>> {
 	const { cwd, isWin, config: baseConfig } = ez;
 	const configPaths = getConfigPaths({ cwd, isWin });
+	const configs = await Promise.all(configPaths.map(async configPath => await getConfig(configPath)));
 
-	return configPaths.reduce((config, configPath) => {
-		return extend(true, config, getConfig(configPath));
+	return configs.reduce((baseConfig, config) => {
+		return extend(true, baseConfig, config);
 	}, baseConfig);
 }

@@ -1,0 +1,28 @@
+{
+	"name": "@ez-fe/config",
+	"version": "0.0.1",
+	"description": "Ez config.",
+	"main": "./lib/index.js",
+	"scripts": {
+		"dev": "tsc -w",
+		"build": "tsc"
+	},
+	"_moduleAliases": {
+		"@": "lib"
+	},
+	"keywords": [
+		"Webpack",
+		"CLI"
+	],
+	"directories": {
+		"lib": "./lib"
+	},
+	"files": [
+		"lib"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"author": "daychongyang",
+	"license": "MIT"
+}

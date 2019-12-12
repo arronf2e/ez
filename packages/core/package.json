@@ -40,6 +40,7 @@
     "debug": "^4.1.1"
   },
   "dependencies": {
+    "@ez-fe/config": "^0.0.1",
     "@ez-fe/helper": "^0.6.3",
     "extend": "^3.0.2"
   }

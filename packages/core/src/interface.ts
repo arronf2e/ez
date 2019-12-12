@@ -1,11 +1,5 @@
+import { Config } from '@ez-fe/config';
 import { PkgInfo } from '@ez-fe/helper';
-
-export interface Config {
-	/** host, 默认 localhost */
-	host: string;
-	/** 监听请求的端口 */
-	port: number;
-}
 
 export interface EZ {
 	isWin: boolean;

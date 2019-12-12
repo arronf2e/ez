@@ -2,11 +2,10 @@ import { resolve } from 'path';
 import { existsSync } from 'fs';
 import createDebug from 'debug';
 import { getPkgInfo, PkgInfo, isWin, message } from '@ez-fe/helper';
-
-import { config } from './basic-config';
+import { config, Config } from '@ez-fe/config';
 import { getUserConfig, getConfigPaths } from './get-config';
 import { registerBabel } from './register-babel';
-import { Config, EZ } from './interface';
+import { EZ } from './interface';
 
 const debug = createDebug('ez:core');
 
