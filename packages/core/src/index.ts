@@ -1,29 +1,24 @@
 import { resolve } from 'path';
 import { existsSync } from 'fs';
 import createDebug from 'debug';
+import { Configuration } from 'webpack';
 import { getPkgInfo, PkgInfo, isWin, message } from '@ez-fe/helper';
 import { config, Config } from '@ez-fe/config';
-import { getUserConfig, getConfigPaths } from './get-config';
+import { getConfig, getConfigPaths } from './get-config';
 import { registerBabel } from './register-babel';
 import { EZ } from './interface';
 
 const debug = createDebug('ez:core');
 
 export default class Ez implements EZ {
-	/** isWin */
 	isWin: boolean;
-	/** 当前工作路径 */
 	cwd: string;
-	/** 配置文件路径集合 */
 	configPaths: string[] = [];
-	/** 当前项目信息 */
 	pkgInfo: PkgInfo['packageJson'];
-	/** 项目源码路径 */
 	sourcePath: string = '';
-	/** 项目配置 */
-	config: Partial<Config> = config;
-	/** 即时编译文件 */
 	babelRegisterFiles: string[] = [];
+	config: Config = config;
+	webpackConfig: Configuration = {};
 
 	constructor() {
 		this.cwd = process.cwd();
@@ -37,11 +32,9 @@ export default class Ez implements EZ {
 		this.resolveSource();
 		this.registerBabel();
 
-		this.config = await getUserConfig(this);
-		debug(`config:${JSON.stringify(this.config)}`);
+		this.config = await getConfig(this);
 	}
 
-	/** 加载包信息 */
 	async loadPkgInfo() {
 		try {
 			const pkgInfo = await getPkgInfo({ cwd: this.cwd });
@@ -52,7 +45,6 @@ export default class Ez implements EZ {
 		}
 	}
 
-	/** 解析源文件夹 */
 	resolveSource() {
 		const { cwd } = this;
 		const normalSource = resolve(cwd, 'src');
@@ -62,7 +54,6 @@ export default class Ez implements EZ {
 		debug(`sourcePath: ${this.sourcePath}`);
 	}
 
-	/** 注册 babel 文件 */
 	registerBabel() {
 		this.babelRegisterFiles = Array.prototype.concat([], getConfigPaths(this));
 		registerBabel(this);

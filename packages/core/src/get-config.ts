@@ -6,8 +6,9 @@ import { Config } from '@ez-fe/config';
 import { formatWinPath, message, dynamicImport, em } from '@ez-fe/helper';
 import { EZ } from './interface';
 
-const debug = createDebug('ez:core');
+const debug = createDebug('core:get-config');
 
+/** 解析配置文件路径 */
 export function getConfigPaths({ cwd, isWin }: { cwd: string; isWin: boolean }) {
 	const configs = ['config/config.ts'];
 	let configPaths = configs.map(config => join(cwd, config));
@@ -19,26 +20,25 @@ export function getConfigPaths({ cwd, isWin }: { cwd: string; isWin: boolean }) 
 	return configPaths;
 }
 
-async function getConfig(configPath: string) {
-	let config = {};
+/** 获取配置文件内容 */
+async function getConfigContent(configPath: string) {
 	if (!existsSync(configPath)) {
-		message.error(`No basic configuration(${em(configPath)}) found!`);
+		message.error(`Configuration file(${em(configPath)}) not found!`);
 		process.exit(-1);
 	}
 
-	config = await dynamicImport(configPath);
+	let config = await dynamicImport(configPath);
 
-	return config;
+	return config as Config;
 }
 
-export async function getUserConfig(ez: EZ): Promise<Partial<Config>> {
+/** 获取配置文件 */
+export async function getConfig(ez: EZ): Promise<Config> {
 	const { cwd, isWin, config: baseConfig } = ez;
 	const configPaths = getConfigPaths({ cwd, isWin });
-	const configs = await Promise.all(configPaths.map(async configPath => await getConfig(configPath)));
+	const configs = await Promise.all(configPaths.map(async configPath => await getConfigContent(configPath)));
 
 	return configs.reduce((baseConfig, config) => {
 		return extend(true, baseConfig, config);
 	}, baseConfig);
 }
-
-export async function getWebpackConfig() {}
