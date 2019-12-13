@@ -5,7 +5,7 @@ import { em } from './highlights';
 import { dynamicImport } from './dynamic-import';
 
 /** 获取包信息 */
-export async function getPkgInfo({ cwd }: { cwd: string }): Promise<PkgInfo> | never {
+export async function getPkgInfo({ cwd }: { cwd: string }): Promise<PkgInfo> {
 	try {
 		const packagePath = resolve(cwd, 'package.json');
 		return await dynamicImport<PkgInfo>(packagePath);
@@ -16,4 +16,4 @@ export async function getPkgInfo({ cwd }: { cwd: string }): Promise<PkgInfo> | n
 }
 
 /** 包信息 */
-export type PkgInfo = NormalizedReadResult['packageJson'];
+export type PkgInfo = NormalizedReadResult['packageJson'] | undefined;

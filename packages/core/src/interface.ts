@@ -10,7 +10,7 @@ export interface EZ {
 	/** 配置文件路径集合 */
 	configPaths: string[];
 	/** 当前项目信息 */
-	pkgInfo: PkgInfo['packageJson'];
+	pkgInfo: PkgInfo;
 	/** 项目源码路径 */
 	sourcePath: string;
 	/** 即时编译文件 */
