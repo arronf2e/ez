@@ -2,8 +2,9 @@ import { getBaseConfig } from './base';
 import { GetBuildConfig } from './interface';
 
 export const getBuildConfig: GetBuildConfig = config => {
-	const { sourcePath } = config;
-	const webpackChainConfig = getBaseConfig({ sourcePath });
+	const { ...baseConfig } = config;
+
+	const webpackChainConfig = getBaseConfig(baseConfig);
 
 	return webpackChainConfig;
 };

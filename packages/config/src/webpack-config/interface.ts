@@ -2,6 +2,7 @@ import WebpackChainConfig from 'webpack-chain';
 
 interface BaseConfig {
 	sourcePath: string;
+	publicPath: string;
 }
 
 interface DevConfig extends BaseConfig {}

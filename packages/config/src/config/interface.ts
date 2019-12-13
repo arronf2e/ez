@@ -5,6 +5,8 @@ export interface Config {
 	host: string;
 	/** 监听请求的端口 */
 	port: number;
+	/** 资源前缀 */
+	publicPath?: string;
 	/** webpack chain  */
 	chainConfig?: (webpackChainConfig: WebpackChainConfig) => WebpackChainConfig;
 }
