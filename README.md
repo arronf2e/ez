@@ -1,10 +1,13 @@
 # Ez
 
-For easier.
+🌱 An attitude scaffolding.
 
 ## Features
 
 ### Init
+
+可选择的初始化模板
+
 - [x] app (react-admin)
 - [x] package
 - [x] readme
@@ -15,9 +18,9 @@ For easier.
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+欢迎提出请求。 对于重大更改，请先打开一个问题以讨论您要更改的内容。
 
-Please make sure to update tests as appropriate.
+请确保适当更新测试。
 
 ## License
 
