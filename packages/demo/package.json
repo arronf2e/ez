@@ -4,7 +4,7 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "ez dev",
-		"debug": "DEBUG=ez:core ez dev"
+		"debug": "DEBUG=ez:get-webpack-config ez dev"
 	},
 	"license": "MIT",
 	"dependencies": {},

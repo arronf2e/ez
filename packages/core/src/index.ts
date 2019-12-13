@@ -5,6 +5,7 @@ import { Configuration } from 'webpack';
 import { getPkgInfo, PkgInfo, isWin, message } from '@ez-fe/helper';
 import { config, Config } from '@ez-fe/config';
 import { getConfig, getConfigPaths } from './get-config';
+import { getWebpackConfig } from './get-webpack-config';
 import { registerBabel } from './register-babel';
 import { EZ } from './interface';
 
@@ -14,7 +15,7 @@ export default class Ez implements EZ {
 	isWin: boolean;
 	cwd: string;
 	configPaths: string[] = [];
-	pkgInfo: PkgInfo['packageJson'];
+	pkgInfo: PkgInfo;
 	sourcePath: string = '';
 	babelRegisterFiles: string[] = [];
 	config: Config = config;
@@ -33,6 +34,7 @@ export default class Ez implements EZ {
 		this.registerBabel();
 
 		this.config = await getConfig(this);
+		this.webpackConfig = await getWebpackConfig(this);
 	}
 
 	async loadPkgInfo() {

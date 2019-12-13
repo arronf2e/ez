@@ -24,5 +24,11 @@
 		"access": "public"
 	},
 	"author": "daychongyang",
-	"license": "MIT"
+	"license": "MIT",
+	"dependencies": {
+		"webpack-chain": "^6.0.0"
+	},
+	"devDependencies": {
+		"@types/webpack-merge": "^4.1.5"
+	}
 }

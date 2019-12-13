@@ -1,7 +1,7 @@
 import { getBaseConfig } from './base';
-import { GetDevConfig } from './interface';
+import { GetBuildConfig } from './interface';
 
-export const getDevConfig: GetDevConfig = config => {
+export const getBuildConfig: GetBuildConfig = config => {
 	const { sourcePath } = config;
 	const webpackChainConfig = getBaseConfig({ sourcePath });
 
