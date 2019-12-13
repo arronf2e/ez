@@ -4,6 +4,7 @@ import { message } from './message';
 import { em } from './highlights';
 import { dynamicImport } from './dynamic-import';
 
+/** 获取包信息 */
 export async function getPkgInfo({ cwd }: { cwd: string }): Promise<PkgInfo> | never {
 	try {
 		const packagePath = resolve(cwd, 'package.json');
@@ -14,4 +15,5 @@ export async function getPkgInfo({ cwd }: { cwd: string }): Promise<PkgInfo> | n
 	}
 }
 
+/** 包信息 */
 export type PkgInfo = NormalizedReadResult['packageJson'];

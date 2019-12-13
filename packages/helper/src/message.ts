@@ -11,6 +11,7 @@ const options = {
 
 const { success, info, warn, error, pending, complete, start } = new Signale(options);
 
+/** 提示信息 */
 export const message = {
 	success: (msg: string) => success(msg),
 	info: (msg: string) => info(msg),
