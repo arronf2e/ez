@@ -33,7 +33,7 @@
     "@ez-fe/core": "^0.7.0",
     "webpack": "^4.41.2"
   },
-  "gitHead": "a17a4f7a8558049c0ab37adee5729e6b513511ee",
+  "gitHead": "e0da27ab58ccacacc42fe5702431bc969cfdad71",
   "devDependencies": {
     "@types/webpack": "^4.41.0"
   }

@@ -34,7 +34,7 @@
     "webpack": "^4.41.2",
     "webpack-dev-server": "^3.9.0"
   },
-  "gitHead": "a17a4f7a8558049c0ab37adee5729e6b513511ee",
+  "gitHead": "e0da27ab58ccacacc42fe5702431bc969cfdad71",
   "devDependencies": {
     "@types/webpack": "^4.41.0",
     "@types/webpack-dev-server": "^3.9.0"
