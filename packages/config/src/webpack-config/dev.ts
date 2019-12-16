@@ -7,7 +7,7 @@ export const getDevConfig: GetDevConfig = config => {
 
 	webpackChainConfig.mode('development').devtool('cheap-module-eval-source-map');
 
-	webpackChainConfig.output.publicPath('/').pathinfo(false);
+	webpackChainConfig.output.publicPath('/').pathinfo(true);
 
 	webpackChainConfig.module
 		.rule('css')

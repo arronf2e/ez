@@ -11,7 +11,7 @@ export const getBabelConfig: GetBabelConfig = ({ babelrc, disableDynamicImport, 
 			[
 				require.resolve('@babel/preset-env'),
 				{
-					modules: false,
+					// modules: false,
 					corejs: '3',
 					useBuiltIns: 'usage',
 				},
@@ -34,7 +34,7 @@ export const getBabelConfig: GetBabelConfig = ({ babelrc, disableDynamicImport, 
 				},
 			],
 			[
-				require.resolve('@babel/plugin-syntax-dynamic-import'),
+				require.resolve('babel-plugin-import'),
 				{
 					libraryName: 'antd',
 					libraryDirectory: 'es',

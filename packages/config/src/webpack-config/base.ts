@@ -6,7 +6,7 @@ import { getEslintConfig } from '../eslint';
 import { GetBaseConfig } from './interface';
 
 export const getBaseConfig: GetBaseConfig = config => {
-	const { name: title, sourcePath, publicPath, outputPath, cwd, babelrc, disableDynamicImport } = config;
+	const { name: title, sourcePath, outputPath, cwd, babelrc, disableDynamicImport } = config;
 	const webpackChainConfig = new Config();
 
 	/** 入口和上下文(entry and context) */
@@ -15,10 +15,6 @@ export const getBaseConfig: GetBaseConfig = config => {
 		.context(cwd)
 		.entry('main')
 		.add(entry);
-
-	/** 输出(output) */
-	const output = resolve(cwd, outputPath);
-	webpackChainConfig.output.path(output).filename('js/[chunkhash:8].js');
 
 	/** 解析(resolve) */
 	webpackChainConfig.resolve.alias
@@ -31,7 +27,7 @@ export const getBaseConfig: GetBaseConfig = config => {
 		.mainFiles.add('index')
 		.end()
 		.modules.add(sourcePath)
-		.add('node_modules');
+		.add('./node_modules');
 
 	/** 模块(module) */
 	const babelConfig = getBabelConfig({
@@ -39,11 +35,9 @@ export const getBaseConfig: GetBaseConfig = config => {
 		disableDynamicImport,
 		cwd,
 	});
-	const eslintConfig = getEslintConfig({ cwd, ...config });
 	webpackChainConfig.module
 		.rule('babel')
 		.test(/\.((ts|js)(x?))$/)
-		.pre()
 		.exclude.add(/node_modules/)
 		.end()
 		.include.add(sourcePath)
@@ -54,7 +48,6 @@ export const getBaseConfig: GetBaseConfig = config => {
 
 	webpackChainConfig.module
 		.rule('url')
-		.pre()
 		.test(/\.(jpe?g|png|gif|svg)$/)
 		.use('url-loader')
 		.loader(require.resolve('url-loader'))
@@ -64,6 +57,7 @@ export const getBaseConfig: GetBaseConfig = config => {
 			name: '[path][name].[ext]',
 		});
 
+	const eslintConfig = getEslintConfig({ cwd, ...config });
 	webpackChainConfig.module
 		.rule('eslint')
 		.test(/\.(js|jsx|ts|tsx)$/)
@@ -89,7 +83,7 @@ export const getBaseConfig: GetBaseConfig = config => {
 		webpackChainConfig.plugin('copy').use(require('copy-webpack-plugin'), [
 			[
 				{
-					from: publicPath,
+					from: publicDir,
 					to: outputPath,
 					toType: 'dir',
 				},

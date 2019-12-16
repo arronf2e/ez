@@ -3,12 +3,20 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"dev": "ez dev",
-		"debug": "DEBUG=ez:get-webpack-config ez dev"
+		"start": "ez dev",
+		"build": "ez build",
+		"debug": "DEBUG=ez:get-webpack-config ez dev",
+		"core": "DEBUG=core ez dev"
 	},
 	"license": "MIT",
-	"dependencies": {},
+	"dependencies": {
+		"@ez-fe/cli": "^0.6.3",
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0"
+	},
 	"devDependencies": {
-		"@ez-fe/config": "^0.0.1"
+		"@ez-fe/config": "^0.0.1",
+		"@types/react": "^16.9.16",
+		"@types/react-dom": "^16.9.4"
 	}
 }

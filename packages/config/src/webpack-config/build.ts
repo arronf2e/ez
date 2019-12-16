@@ -1,11 +1,18 @@
+import { resolve } from 'path';
 import { getBaseConfig } from './base';
 import { GetBuildConfig } from './interface';
 
 export const getBuildConfig: GetBuildConfig = config => {
-	const { publicPath } = config;
+	const { publicPath, cwd, outputPath } = config;
 
 	const webpackChainConfig = getBaseConfig(config);
-	webpackChainConfig.output.publicPath(publicPath);
+
+	/** 输出(output) */
+	const output = resolve(cwd, outputPath);
+	webpackChainConfig.output
+		.path(output)
+		.filename('js/[chunkhash:8].js')
+		.publicPath(publicPath);
 
 	return webpackChainConfig;
 };

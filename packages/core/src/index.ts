@@ -7,12 +7,13 @@ import { config, Config } from '@ez-fe/config';
 import { getConfig, getConfigPaths } from './get-config';
 import { getWebpackConfig } from './get-webpack-config';
 import { registerBabel } from './register-babel';
-import { EZ } from './interface';
+import { EZ, NODE_ENV } from './interface';
 
-const debug = createDebug('ez:core');
+const debug = createDebug('core');
 
 export default class Ez implements EZ {
 	isWin: boolean;
+	NODE_ENV: NODE_ENV;
 	cwd: string;
 	configPaths: string[] = [];
 	pkgInfo: PkgInfo;
@@ -21,11 +22,10 @@ export default class Ez implements EZ {
 	config: Config = config;
 	webpackConfig: Configuration = {};
 
-	constructor() {
-		this.cwd = process.cwd();
+	constructor({ NODE_ENV }: { NODE_ENV: NODE_ENV }) {
 		this.isWin = isWin();
-
-		this.init();
+		this.cwd = process.cwd();
+		this.NODE_ENV = NODE_ENV;
 	}
 
 	async init() {
@@ -34,6 +34,7 @@ export default class Ez implements EZ {
 		this.registerBabel();
 
 		this.config = await getConfig(this);
+		debug(`userConfig: ${JSON.stringify(this.config)}`);
 		this.webpackConfig = await getWebpackConfig(this);
 	}
 

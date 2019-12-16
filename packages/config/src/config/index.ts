@@ -5,7 +5,7 @@ export const config = <Config>{
 	host: '0.0.0.0',
 	port: 12138,
 	publicPath: '/',
-	outputPath: 'dist',
+	outputPath: './dist',
 	babelrc: false,
 	eslintrc: false,
 	disableDynamicImport: false,

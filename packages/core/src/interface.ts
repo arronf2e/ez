@@ -2,7 +2,11 @@ import { Configuration } from 'webpack';
 import { Config } from '@ez-fe/config';
 import { PkgInfo } from '@ez-fe/helper';
 
+export type NODE_ENV = 'development' | 'production';
+
 export interface EZ {
+	/** NODE_ENV */
+	NODE_ENV: NODE_ENV;
 	/** isWin */
 	isWin: boolean;
 	/** 当前工作路径 */

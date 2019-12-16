@@ -1,9 +1,4 @@
-import { Config } from '@ez-fe/config';
-
-export default <Config>{
+export default {
 	name: '测试项目',
 	port: 9527,
-	chainConfig: webpackChainConfig => {
-		return webpackChainConfig;
-	},
 };

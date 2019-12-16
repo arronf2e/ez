@@ -11,10 +11,7 @@ export const getEslintConfig: GetEslintConfig = ({ cwd }) => {
 			node: true,
 		},
 		extends: ['airbnb', 'prettier', 'prettier/@typescript-eslint'],
-		globals: {
-			Atomics: 'readonly',
-			SharedArrayBuffer: 'readonly',
-		},
+		globals: [],
 		parser: '@typescript-eslint/parser',
 		parserOptions: {
 			ecmaFeatures: {
