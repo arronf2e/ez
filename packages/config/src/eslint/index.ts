@@ -3,7 +3,7 @@ import { GetEslintConfig } from './interface';
 
 export const getEslintConfig: GetEslintConfig = ({ cwd }) => {
 	return {
-		cache: resolve(cwd, '.cache/eslint_cache'),
+		cache: resolve(cwd, './node_modules/.cache/eslint_cache'),
 		eslintPath: require.resolve('eslint'),
 		env: {
 			browser: true,
