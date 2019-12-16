@@ -1,16 +1,14 @@
 {
-  "packages": [
-    "packages/*"
-  ],
-  "command": {
-    "publish": {
-      "conventionalCommits": true,
-      "registry": "https://registry.npmjs.org/"
-    },
-    "run": {
-      "npmClient": "yarn"
-    }
-  },
-  "version": "0.7.0",
-  "npmClient": "yarn"
+	"packages": ["packages/*"],
+	"command": {
+		"publish": {
+			"conventionalCommits": true,
+			"registry": "https://registry.npmjs.org/"
+		},
+		"run": {
+			"npmClient": "yarn"
+		}
+	},
+	"version": "0.8.0",
+	"npmClient": "yarn"
 }
