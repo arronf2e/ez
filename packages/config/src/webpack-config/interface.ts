@@ -1,8 +1,11 @@
 import WebpackChainConfig from 'webpack-chain';
+import { Config } from '../config';
 
-interface BaseConfig {
+interface BaseConfig extends Required<Config> {
+	/** 当前工作路径 */
+	cwd: string;
+	/** 源码地址 */
 	sourcePath: string;
-	publicPath: string;
 }
 
 interface DevConfig extends BaseConfig {}

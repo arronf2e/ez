@@ -26,6 +26,19 @@
 	"author": "daychongyang",
 	"license": "MIT",
 	"dependencies": {
+		"@babel/plugin-proposal-class-properties": "^7.7.4",
+		"@babel/plugin-proposal-decorators": "^7.7.4",
+		"@babel/plugin-proposal-optional-chaining": "^7.7.5",
+		"@babel/plugin-syntax-dynamic-import": "^7.7.4",
+		"@babel/plugin-transform-runtime": "^7.7.6",
+		"@babel/preset-env": "^7.7.6",
+		"@babel/preset-react": "^7.7.4",
+		"@babel/preset-typescript": "^7.7.4",
+		"babel-loader": "^8.0.6",
+		"babel-plugin-dynamic-import-node": "^2.3.0",
+		"cache-loader": "^4.1.0",
+		"eslint-loader": "^3.0.3",
+		"url-loader": "^3.0.0",
 		"webpack-chain": "^6.0.0"
 	},
 	"devDependencies": {
