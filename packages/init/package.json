@@ -1,6 +1,6 @@
 {
 	"name": "@ez-fe/init",
-	"version": "0.8.0",
+	"version": "0.6.4",
 	"description": "Init a project/readme/package with templete.",
 	"main": "./lib/index.js",
 	"scripts": {

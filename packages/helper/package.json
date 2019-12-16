@@ -1,47 +1,47 @@
 {
-  "name": "@ez-fe/helper",
-  "version": "0.7.0",
-  "description": "Nodejs Utils for Ez",
-  "main": "./lib/index.js",
-  "scripts": {
-    "dev": "tsc -w",
-    "build": "tsc"
-  },
-  "keywords": [
-    "Webpack",
-    "CLI"
-  ],
-  "directories": {
-    "lib": "./lib"
-  },
-  "files": [
-    "lib"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ez-fe/ez.git"
-  },
-  "author": "daychongyang",
-  "license": "MIT",
-  "dependencies": {
-    "chalk": "^3.0.0",
-    "log-symbols": "^3.0.0",
-    "module-alias": "^2.2.2",
-    "read-pkg-up": "^7.0.0",
-    "semver": "^6.3.0",
-    "signale": "^1.4.0",
-    "slash": "^3.0.0",
-    "update-notifier": "^3.0.1"
-  },
-  "devDependencies": {
-    "@types/inquirer": "^6.5.0",
-    "@types/read-pkg-up": "^6.0.0",
-    "@types/semver": "^6.2.0",
-    "@types/signale": "^1.2.1",
-    "@types/update-notifier": "^2.5.0"
-  },
-  "gitHead": "e0da27ab58ccacacc42fe5702431bc969cfdad71"
+	"name": "@ez-fe/helper",
+	"version": "0.6.4",
+	"description": "Nodejs Utils for Ez",
+	"main": "./lib/index.js",
+	"scripts": {
+		"dev": "tsc -w",
+		"build": "tsc"
+	},
+	"keywords": [
+		"Webpack",
+		"CLI"
+	],
+	"directories": {
+		"lib": "./lib"
+	},
+	"files": [
+		"lib"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ez-fe/ez.git"
+	},
+	"author": "daychongyang",
+	"license": "MIT",
+	"dependencies": {
+		"chalk": "^3.0.0",
+		"log-symbols": "^3.0.0",
+		"module-alias": "^2.2.2",
+		"read-pkg-up": "^7.0.0",
+		"semver": "^6.3.0",
+		"signale": "^1.4.0",
+		"slash": "^3.0.0",
+		"update-notifier": "^3.0.1"
+	},
+	"devDependencies": {
+		"@types/inquirer": "^6.5.0",
+		"@types/read-pkg-up": "^6.0.0",
+		"@types/semver": "^6.2.0",
+		"@types/signale": "^1.2.1",
+		"@types/update-notifier": "^2.5.0"
+	},
+	"gitHead": "e0da27ab58ccacacc42fe5702431bc969cfdad71"
 }

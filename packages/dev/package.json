@@ -1,42 +1,42 @@
 {
-  "name": "@ez-fe/dev",
-  "version": "0.7.0",
-  "description": "Running application using ez.",
-  "main": "./lib/index.js",
-  "scripts": {
-    "dev": "tsc -w",
-    "build": "tsc"
-  },
-  "_moduleAliases": {
-    "@": "lib"
-  },
-  "keywords": [
-    "Webpack",
-    "CLI"
-  ],
-  "directories": {
-    "lib": "./lib"
-  },
-  "files": [
-    "lib"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ez-fe/ez.git"
-  },
-  "author": "daychongyang",
-  "license": "MIT",
-  "dependencies": {
-    "@ez-fe/core": "^0.7.0",
-    "webpack": "^4.41.2",
-    "webpack-dev-server": "^3.9.0"
-  },
-  "gitHead": "e0da27ab58ccacacc42fe5702431bc969cfdad71",
-  "devDependencies": {
-    "@types/webpack": "^4.41.0",
-    "@types/webpack-dev-server": "^3.9.0"
-  }
+	"name": "@ez-fe/dev",
+	"version": "0.6.4",
+	"description": "Running application using ez.",
+	"main": "./lib/index.js",
+	"scripts": {
+		"dev": "tsc -w",
+		"build": "tsc"
+	},
+	"_moduleAliases": {
+		"@": "lib"
+	},
+	"keywords": [
+		"Webpack",
+		"CLI"
+	],
+	"directories": {
+		"lib": "./lib"
+	},
+	"files": [
+		"lib"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ez-fe/ez.git"
+	},
+	"author": "daychongyang",
+	"license": "MIT",
+	"dependencies": {
+		"@ez-fe/core": "^0.7.0",
+		"webpack": "^4.41.2",
+		"webpack-dev-server": "^3.9.0"
+	},
+	"gitHead": "e0da27ab58ccacacc42fe5702431bc969cfdad71",
+	"devDependencies": {
+		"@types/webpack": "^4.41.0",
+		"@types/webpack-dev-server": "^3.9.0"
+	}
 }
