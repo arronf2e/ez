@@ -1,29 +1,29 @@
 {
-  "name": "@ez-fe/oss-plugin",
-  "version": "0.7.0",
-  "description": "OSS plugin for Ez.",
-  "scripts": {
-    "dev": "tsc -w",
-    "build": "tsc"
-  },
-  "keywords": [
-    "Webpack",
-    "CLI"
-  ],
-  "directories": {
-    "lib": "./lib"
-  },
-  "files": [
-    "lib"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ez-fe/ez.git"
-  },
-  "author": "daychongyang",
-  "license": "MIT",
-  "gitHead": "e0da27ab58ccacacc42fe5702431bc969cfdad71"
+	"name": "@ez-fe/oss-plugin",
+	"version": "0.8.0",
+	"description": "OSS plugin for Ez.",
+	"scripts": {
+		"dev": "tsc -w",
+		"build": "tsc"
+	},
+	"keywords": [
+		"Webpack",
+		"CLI"
+	],
+	"directories": {
+		"lib": "./lib"
+	},
+	"files": [
+		"lib"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ez-fe/ez.git"
+	},
+	"author": "daychongyang",
+	"license": "MIT",
+	"gitHead": "e0da27ab58ccacacc42fe5702431bc969cfdad71"
 }
