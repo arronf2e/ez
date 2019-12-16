@@ -41,8 +41,8 @@
 		"debug": "^4.1.1"
 	},
 	"dependencies": {
-		"@ez-fe/config": "^0.7.0",
-		"@ez-fe/helper": "^0.7.0",
+		"@ez-fe/config": "^0.6.6",
+		"@ez-fe/helper": "^0.6.6",
 		"extend": "^3.0.2",
 		"webpack": "^4.41.2",
 		"webpack-chain": "^6.0.0"
