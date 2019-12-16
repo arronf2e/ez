@@ -16,9 +16,9 @@ export async function getWebpackConfig(ez: EZ): Promise<Configuration> {
 
 	if (chainConfig) {
 		webpackConfig = chainConfig(webpackChainConfig).toConfig();
+	} else {
+		webpackConfig = webpackChainConfig.toConfig();
 	}
-
-	webpackConfig = webpackChainConfig.toConfig();
 
 	debug(JSON.stringify(webpackConfig));
 	return webpackConfig;

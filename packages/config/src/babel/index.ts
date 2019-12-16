@@ -1,8 +1,10 @@
+import { resolve } from 'path';
 import { GetBabelConfig } from './interface';
 
-export const getBabelConfig: GetBabelConfig = ({ babelrc, disableDynamicImport }) => {
+export const getBabelConfig: GetBabelConfig = ({ babelrc, disableDynamicImport, cwd }) => {
 	return {
 		babelrc,
+		cacheDirectory: resolve(cwd, '.cache/webpack_cache'),
 		presets: [
 			require.resolve('@babel/preset-react'),
 			require.resolve('@babel/preset-typescript'),
