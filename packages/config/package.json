@@ -1,6 +1,6 @@
 {
 	"name": "@ez-fe/config",
-	"version": "0.6.4",
+	"version": "0.6.6",
 	"description": "Ez config.",
 	"main": "./lib/index.js",
 	"scripts": {

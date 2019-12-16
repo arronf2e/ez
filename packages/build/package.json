@@ -1,6 +1,6 @@
 {
 	"name": "@ez-fe/build",
-	"version": "0.6.4",
+	"version": "0.6.6",
 	"description": "Building application using ez.",
 	"main": "./lib/index.js",
 	"scripts": {

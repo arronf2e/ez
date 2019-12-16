@@ -1,6 +1,6 @@
 {
 	"name": "@ez-fe/oss-plugin",
-	"version": "0.6.4",
+	"version": "0.6.6",
 	"description": "OSS plugin for Ez.",
 	"scripts": {
 		"dev": "tsc -w",
