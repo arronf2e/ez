@@ -1,6 +1,6 @@
 {
 	"name": "@ez-fe/core",
-	"version": "0.6.11",
+	"version": "0.6.12",
 	"description": "Ez core.",
 	"main": "./lib/index.js",
 	"scripts": {
@@ -41,7 +41,7 @@
 		"@babel/preset-env": "^7.7.6",
 		"@babel/preset-typescript": "^7.7.4",
 		"@babel/register": "^7.7.4",
-		"@ez-fe/config": "^0.6.11",
+		"@ez-fe/config": "^0.6.12",
 		"@ez-fe/helper": "^0.6.7",
 		"extend": "^3.0.2",
 		"webpack": "^4.41.2",

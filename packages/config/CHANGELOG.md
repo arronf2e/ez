@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.12](https://github.com/ez-fe/ez/compare/v0.6.11...v0.6.12) (2019-12-17)
+
+
+### Bug Fixes
+
+* public index.html ([1985525](https://github.com/ez-fe/ez/commit/19855254341fa7a4cac491b613919a09e29a9a4e))
+
+
+
+
+
 ## [0.6.11](https://github.com/ez-fe/ez/compare/v0.6.10...v0.6.11) (2019-12-17)
 
 
