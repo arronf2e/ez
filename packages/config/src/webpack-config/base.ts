@@ -95,12 +95,12 @@ export const getBaseConfig: GetBaseConfig = config => {
 	let favicon = join(cwd, 'public/favicon.ico');
 	const hasTemplate = existsSync(template);
 	if (!hasTemplate) {
-		template = resolve(__dirname, '..', 'public/index.html');
+		template = resolve(__dirname, '..', '..', 'public/index.html');
 	}
 
 	const hasFavicon = existsSync(favicon);
 	if (!hasFavicon) {
-		favicon = resolve(__dirname, '..', 'public/favicon.ico');
+		favicon = resolve(__dirname, '..', '..', 'public/favicon.ico');
 	}
 
 	webpackChainConfig.plugin('html').use(require('html-webpack-plugin'), [
