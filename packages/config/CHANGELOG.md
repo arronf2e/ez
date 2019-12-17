@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.11](https://github.com/ez-fe/ez/compare/v0.6.10...v0.6.11) (2019-12-17)
+
+
+### Features
+
+* 默认 index.html favicon ([8ece096](https://github.com/ez-fe/ez/commit/8ece096963b5690c86ac94f5745de99ea772a2e6))
+
+
+
+
+
 ## [0.6.9](https://github.com/ez-fe/ez/compare/v0.6.8...v0.6.9) (2019-12-17)
 
 
