@@ -7,7 +7,8 @@
 		"clean": "lerna clean",
 		"build": "lerna run build",
 		"bootstrap": "lerna bootstrap",
-		"prerelease": "lerna exec -- rm -rf lib && lerna run build"
+		"prerelease": "lerna exec -- rm -rf lib && lerna run build",
+		"remove:changelog": "lerna exec -- rm -rf CHANGELOG.md"
 	},
 	"repository": "git@github.com:ez-fe/ez.git",
 	"author": "Day <daychongyang@gmail.com>",
