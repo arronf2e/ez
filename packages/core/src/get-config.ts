@@ -1,6 +1,7 @@
 import { join } from 'path';
 import createDebug from 'debug';
 import extend from 'extend';
+import { existsSync } from 'fs';
 import { Config } from '@ez-fe/config';
 import { formatWinPath, dynamicImport } from '@ez-fe/helper';
 import { EZ } from './interface';
@@ -21,6 +22,10 @@ export function getConfigPaths({ cwd, isWin }: { cwd: string; isWin: boolean }) 
 
 /** 获取配置文件内容 */
 async function getConfigContent(configPath: string) {
+	if (!existsSync(configPath)) {
+		return {} as Config;
+	}
+
 	let config = await dynamicImport(configPath);
 
 	return config as Config;
