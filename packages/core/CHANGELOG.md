@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.10](https://github.com/ez-fe/ez/compare/v0.6.9...v0.6.10) (2019-12-17)
+
+
+### Features
+
+* 取消 config 校验 ([6cd7618](https://github.com/ez-fe/ez/commit/6cd7618797dfa4b8459805e241727bd59adb990e))
+
+
+
+
+
 ## [0.6.9](https://github.com/ez-fe/ez/compare/v0.6.8...v0.6.9) (2019-12-17)
 
 **Note:** Version bump only for package @ez-fe/core
