@@ -1,9 +1,8 @@
 import { join } from 'path';
-import { existsSync } from 'fs';
 import createDebug from 'debug';
 import extend from 'extend';
 import { Config } from '@ez-fe/config';
-import { formatWinPath, message, dynamicImport, em } from '@ez-fe/helper';
+import { formatWinPath, dynamicImport } from '@ez-fe/helper';
 import { EZ } from './interface';
 
 const debug = createDebug('core:get-config');
@@ -22,11 +21,6 @@ export function getConfigPaths({ cwd, isWin }: { cwd: string; isWin: boolean }) 
 
 /** 获取配置文件内容 */
 async function getConfigContent(configPath: string) {
-	if (!existsSync(configPath)) {
-		message.error(`Configuration file(${em(configPath)}) not found!`);
-		process.exit(-1);
-	}
-
 	let config = await dynamicImport(configPath);
 
 	return config as Config;
