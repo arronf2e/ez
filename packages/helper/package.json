@@ -1,6 +1,6 @@
 {
 	"name": "@ez-fe/helper",
-	"version": "0.6.6",
+	"version": "0.6.7",
 	"description": "Nodejs Utils for Ez",
 	"main": "./lib/index.js",
 	"scripts": {
