@@ -1,6 +1,6 @@
 {
 	"name": "@ez-fe/build",
-	"version": "0.6.7",
+	"version": "0.6.8",
 	"description": "Building application using ez.",
 	"main": "./lib/index.js",
 	"scripts": {
@@ -30,7 +30,7 @@
 	"author": "daychongyang",
 	"license": "MIT",
 	"dependencies": {
-		"@ez-fe/core": "^0.6.7",
+		"@ez-fe/core": "^0.6.8",
 		"webpack": "^4.41.2"
 	},
 	"gitHead": "e0da27ab58ccacacc42fe5702431bc969cfdad71",

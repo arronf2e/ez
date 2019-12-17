@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.8](https://github.com/ez-fe/ez/compare/v0.6.7...v0.6.8) (2019-12-17)
+
+
+### Bug Fixes
+
+* dependencies ([43d00b7](https://github.com/ez-fe/ez/commit/43d00b7eae9195431c819a26562700ed8540cf14))
+
+
+
+
+
 ## [0.6.7](https://github.com/ez-fe/ez/compare/v0.6.6...v0.6.7) (2019-12-17)
 
 
