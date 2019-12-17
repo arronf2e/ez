@@ -21,15 +21,19 @@ export interface EZ {
 	babelRegisterFiles: string[];
 	/** 项目配置 */
 	config: Config;
+	/** 插件列表 */
+	plugins: Plugin[];
 	/** webpack 配置 */
 	webpackConfig: Configuration;
 
 	/** 初始化方法 */
 	init(): void;
-	/** 加载包信息 */
-	loadPkgInfo(): void;
-	/** 解析源码目录 */
-	resolveSource(): void;
 	/** 注册 babel 文件 */
-	registerBabel(): void;
+	registerBabel(files: string[]): void;
 }
+
+export interface Plugin {
+	install: (ez: EZ, options: object) => void;
+}
+
+export type Plugins = Plugin[];

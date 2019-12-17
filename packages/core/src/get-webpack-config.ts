@@ -5,6 +5,7 @@ import { EZ } from './interface';
 
 const debug = createDebug('ez:get-webpack-config');
 
+/** 获取 webpack 配置 */
 export async function getWebpackConfig(ez: EZ): Promise<Configuration> {
 	let webpackConfig = null;
 	const { sourcePath, NODE_ENV } = ez;

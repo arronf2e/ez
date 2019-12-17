@@ -1,15 +1,13 @@
-import { resolve } from 'path';
-import { existsSync } from 'fs';
-import createDebug from 'debug';
 import { Configuration } from 'webpack';
-import { getPkgInfo, PkgInfo, isWin, message } from '@ez-fe/helper';
+import { PkgInfo, isWin } from '@ez-fe/helper';
 import { config, Config } from '@ez-fe/config';
+import { getPkg } from './get-pkg';
+import { resolveSource } from './resolve-source';
 import { getConfig, getConfigPaths } from './get-config';
 import { getWebpackConfig } from './get-webpack-config';
+import { getPlugins } from './get-plugins';
 import { registerBabel } from './register-babel';
-import { EZ, NODE_ENV } from './interface';
-
-const debug = createDebug('core');
+import { EZ, NODE_ENV, Plugins } from './interface';
 
 export default class Ez implements EZ {
 	isWin: boolean;
@@ -20,6 +18,7 @@ export default class Ez implements EZ {
 	sourcePath: string = '';
 	babelRegisterFiles: string[] = [];
 	config: Config = config;
+	plugins: Plugins = [];
 	webpackConfig: Configuration = {};
 
 	constructor({ NODE_ENV }: { NODE_ENV: NODE_ENV }) {
@@ -29,36 +28,18 @@ export default class Ez implements EZ {
 	}
 
 	async init() {
-		this.loadPkgInfo();
-		this.resolveSource();
-		this.registerBabel();
+		this.pkgInfo = await getPkg(this);
+		this.sourcePath = resolveSource(this);
+
+		this.registerBabel(getConfigPaths(this));
 
 		this.config = await getConfig(this);
-		debug(`userConfig: ${JSON.stringify(this.config)}`);
 		this.webpackConfig = await getWebpackConfig(this);
+		this.plugins = await getPlugins(this);
 	}
 
-	async loadPkgInfo() {
-		try {
-			const pkgInfo = await getPkgInfo({ cwd: this.cwd });
-			this.pkgInfo = pkgInfo;
-			debug(`pkgInfo:${JSON.stringify(this.pkgInfo)}`);
-		} catch (e) {
-			message.error(e);
-		}
-	}
-
-	resolveSource() {
-		const { cwd } = this;
-		const normalSource = resolve(cwd, 'src');
-		const source = existsSync(normalSource) ? normalSource : cwd;
-
-		this.sourcePath = source;
-		debug(`sourcePath: ${this.sourcePath}`);
-	}
-
-	registerBabel() {
-		this.babelRegisterFiles = Array.prototype.concat([], getConfigPaths(this));
+	registerBabel(files: string[]) {
+		this.babelRegisterFiles = Array.prototype.concat(this.babelRegisterFiles, files);
 		registerBabel(this);
 	}
 }

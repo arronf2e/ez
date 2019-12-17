@@ -37,7 +37,10 @@ export async function getConfig(ez: EZ): Promise<Config> {
 	const configPaths = getConfigPaths({ cwd, isWin });
 	const configs = await Promise.all(configPaths.map(async configPath => await getConfigContent(configPath)));
 
-	return configs.reduce((baseConfig, config) => {
+	const config = configs.reduce((baseConfig, config) => {
 		return extend(true, baseConfig, config);
 	}, baseConfig);
+
+	debug(`userConfig: ${JSON.stringify(config)}`);
+	return config;
 }
