@@ -32,11 +32,13 @@
 	"dependencies": {
 		"@ez-fe/core": "^0.6.13",
 		"webpack": "^4.41.2",
-		"webpack-dev-server": "^3.9.0"
+		"webpack-dev-server": "^3.9.0",
+		"yargs": "^15.0.2"
 	},
 	"gitHead": "e0da27ab58ccacacc42fe5702431bc969cfdad71",
 	"devDependencies": {
 		"@types/webpack": "^4.41.0",
-		"@types/webpack-dev-server": "^3.9.0"
+		"@types/webpack-dev-server": "^3.9.0",
+		"@types/yargs": "^13.0.3"
 	}
 }

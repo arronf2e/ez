@@ -2,9 +2,18 @@ import assert from 'assert';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import Ez from '@ez-fe/core';
+import { BUILD_ENV } from '@ez-fe/core/lib/interface';
+import { Arguments } from 'yargs';
 
-export async function dev() {
-	const ez = new Ez({ NODE_ENV: 'development' });
+export async function dev(argv: Arguments) {
+	const { target } = argv;
+
+	assert(target, 'target is error.');
+
+	const ez = new Ez({
+		NODE_ENV: 'development',
+		BUILD_ENV: target as BUILD_ENV,
+	});
 
 	await ez.init();
 

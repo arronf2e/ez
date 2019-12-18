@@ -8,7 +8,7 @@ const debug = createDebug('ez:get-webpack-config');
 /** 获取 webpack 配置 */
 export async function getWebpackConfig(ez: EZ): Promise<Configuration> {
 	let webpackConfig = null;
-	const { sourcePath, NODE_ENV } = ez;
+	const { sourcePath, NODE_ENV, BUILD_ENV } = ez;
 	const { getWebpackChainConfig } = await import('@ez-fe/config');
 	const { config, cwd } = ez;
 	const { chainConfig } = config;
@@ -16,6 +16,8 @@ export async function getWebpackConfig(ez: EZ): Promise<Configuration> {
 	const webpackChainConfig = getWebpackChainConfig[NODE_ENV]({
 		cwd,
 		sourcePath,
+		NODE_ENV,
+		BUILD_ENV,
 		...(<Required<Config>>config),
 	});
 

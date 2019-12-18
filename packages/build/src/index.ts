@@ -1,7 +1,11 @@
 import webpack from 'webpack';
+import { Arguments } from 'yargs';
 import Ez from '@ez-fe/core';
-export async function build() {
-	const ez = new Ez({ NODE_ENV: 'production' });
+import { BUILD_ENV } from '@ez-fe/core/lib/interface';
+
+export async function build(args: Arguments) {
+	const { target } = args;
+	const ez = new Ez({ NODE_ENV: 'production', BUILD_ENV: target as BUILD_ENV });
 
 	await ez.init();
 

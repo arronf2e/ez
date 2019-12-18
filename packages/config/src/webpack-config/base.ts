@@ -103,6 +103,15 @@ export const getBaseConfig: GetBaseConfig = config => {
 		favicon = resolve(__dirname, '..', '..', 'public/favicon.ico');
 	}
 
+	/** DefinePlugin */
+	const { BUILD_ENV, NODE_ENV } = config;
+	webpackChainConfig
+		.plugin('define')
+		.use(require('webpack').DefinePlugin, [
+			{ 'process.env': { NODE_ENV: JSON.stringify(NODE_ENV), BUILD_ENV: JSON.stringify(BUILD_ENV) } },
+		]);
+
+	/** HtmlWebpackPlugin */
 	webpackChainConfig.plugin('html').use(require('html-webpack-plugin'), [
 		{
 			title,
@@ -120,6 +129,7 @@ export const getBaseConfig: GetBaseConfig = config => {
 		},
 	]);
 
+	/** CircularDependencyPlugin */
 	webpackChainConfig.plugin('circular-dependency').use(require('circular-dependency-plugin'), [
 		{
 			exclude: /node_modules/,

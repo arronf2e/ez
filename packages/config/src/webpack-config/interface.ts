@@ -6,6 +6,10 @@ interface BaseConfig extends Required<Config> {
 	cwd: string;
 	/** 源码地址 */
 	sourcePath: string;
+	/** BUILD_ENV */
+	BUILD_ENV: string;
+	/** NODE_ENV */
+	NODE_ENV: string;
 }
 
 interface DevConfig extends BaseConfig {}

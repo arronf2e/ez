@@ -35,6 +35,7 @@
 	},
 	"gitHead": "e0da27ab58ccacacc42fe5702431bc969cfdad71",
 	"devDependencies": {
-		"@types/webpack": "^4.41.0"
+		"@types/webpack": "^4.41.0",
+		"@types/yargs": "^13.0.3"
 	}
 }

@@ -2,16 +2,17 @@ import { Configuration } from 'webpack';
 import { PkgInfo, isWin } from '@ez-fe/helper';
 import { config, Config } from '@ez-fe/config';
 import { getPkg } from './get-pkg';
+import { getPlugins } from './get-plugins';
+import { registerBabel } from './register-babel';
 import { resolveSource } from './resolve-source';
 import { getConfig, getConfigPaths } from './get-config';
 import { getWebpackConfig } from './get-webpack-config';
-import { getPlugins } from './get-plugins';
-import { registerBabel } from './register-babel';
-import { EZ, NODE_ENV, Plugins } from './interface';
+import { EZ, NODE_ENV, BUILD_ENV, ENV, Plugins } from './interface';
 
 export default class Ez implements EZ {
 	isWin: boolean;
 	NODE_ENV: NODE_ENV;
+	BUILD_ENV: BUILD_ENV;
 	cwd: string;
 	configPaths: string[] = [];
 	pkgInfo: PkgInfo;
@@ -21,16 +22,18 @@ export default class Ez implements EZ {
 	plugins: Plugins = [];
 	webpackConfig: Configuration = {};
 
-	constructor({ NODE_ENV }: { NODE_ENV: NODE_ENV }) {
+	constructor({ NODE_ENV, BUILD_ENV }: ENV) {
 		this.isWin = isWin();
 		this.cwd = process.cwd();
 		this.NODE_ENV = NODE_ENV;
+		this.BUILD_ENV = BUILD_ENV;
 	}
 
 	async init() {
 		this.pkgInfo = await getPkg(this);
 		this.sourcePath = resolveSource(this);
 
+		/** 配置文件 babel 转码 */
 		this.registerBabel(getConfigPaths(this));
 
 		this.config = await getConfig(this);

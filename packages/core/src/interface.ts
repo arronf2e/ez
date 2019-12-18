@@ -4,9 +4,15 @@ import { PkgInfo } from '@ez-fe/helper';
 
 export type NODE_ENV = 'development' | 'production';
 
+export type BUILD_ENV = 'development' | 'uat' | 'production';
+
+export type ENV = { NODE_ENV: NODE_ENV; BUILD_ENV: BUILD_ENV };
+
 export interface EZ {
 	/** NODE_ENV */
 	NODE_ENV: NODE_ENV;
+	/** BUILD_ENV */
+	BUILD_ENV: BUILD_ENV;
 	/** isWin */
 	isWin: boolean;
 	/** 当前工作路径 */
