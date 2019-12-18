@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.15](https://github.com/ez-fe/ez/compare/v0.6.14...v0.6.15) (2019-12-18)
+
+
+### Features
+
+* user config ([edafbd2](https://github.com/ez-fe/ez/commit/edafbd24a46677330a782727b38ea210fabaf66c))
+
+
+
+
+
 ## [0.6.14](https://github.com/ez-fe/ez/compare/v0.6.13...v0.6.14) (2019-12-18)
 
 
