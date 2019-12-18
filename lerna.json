@@ -1,7 +1,5 @@
 {
-	"packages": [
-		"packages/*"
-	],
+	"packages": ["packages/*", "__test__/*"],
 	"command": {
 		"publish": {
 			"conventionalCommits": true,

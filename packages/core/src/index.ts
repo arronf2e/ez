@@ -33,10 +33,10 @@ export default class Ez implements EZ {
 
 		this.fileMonitor.on('ready', () => console.log('Initial scan complete. Ready for changes'));
 		this.fileMonitor.on('add', path => {
-			console.log(path);
+			console.log(path, 'add');
 		});
 		this.fileMonitor.on('change', path => {
-			console.log(path);
+			console.log(path, 'change');
 		});
 	}
 
