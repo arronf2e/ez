@@ -6,7 +6,7 @@ import { getPlugins } from './get-plugins';
 import { registerBabel } from './register-babel';
 import { resolveSource } from './resolve-source';
 import { getConfig, getConfigPaths } from './get-config';
-import { getWebpackConfig } from './get-webpack-config';
+import { getWebpackConfig } from './webpack-config';
 import { EZ, NODE_ENV, BUILD_ENV, ENV, Plugins } from './interface';
 
 export default class Ez implements EZ {

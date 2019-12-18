@@ -5,3 +5,5 @@ export const getWebpackChainConfig = {
 	development: getDevConfig,
 	production: getBuildConfig,
 };
+
+export * from './get-webpack-config';

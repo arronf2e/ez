@@ -1,8 +1,8 @@
 import createDebug from 'debug';
 import { Configuration } from 'webpack';
 import { Config } from '@ez-fe/config';
-import { getWebpackChainConfig } from './webpack-config';
-import { EZ } from './interface';
+import { getWebpackChainConfig } from './index';
+import { EZ } from '../interface';
 
 const debug = createDebug('ez:get-webpack-config');
 
