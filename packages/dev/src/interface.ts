@@ -17,6 +17,46 @@ export type Type =
 	| 'progress'
 	| 'overlay';
 
+export type Signals =
+	| 'SIGABRT'
+	| 'SIGALRM'
+	| 'SIGBUS'
+	| 'SIGCHLD'
+	| 'SIGCONT'
+	| 'SIGFPE'
+	| 'SIGHUP'
+	| 'SIGILL'
+	| 'SIGINT'
+	| 'SIGIO'
+	| 'SIGIOT'
+	| 'SIGKILL'
+	| 'SIGPIPE'
+	| 'SIGPOLL'
+	| 'SIGPROF'
+	| 'SIGPWR'
+	| 'SIGQUIT'
+	| 'SIGSEGV'
+	| 'SIGSTKFLT'
+	| 'SIGSTOP'
+	| 'SIGSYS'
+	| 'SIGTERM'
+	| 'SIGTRAP'
+	| 'SIGTSTP'
+	| 'SIGTTIN'
+	| 'SIGTTOU'
+	| 'SIGUNUSED'
+	| 'SIGURG'
+	| 'SIGUSR1'
+	| 'SIGUSR2'
+	| 'SIGVTALRM'
+	| 'SIGWINCH'
+	| 'SIGXCPU'
+	| 'SIGXFSZ'
+	| 'SIGBREAK'
+	| 'SIGLOST'
+	| 'SIGINFO';
+
 export interface DevServer extends WebpackDevServer {
-	sockWrite: (sockets: Sockets, type: Type, data: any) => void;
+	sockets: Sockets;
+	sockWrite: (sockets: Sockets, type: Type, data?: any) => void;
 }

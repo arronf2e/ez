@@ -5,6 +5,7 @@ import WebpackDevServer from 'webpack-dev-server';
 import Ez from '@ez-fe/core';
 import { BUILD_ENV } from '@ez-fe/core/lib/interface';
 import { message } from '@ez-fe/helper';
+import { DevServer, Signals } from './interface';
 
 export async function dev(argv: Arguments) {
 	const { target } = argv;
@@ -40,10 +41,22 @@ export async function dev(argv: Arguments) {
 		},
 		historyApiFallback: true,
 		clientLogLevel: 'warning',
-	});
+	}) as DevServer;
 
 	devServer.listen(port, host, (err: any) => {
-		console.log('Starting the development server...\n');
+		if (err) {
+			message.error(err);
+		}
+
+		message.start('Starting the development server...\n');
+	});
+
+	[/** <Ctrl>+C */ 'SIGINT', 'SIGTERM'].forEach(signal => {
+		process.on(signal as Signals, () => {
+			devServer.close(() => {
+				process.exit(0);
+			});
+		});
 	});
 
 	const restart = (reason: string) => {
@@ -57,12 +70,8 @@ export async function dev(argv: Arguments) {
 		dev(argv);
 	};
 
-	setInterval(() => {
-		message.info('reload');
-		devServer.sockWrite(devServer.sockets, 'content-changed');
-	}, 3000);
-
-	if (false) {
-		restart('hahah');
-	}
+	// setInterval(() => {
+	// 	message.info('reload');
+	// 	devServer.sockWrite(devServer.sockets, 'content-changed');
+	// }, 3000);
 }

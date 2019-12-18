@@ -1,4 +1,5 @@
 import { Configuration } from 'webpack';
+import chokidar, { FSWatcher } from 'chokidar';
 import { PkgInfo, isWin } from '@ez-fe/helper';
 import { config, Config } from '@ez-fe/config';
 import { getPkg } from './get-pkg';
@@ -21,12 +22,22 @@ export default class Ez implements EZ {
 	config: Config = config;
 	plugins: Plugins = [];
 	webpackConfig: Configuration = {};
+	fileMonitor: FSWatcher;
 
 	constructor({ NODE_ENV, BUILD_ENV }: ENV) {
 		this.isWin = isWin();
 		this.cwd = process.cwd();
 		this.NODE_ENV = NODE_ENV;
 		this.BUILD_ENV = BUILD_ENV;
+		this.fileMonitor = chokidar.watch([]);
+
+		this.fileMonitor.on('ready', () => console.log('Initial scan complete. Ready for changes'));
+		this.fileMonitor.on('add', path => {
+			console.log(path);
+		});
+		this.fileMonitor.on('change', path => {
+			console.log(path);
+		});
 	}
 
 	async init() {
@@ -41,8 +52,13 @@ export default class Ez implements EZ {
 		this.plugins = await getPlugins(this);
 	}
 
+	watchFiles(files: string[]) {
+		this.fileMonitor.add(files);
+	}
+
 	registerBabel(files: string[]) {
 		this.babelRegisterFiles = Array.prototype.concat(this.babelRegisterFiles, files);
 		registerBabel(this);
+		this.watchFiles(files);
 	}
 }
