@@ -1,4 +1,4 @@
-import { Config } from '../config';
+import { Config } from '@ez-fe/config';
 
 export type BaseConfig = Pick<Config, 'babelrc'> &
 	Pick<Config, 'disableDynamicImport'> & {

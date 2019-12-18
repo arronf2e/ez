@@ -1,5 +1,5 @@
 import WebpackChainConfig from 'webpack-chain';
-import { Config } from '../config';
+import { Config } from '@ez-fe/config';
 
 interface BaseConfig extends Required<Config> {
 	/** 当前工作路径 */
