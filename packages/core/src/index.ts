@@ -30,6 +30,18 @@ export default class Ez implements EZ {
 		this.NODE_ENV = NODE_ENV;
 		this.BUILD_ENV = BUILD_ENV;
 		this.fileMonitor = chokidar.watch([]);
+	}
+
+	async init() {
+		this.pkgInfo = await getPkg(this);
+		this.sourcePath = resolveSource(this);
+
+		/** 配置文件 babel 转码 */
+		this.registerBabel(getConfigPaths(this));
+
+		await this.getConfig();
+		await this.getPlugins();
+		await this.getWebpackConfig();
 
 		this.fileMonitor.on('ready', () => console.log('Initial scan complete. Ready for changes'));
 		this.fileMonitor.on('add', path => {
@@ -40,16 +52,16 @@ export default class Ez implements EZ {
 		});
 	}
 
-	async init() {
-		this.pkgInfo = await getPkg(this);
-		this.sourcePath = resolveSource(this);
-
-		/** 配置文件 babel 转码 */
-		this.registerBabel(getConfigPaths(this));
-
+	async getConfig() {
 		this.config = await getConfig(this);
-		this.webpackConfig = await getWebpackConfig(this);
+	}
+
+	async getPlugins() {
 		this.plugins = await getPlugins(this);
+	}
+
+	async getWebpackConfig() {
+		this.webpackConfig = await getWebpackConfig(this);
 	}
 
 	watchFiles(files: string[]) {

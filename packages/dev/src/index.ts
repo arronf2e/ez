@@ -1,77 +1,34 @@
-import assert from 'assert';
+import { resolve } from 'path';
+import { fork } from 'child_process';
 import { Arguments } from 'yargs';
-import webpack from 'webpack';
-import WebpackDevServer from 'webpack-dev-server';
-import Ez from '@ez-fe/core';
-import { BUILD_ENV } from '@ez-fe/core/lib/interface';
-import { message } from '@ez-fe/helper';
-import { DevServer, Signals } from './interface';
+import { Signale } from '@ez-fe/helper';
+import { Signals, Msg, StartingData } from './interface';
+
+const logger = new Signale({
+	interactive: true,
+});
 
 export async function dev(argv: Arguments) {
-	const { target } = argv;
+	// logger.await('Starting the development server...\n');
+	const devServer = fork(resolve(__dirname, './dev-server'));
 
-	assert(target, 'target is error.');
+	devServer.on('message', (msg: Msg) => {
+		const { type, data } = msg;
 
-	const ez = new Ez({
-		NODE_ENV: 'development',
-		BUILD_ENV: target as BUILD_ENV,
-	});
-
-	await ez.init();
-
-	const {
-		webpackConfig,
-		config: { port, host },
-	} = ez;
-
-	assert(webpackConfig, 'webpackConfig is error.');
-
-	const compiler = webpack(webpackConfig);
-
-	const devServer = new WebpackDevServer(compiler, {
-		host,
-		port,
-		public: `localhost:${port}`,
-		open: false,
-		hot: true,
-		quiet: true,
-		overlay: {
-			warnings: true,
-			errors: true,
-		},
-		historyApiFallback: true,
-		clientLogLevel: 'warning',
-	}) as DevServer;
-
-	devServer.listen(port, host, (err: any) => {
-		if (err) {
-			message.error(err);
+		if (type === 'starting') {
+			const { step, name } = <StartingData>data;
+			logger.pending(`[%d/3] - ${name}...`, step);
 		}
 
-		message.start('Starting the development server...\n');
+		if (type === 'success') {
+			const { name } = <StartingData>data;
+			logger.success(name);
+		}
 	});
 
-	[/** <Ctrl>+C */ 'SIGINT', 'SIGTERM'].forEach(signal => {
+	['SIGINT', 'SIGTERM'].forEach(signal => {
 		process.on(signal as Signals, () => {
-			devServer.close(() => {
-				process.exit(0);
-			});
+			process.exit(0);
 		});
 	});
-
-	const restart = (reason: string) => {
-		if (reason) {
-			message.pending(reason);
-		} else {
-			message.pending('Try to restart server...');
-		}
-		devServer.close();
-
-		dev(argv);
-	};
-
-	// setInterval(() => {
-	// 	message.info('reload');
-	// 	devServer.sockWrite(devServer.sockets, 'content-changed');
-	// }, 3000);
 }
