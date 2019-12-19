@@ -8,6 +8,8 @@ export * from './dynamic-import';
 
 export * from './highlights';
 
+export * from './json';
+
 export * from './get-pkg';
 
 export * from './message';

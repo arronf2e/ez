@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
+import { parse } from '@ez-fe/helper';
 import { Msg, StartData } from './interface';
 
 const send = (msg: Msg) => {
@@ -21,7 +22,7 @@ if (!started) {
 
 process.on('message', ({ type, data }: Msg) => {
 	if (type === 'start') {
-		startDevServer(<StartData>data);
+		startDevServer(<StartData>parse(data as string));
 	}
 });
 

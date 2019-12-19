@@ -17,7 +17,7 @@ export async function dev(argv: Arguments) {
 		BUILD_ENV: target as BUILD_ENV,
 	});
 
-	const devServer = fork(resolve(__dirname, './dev-server'), [], { silent: true });
+	const devServer = fork(resolve(__dirname, './dev-server'), [], { silent: false });
 
 	devServer.on('message', async (msg: Msg) => {
 		const { type, data } = msg;

@@ -1,6 +1,6 @@
 import { ChildProcess } from 'child_process';
 import { EZ } from '@ez-fe/core/lib/interface';
-import { Signale } from '@ez-fe/helper';
+import { Signale, stringify } from '@ez-fe/helper';
 
 const logger = new Signale({
 	interactive: true,
@@ -28,6 +28,6 @@ export async function start(ez: EZ, devServer: ChildProcess) {
 	const { config, webpackConfig } = ez;
 	devServer.send({
 		type: 'start',
-		data: { config, webpackConfig },
+		data: stringify({ config, webpackConfig }),
 	});
 }

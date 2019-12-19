@@ -72,7 +72,7 @@ export interface StartData {
 
 export interface Start {
 	type: 'start';
-	data?: StartData;
+	data?: string;
 }
 
 export interface ReStartingData {
