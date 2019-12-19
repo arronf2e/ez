@@ -1,46 +1,49 @@
-setTimeout(() => {
-	process &&
-		process.send &&
-		process.send({
-			type: 'starting',
-			data: {
-				name: ' Starting the development server...',
-				step: 3,
-			},
-		});
-}, 3000);
+import webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
+import { Msg, StartData } from './interface';
 
-setTimeout(() => {
-	process &&
-		process.send &&
-		process.send({
-			type: 'starting',
-			data: {
-				name: ' Starting the development server...',
-				step: 1,
-			},
-		});
-}, 1000);
+const send = (msg: Msg) => {
+	if (process && process.send) {
+		process.send(msg);
+	}
+};
 
-setTimeout(() => {
-	process &&
-		process.send &&
-		process.send({
-			type: 'starting',
-			data: {
-				name: ' Starting the development server...',
-				step: 2,
-			},
-		});
-}, 2000);
+let started = false;
 
-setTimeout(() => {
-	process &&
-		process.send &&
-		process.send({
-			type: 'success',
-			data: {
-				name: 'Server is running at 13138.',
-			},
-		});
-}, 3000);
+/** 未启动过 */
+if (!started) {
+	send({
+		type: 'start',
+	});
+
+	started = true;
+}
+
+process.on('message', ({ type, data }: Msg) => {
+	if (type === 'start') {
+		startDevServer(<StartData>data);
+	}
+});
+
+function startDevServer({ config, webpackConfig }: StartData) {
+	const { host, port } = config;
+	const compiler = webpack(webpackConfig);
+	const server = new WebpackDevServer(compiler, {
+		host,
+		port,
+		public: `localhost:${port}`,
+		open: false,
+		hot: true,
+		quiet: true,
+		overlay: {
+			warnings: true,
+			errors: true,
+		},
+		historyApiFallback: true,
+		clientLogLevel: 'warning',
+	});
+
+	server.listen(port, host, err => {
+		console.log('Starting the development server...\n');
+	});
+}

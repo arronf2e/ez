@@ -32,8 +32,14 @@ export interface EZ {
 	/** webpack 配置 */
 	webpackConfig: Configuration;
 
-	/** 初始化方法 */
-	init(): void;
+	/** 获取包信息 */
+	getPkg(): Promise<void>;
+	/** 获取用户配置 */
+	getConfig(): Promise<void>;
+	/** 获取插件配置 */
+	getPlugins(): Promise<void>;
+	/** 获取 webpack 配置 */
+	getWebpackConfig(): Promise<void>;
 	/** 注册 babel 文件 */
 	registerBabel(files: string[]): void;
 }

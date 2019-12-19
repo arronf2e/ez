@@ -1,6 +1,10 @@
 import { resolve, join } from 'path';
 import { existsSync } from 'fs';
 import Config from 'webpack-chain';
+import WebpackBarPlugin from 'webpackbar';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
 import { getBabelConfig } from '../babel';
 import { getEslintConfig } from '../eslint';
 import { GetBaseConfig } from './interface';
@@ -72,7 +76,7 @@ export const getBaseConfig: GetBaseConfig = config => {
 		.options(eslintConfig);
 
 	/** 插件(plugins) */
-	webpackChainConfig.plugin('progress').use(require('webpackbar'), [
+	webpackChainConfig.plugin('progress').use(WebpackBarPlugin, [
 		{
 			color: 'green',
 		},
@@ -80,7 +84,7 @@ export const getBaseConfig: GetBaseConfig = config => {
 
 	const publicDir = join(cwd, 'public');
 	if (existsSync(publicDir)) {
-		webpackChainConfig.plugin('copy').use(require('copy-webpack-plugin'), [
+		webpackChainConfig.plugin('copy').use(CopyWebpackPlugin, [
 			[
 				{
 					from: publicDir,
@@ -112,7 +116,7 @@ export const getBaseConfig: GetBaseConfig = config => {
 		]);
 
 	/** HtmlWebpackPlugin */
-	webpackChainConfig.plugin('html').use(require('html-webpack-plugin'), [
+	webpackChainConfig.plugin('html').use(HtmlWebpackPlugin, [
 		{
 			title,
 			filename: 'index.html',
@@ -130,7 +134,7 @@ export const getBaseConfig: GetBaseConfig = config => {
 	]);
 
 	/** CircularDependencyPlugin */
-	webpackChainConfig.plugin('circular-dependency').use(require('circular-dependency-plugin'), [
+	webpackChainConfig.plugin('circular-dependency').use(CircularDependencyPlugin, [
 		{
 			exclude: /node_modules/,
 			include: /src/,

@@ -1,5 +1,7 @@
+import { Configuration } from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import { Connection } from 'sockjs';
+import { Config } from '@ez-fe/config';
 
 export type Sockets = Connection[];
 
@@ -61,16 +63,16 @@ export interface DevServer extends WebpackDevServer {
 	sockWrite: (sockets: Sockets, type: Type, data?: any) => void;
 }
 
-export type MsgType = 'starting' | 'restarting' | 'success' | 'error';
+export type MsgType = 'start' | 'restarting' | 'success' | 'error';
 
-export interface StartingData {
-	name: string;
-	step: number;
+export interface StartData {
+	webpackConfig: Configuration;
+	config: Config;
 }
 
-export interface Starting {
-	type: 'starting';
-	data: StartingData;
+export interface Start {
+	type: 'start';
+	data?: StartData;
 }
 
 export interface ReStartingData {
@@ -82,9 +84,7 @@ export interface ReStarting {
 	data: ReStartingData;
 }
 
-export interface SuccessData {
-	why: string;
-}
+export interface SuccessData {}
 
 export interface Success {
 	type: 'success';
@@ -100,4 +100,4 @@ export interface Error {
 	data: ErrorData;
 }
 
-export type Msg = Starting | ReStarting | Success | Error;
+export type Msg = Start | ReStarting | Success | Error;
