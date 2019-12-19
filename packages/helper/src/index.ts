@@ -1,4 +1,4 @@
-export { Signale } from 'signale';
+export { Signale, DefaultMethods as SignaleMethods } from 'signale';
 
 export * from './check-version';
 

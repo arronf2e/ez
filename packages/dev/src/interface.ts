@@ -1,7 +1,7 @@
-import { Configuration } from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import { Connection } from 'sockjs';
-import { Config } from '@ez-fe/config';
+import { SignaleMethods } from '@ez-fe/helper';
+import { BUILD_ENV } from '@ez-fe/core/lib/interface';
 
 export type Sockets = Connection[];
 
@@ -65,14 +65,19 @@ export interface DevServer extends WebpackDevServer {
 
 export type MsgType = 'start' | 'restarting' | 'success' | 'error';
 
+export type MsgOperationType = 'log' | 'exec';
+
 export interface StartData {
-	webpackConfig: Configuration;
-	config: Config;
+	loggerMethod?: SignaleMethods;
+	message?: string;
+	step?: number;
+	target?: BUILD_ENV;
 }
 
 export interface Start {
 	type: 'start';
-	data?: string;
+	operationType: MsgOperationType;
+	data?: StartData;
 }
 
 export interface ReStartingData {
@@ -81,6 +86,7 @@ export interface ReStartingData {
 
 export interface ReStarting {
 	type: 'restarting';
+	operationType: MsgOperationType;
 	data: ReStartingData;
 }
 
@@ -88,6 +94,7 @@ export interface SuccessData {}
 
 export interface Success {
 	type: 'success';
+	operationType: MsgOperationType;
 	data: SuccessData;
 }
 
@@ -97,6 +104,7 @@ export interface ErrorData {
 
 export interface Error {
 	type: 'error';
+	operationType: MsgOperationType;
 	data: ErrorData;
 }
 
