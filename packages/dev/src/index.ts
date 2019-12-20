@@ -6,8 +6,11 @@ import { Signals, Msg } from './interface';
 
 export async function dev(argv: Arguments) {
 	const { target } = argv;
+	logger.start(`Initializing development configuration...`);
 
-	const devServer = fork(resolve(__dirname, './dev-server'), [], { silent: false });
+	const devServer = fork(resolve(__dirname, './dev-server'), [], {
+		silent: true,
+	});
 
 	devServer.on('message', async ({ exec, data }: Msg) => {
 		if (exec === 'log') {

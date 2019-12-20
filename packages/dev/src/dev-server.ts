@@ -2,22 +2,10 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import Ez from '@ez-fe/core';
 import { BUILD_ENV } from '@ez-fe/core/lib/interface';
-import { Start, Close, Msg } from './interface';
+import { sendLog } from './logger';
+import { Start, Close } from './interface';
 
 const totalStep = 5;
-
-const send = (msg: Msg) => {
-	if (process && process.send) {
-		process.send(msg);
-	}
-};
-
-const sendLog = (data: Msg['data']) => {
-	send({
-		exec: 'log',
-		data,
-	});
-};
 
 let devServer: WebpackDevServer | null;
 
@@ -37,11 +25,6 @@ async function startDevServer(BUILD_ENV: BUILD_ENV) {
 	const ez = new Ez({
 		NODE_ENV: 'development',
 		BUILD_ENV,
-	});
-
-	sendLog({
-		type: 'start',
-		content: `Initializing development configuration...`,
 	});
 
 	sendLog({
