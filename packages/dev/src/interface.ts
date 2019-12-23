@@ -73,10 +73,25 @@ export interface Close {
 	data: null;
 }
 
-export interface Msg {
-	exec: 'log';
+export interface Tip {
+	exec: 'tip';
 	data: {
 		type: SignaleMethods;
 		content: string;
 	};
+}
+
+export type CompilerLogType = 'Success' | 'Done' | 'Warning' | 'Error';
+export interface Log {
+	exec: 'log';
+	data: {
+		type: CompilerLogType;
+		content: string;
+	};
+}
+
+export type Msg = Tip | Log;
+
+export interface CompilerLog {
+	[type: string]: (content: string) => string;
 }

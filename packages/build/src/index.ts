@@ -7,8 +7,6 @@ export async function build(args: Arguments) {
 	const { target } = args;
 	const ez = new Ez({ NODE_ENV: 'production', BUILD_ENV: target as BUILD_ENV });
 
-	await ez.init();
-
 	const { webpackConfig } = ez;
 
 	webpack(webpackConfig, (err, stats) => {

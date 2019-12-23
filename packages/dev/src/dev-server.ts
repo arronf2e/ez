@@ -2,7 +2,7 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import Ez from '@ez-fe/core';
 import { BUILD_ENV } from '@ez-fe/core/lib/interface';
-import { sendLog } from './logger';
+import { sendTip, sendLog } from './tip';
 import { Start, Close } from './interface';
 
 const totalStep = 5;
@@ -27,32 +27,32 @@ async function startDevServer(BUILD_ENV: BUILD_ENV) {
 		BUILD_ENV,
 	});
 
-	sendLog({
+	sendTip({
 		type: 'await',
 		content: `[1/${totalStep}] Getting package information...`,
 	});
 
 	await ez.getPkg();
 
-	sendLog({
+	sendTip({
 		type: 'await',
 		content: `[2/${totalStep}] Getting user configuration...`,
 	});
 	await ez.getConfig();
 
-	sendLog({
+	sendTip({
 		type: 'await',
 		content: `[3/${totalStep}] Getting plugin configuration...`,
 	});
 	await ez.getPlugins();
 
-	sendLog({
+	sendTip({
 		type: 'await',
 		content: `[4/${totalStep}] Getting webpack configuration...`,
 	});
 	await ez.getWebpackConfig();
 
-	sendLog({
+	sendTip({
 		type: 'pending',
 		content: `[5/${totalStep}] Starting the development server...`,
 	});
@@ -64,15 +64,15 @@ async function startDevServer(BUILD_ENV: BUILD_ENV) {
 
 	devServer.listen(port, host, err => {
 		if (err) {
-			return sendLog({
+			return sendTip({
 				type: 'error',
 				content: err.message,
 			});
 		}
 
 		sendLog({
-			type: 'success',
-			content: `Server is running at localhost:${port}`,
+			type: 'Success',
+			content: `${port}`,
 		});
 	});
 }

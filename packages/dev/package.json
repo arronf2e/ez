@@ -32,12 +32,15 @@
 	"dependencies": {
 		"@ez-fe/core": "^0.6.15",
 		"@ez-fe/helper": "^0.6.14",
+		"address": "^1.1.2",
+		"chalk": "^3.0.0",
 		"webpack": "^4.41.2",
 		"webpack-dev-server": "^3.9.0",
 		"yargs": "^15.0.2"
 	},
 	"gitHead": "e0da27ab58ccacacc42fe5702431bc969cfdad71",
 	"devDependencies": {
+		"@types/chalk": "^2.2.0",
 		"@types/node": "12.12.21",
 		"@types/sockjs": "^0.3.31",
 		"@types/webpack": "^4.41.0",
