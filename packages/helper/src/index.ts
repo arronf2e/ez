@@ -15,3 +15,5 @@ export * from './get-pkg';
 export * from './message';
 
 export * from './win';
+
+export * from './logger';

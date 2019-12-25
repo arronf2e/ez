@@ -1,20 +1,39 @@
-import webpack from 'webpack';
+import { resolve } from 'path';
+import { fork } from 'child_process';
 import { Arguments } from 'yargs';
-import Ez from '@ez-fe/core';
-import { BUILD_ENV } from '@ez-fe/core/lib/interface';
+import { logger } from '@ez-fe/helper';
+import { Signals, Tip, Log, Msg } from './interface';
+import { tip } from './build/message';
 
 export async function build(args: Arguments) {
 	const { target } = args;
-	const ez = new Ez({ NODE_ENV: 'production', BUILD_ENV: target as BUILD_ENV });
+	tip.start(`Initializing production configuration...`);
 
-	const { webpackConfig } = ez;
+	const buildProcess = fork(resolve(__dirname, './build'), [], {
+		silent: false,
+	});
 
-	webpack(webpackConfig, (err, stats) => {
-		console.log('build done');
-
-		if (err || stats.hasErrors()) {
-			console.log(err);
-			console.log(stats);
+	buildProcess.on('message', async ({ exec, data }: Msg) => {
+		if (exec === 'tip') {
+			const { type, content } = <Tip['data']>data;
+			return tip[type](content);
 		}
+
+		if (exec === 'log') {
+			const { type, content } = <Log['data']>data;
+			return logger[type](content as any);
+		}
+	});
+
+	['SIGINT', 'SIGTERM'].forEach(signal => {
+		process.on(signal as Signals, () => {
+			buildProcess.kill();
+			process.exit(0);
+		});
+	});
+
+	buildProcess.send({
+		exec: 'start',
+		target,
 	});
 }

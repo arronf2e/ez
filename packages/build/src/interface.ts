@@ -1,46 +1,16 @@
 import { Configuration } from 'webpack';
 import WebpackChainConfig from 'webpack-chain';
-import WebpackDevServer from 'webpack-dev-server';
-import { Connection } from 'sockjs';
 import { BUILD_ENV } from '@ez-fe/core/lib/interface';
 import { SignaleMethods } from '@ez-fe/helper';
 
-export type GetDevConfig = (
+export type GetBuildConfig = (
 	webpackChainConfig: WebpackChainConfig,
 	{ host, port }: { host: string; port: number }
 ) => Configuration;
 
-export type Sockets = Connection[];
-
-export type Type =
-	| 'still-ok'
-	| 'hash'
-	| 'errors'
-	| 'warnings'
-	| 'content-changed'
-	| 'progress-update'
-	| 'invalid'
-	| 'log-level'
-	| 'hot'
-	| 'liveReload'
-	| 'progress'
-	| 'overlay';
-
-export type Signals = 'SIGINT' | 'SIGTERM';
-
-export interface DevServer extends WebpackDevServer {
-	sockets: Sockets;
-	sockWrite: (sockets: Sockets, type: Type, data?: any) => void;
-}
-
 export interface Start {
 	exec: 'start';
 	data: BUILD_ENV;
-}
-
-export interface Close {
-	exec: 'close';
-	data: null;
 }
 
 export interface Tip {
@@ -50,6 +20,8 @@ export interface Tip {
 		content: string;
 	};
 }
+
+export type Signals = 'SIGINT' | 'SIGTERM';
 
 export type CompilerLogType =
 	/** 输出地址 */

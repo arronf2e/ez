@@ -1,7 +1,6 @@
 import { resolve, join } from 'path';
 import { existsSync } from 'fs';
 import Config from 'webpack-chain';
-import WebpackBarPlugin from 'webpackbar';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
@@ -76,12 +75,6 @@ export const getBaseConfig: GetBaseConfig = config => {
 		.options(eslintConfig);
 
 	/** 插件(plugins) */
-	webpackChainConfig.plugin('progress').use(WebpackBarPlugin, [
-		{
-			color: 'green',
-		},
-	]);
-
 	const publicDir = join(cwd, 'public');
 	if (existsSync(publicDir)) {
 		webpackChainConfig.plugin('copy').use(CopyWebpackPlugin, [

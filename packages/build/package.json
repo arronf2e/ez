@@ -31,11 +31,13 @@
 	"license": "MIT",
 	"dependencies": {
 		"@ez-fe/core": "^0.6.15",
-		"webpack": "^4.41.2"
+		"@ez-fe/helper": "^0.6.14",
+		"webpack": "^4.41.4"
 	},
 	"gitHead": "e0da27ab58ccacacc42fe5702431bc969cfdad71",
 	"devDependencies": {
 		"@types/webpack": "^4.41.0",
+		"@types/webpack-chain": "^5.2.0",
 		"@types/yargs": "^13.0.3"
 	}
 }

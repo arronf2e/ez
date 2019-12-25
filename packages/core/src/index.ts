@@ -1,13 +1,13 @@
-import { Configuration } from 'webpack';
+import WebpackChainConfig from 'webpack-chain';
 import chokidar, { FSWatcher } from 'chokidar';
-import { PkgInfo, isWin } from '@ez-fe/helper';
+import { PkgInfo, isWin, Signale } from '@ez-fe/helper';
 import { config, Config } from '@ez-fe/config';
 import { getPkg } from './get-pkg';
 import { getPlugins } from './get-plugins';
 import { registerBabel } from './register-babel';
 import { resolveSource } from './resolve-source';
 import { getConfig, getConfigPaths } from './get-config';
-import { getWebpackConfig } from './webpack-config';
+import { getWebpackChainConfig } from './webpack-config';
 import { EZ, NODE_ENV, BUILD_ENV, ENV, Plugins } from './interface';
 
 export default class Ez implements EZ {
@@ -21,8 +21,11 @@ export default class Ez implements EZ {
 	babelRegisterFiles: string[] = [];
 	config: Config = config;
 	plugins: Plugins = [];
-	webpackConfig: Configuration = {};
+	webpackConfig?: WebpackChainConfig;
 	fileMonitor: FSWatcher;
+	tip: Signale = new Signale({
+		interactive: true,
+	});
 
 	constructor({ NODE_ENV, BUILD_ENV }: ENV) {
 		this.isWin = isWin();
@@ -50,7 +53,7 @@ export default class Ez implements EZ {
 	}
 
 	async getWebpackConfig() {
-		this.webpackConfig = await getWebpackConfig(this);
+		this.webpackConfig = await getWebpackChainConfig(this);
 	}
 
 	registerFileMonitor() {

@@ -1,9 +1,20 @@
-import { getDevConfig } from './dev';
-import { getBuildConfig } from './build';
+import WebpackChainConfig from 'webpack-chain';
+import { Config } from '@ez-fe/config';
+import { getBaseConfig } from './base';
+import { EZ } from '../interface';
 
-export const getWebpackChainConfig = {
-	development: getDevConfig,
-	production: getBuildConfig,
-};
+/** 获取 webpack 配置 */
+export async function getWebpackChainConfig(ez: EZ): Promise<WebpackChainConfig> {
+	const { sourcePath, NODE_ENV, BUILD_ENV } = ez;
+	const { config, cwd } = ez;
 
-export * from './get-webpack-config';
+	const webpackChainConfig = getBaseConfig({
+		cwd,
+		sourcePath,
+		NODE_ENV,
+		BUILD_ENV,
+		...(<Required<Config>>config),
+	});
+
+	return webpackChainConfig;
+}

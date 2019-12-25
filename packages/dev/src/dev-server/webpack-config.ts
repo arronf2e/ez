@@ -1,14 +1,11 @@
-import { getBaseConfig } from './base';
-import { GetDevConfig } from './interface';
-import webpack = require('@ez-fe/config/node_modules/@types/webpack');
+import { GetDevConfig } from '../interface';
 
-export const getDevConfig: GetDevConfig = config => {
-	const { ...baseConfig } = config;
-	const { host, port } = config;
-	const webpackChainConfig = getBaseConfig(baseConfig);
-
+export const getDevConfig: GetDevConfig = (webpackChainConfig, { host, port }) => {
 	/** 模式(mode) */
 	webpackChainConfig.mode('development');
+
+	/** 统计信息(stats) */
+	webpackChainConfig.stats('none');
 
 	/** devServer */
 	webpackChainConfig.devServer.host(host);
@@ -43,5 +40,5 @@ export const getDevConfig: GetDevConfig = config => {
 		.use('css-loader')
 		.loader(require.resolve('css-loader'));
 
-	return webpackChainConfig;
+	return webpackChainConfig.toConfig();
 };
