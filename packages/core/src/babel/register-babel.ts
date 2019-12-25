@@ -1,5 +1,5 @@
 import register from '@babel/register';
-import { EZ } from './interface';
+import { EZ } from '../interface';
 
 export const registerBabel = (ez: EZ) => {
 	const { babelRegisterFiles } = ez;

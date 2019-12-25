@@ -2,11 +2,10 @@ import WebpackChainConfig from 'webpack-chain';
 import chokidar, { FSWatcher } from 'chokidar';
 import { PkgInfo, isWin, Signale } from '@ez-fe/helper';
 import { config, Config } from '@ez-fe/config';
-import { getPkg } from './get-pkg';
-import { getPlugins } from './get-plugins';
-import { registerBabel } from './register-babel';
-import { resolveSource } from './resolve-source';
-import { getConfig, getConfigPaths } from './get-config';
+import { getPlugins } from './plugin';
+import { registerBabel } from './babel';
+import { getPkg, resolveSource } from './helper';
+import { getConfig, getConfigPaths } from './config';
 import { getWebpackChainConfig } from './webpack-config';
 import { EZ, NODE_ENV, BUILD_ENV, ENV, Plugins } from './interface';
 

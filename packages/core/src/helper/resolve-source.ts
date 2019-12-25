@@ -1,7 +1,8 @@
 import { resolve } from 'path';
 import { existsSync } from 'fs';
-import { EZ } from './interface';
 import createDebug from 'debug';
+
+import { EZ } from '../interface';
 
 const debug = createDebug('resolve-source');
 

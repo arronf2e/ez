@@ -1,6 +1,6 @@
 import createDebug from 'debug';
 import { getPkgInfo, PkgInfo, message } from '@ez-fe/helper';
-import { EZ } from './interface';
+import { EZ } from '../interface';
 
 const debug = createDebug('core:get-pkg');
 

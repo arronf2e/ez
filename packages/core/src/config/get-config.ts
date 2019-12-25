@@ -4,7 +4,8 @@ import extend from 'extend';
 import { existsSync } from 'fs';
 import { Config } from '@ez-fe/config';
 import { formatWinPath, dynamicImport } from '@ez-fe/helper';
-import { EZ } from './interface';
+
+import { EZ } from '../interface';
 
 const debug = createDebug('core:get-config');
 
