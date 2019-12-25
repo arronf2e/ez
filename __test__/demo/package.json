@@ -1,13 +1,13 @@
 {
 	"name": "@ez-fe/ez-demo",
-	"version": "0.0.1",
+	"version": "0.6.16",
 	"scripts": {
 		"start": "ez dev --target uat",
 		"build:uat": "ez build --target uat"
 	},
 	"license": "MIT",
 	"devDependencies": {
-		"@ez-fe/config": "^0.6.15",
+		"@ez-fe/config": "^0.6.16",
 		"@types/react": "^16.9.17",
 		"@types/react-dom": "^16.9.4",
 		"@types/webpack-env": "^1.14.1"
