@@ -2,8 +2,8 @@ import { resolve } from 'path';
 import { fork } from 'child_process';
 import { Arguments } from 'yargs';
 import { logger } from '@ez-fe/helper';
+import { tip } from '@ez-fe/core';
 import { Signals, Tip, Log, Msg } from './interface';
-import { tip } from './build/message';
 
 export async function build(args: Arguments) {
 	const { target } = args;

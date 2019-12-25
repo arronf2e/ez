@@ -1,4 +1,3 @@
-import { Configuration } from 'webpack';
 import WebpackChainConfig from 'webpack-chain';
 import WebpackDevServer from 'webpack-dev-server';
 import { Connection } from 'sockjs';
@@ -8,7 +7,7 @@ import { SignaleMethods } from '@ez-fe/helper';
 export type GetDevConfig = (
 	webpackChainConfig: WebpackChainConfig,
 	{ host, port }: { host: string; port: number }
-) => Configuration;
+) => WebpackChainConfig;
 
 export type Sockets = Connection[];
 

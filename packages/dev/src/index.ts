@@ -1,9 +1,8 @@
 import { resolve } from 'path';
 import { fork } from 'child_process';
 import { Arguments } from 'yargs';
-import { tip } from './message';
+import { Signals, Msg, Tip, Log, tip } from '@ez-fe/core';
 import { logger } from '@ez-fe/helper';
-import { Signals, Msg, Tip, Log } from './interface';
 
 export async function dev(argv: Arguments) {
 	const { target } = argv;

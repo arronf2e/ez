@@ -40,5 +40,5 @@ export const getDevConfig: GetDevConfig = (webpackChainConfig, { host, port }) =
 		.use('css-loader')
 		.loader(require.resolve('css-loader'));
 
-	return webpackChainConfig.toConfig();
+	return webpackChainConfig;
 };

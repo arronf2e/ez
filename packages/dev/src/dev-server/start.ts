@@ -3,16 +3,11 @@ import WebpackChianConfig from 'webpack-chain';
 import WebpackDevServer from 'webpack-dev-server';
 import formatMessages from 'webpack-format-messages';
 import address from 'address';
-
-import Ez from '@ez-fe/core';
+import Ez, { sendTip, sendLog, done, error, warning } from '@ez-fe/core';
 import { BUILD_ENV } from '@ez-fe/core/lib/interface';
+import { getReady } from './get-ready';
 import { getDevConfig } from './webpack-config';
-import { sendTip, sendLog } from '../message';
-import { done } from './done';
-import { error } from './error';
-import { warning } from './warning';
 
-const totalStep = 5;
 const intranetAddress = address.ip();
 
 let devServer: WebpackDevServer | null;
@@ -24,43 +19,17 @@ export async function startDevServer(BUILD_ENV: BUILD_ENV): Promise<WebpackDevSe
 		BUILD_ENV,
 	});
 
-	/** 获取包信息 */
-	sendTip({
-		type: 'await',
-		content: `[1/${totalStep}] Getting package information...`,
-	});
-	await ez.getPkg();
-
-	/** 获取用户配置 */
-	sendTip({
-		type: 'await',
-		content: `[2/${totalStep}] Getting user configuration...`,
-	});
-	await ez.getConfig();
-
-	/** 获取用户配置 */
-	sendTip({
-		type: 'await',
-		content: `[3/${totalStep}] Getting plugin configuration...`,
-	});
-	await ez.getPlugins();
-
-	/** 获取 webpack 公用配置 */
-	sendTip({
-		type: 'await',
-		content: `[4/${totalStep}] Getting webpack configuration...`,
-	});
-	await ez.getWebpackConfig();
-
-	/** 启动开发服务 */
-	sendTip({
-		type: 'pending',
-		content: `[5/${totalStep}] Starting the development server...`,
-	});
+	await getReady(ez);
 
 	const { config, webpackConfig } = ez;
-	const { host, port } = config;
-	const webpackDevConfig = getDevConfig(webpackConfig as WebpackChianConfig, { host, port });
+	const { host, port, chainConfig } = config;
+	const webpackDevChainConfig = getDevConfig(webpackConfig as WebpackChianConfig, { host, port });
+
+	if (chainConfig) {
+		chainConfig(webpackDevChainConfig);
+	}
+
+	const webpackDevConfig = webpackDevChainConfig.toConfig();
 
 	const compiler = webpack(webpackDevConfig);
 

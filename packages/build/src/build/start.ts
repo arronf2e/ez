@@ -4,7 +4,7 @@ import webpack from 'webpack';
 import Ez from '@ez-fe/core';
 import { BUILD_ENV } from '@ez-fe/core/lib/interface';
 import { message } from '@ez-fe/helper';
-import { sendTip, sendLog } from './message';
+import { sendTip, sendLog } from '@ez-fe/core';
 
 const totalStep = 5;
 
