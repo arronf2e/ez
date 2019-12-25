@@ -1,30 +1,18 @@
-import { sendLog } from './message';
+import { logger } from '@ez-fe/helper';
 
 export function error(errors: string[]) {
-	sendLog({
-		type: 'error',
-		content: `Failed to compile with ${errors.length} errors`,
-	});
+	logger.error(`Failed to compile with ${errors.length} errors`);
 	errors.forEach(error => {
-		sendLog({
-			type: 'error',
-			content: error,
-		});
+		logger.error(error);
 	});
 }
 
 export function done(costTime?: number) {
-	sendLog({
-		type: 'done',
-		content: `Compiled successfully in ${costTime} ms`,
-	});
+	logger.done(`Compiled successfully in ${costTime} ms`);
 }
 
 export function warning(warnings: string[]) {
 	warnings.forEach(warning => {
-		sendLog({
-			type: 'warning',
-			content: warning,
-		});
+		logger.warning(warning);
 	});
 }
