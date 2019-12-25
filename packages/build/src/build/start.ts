@@ -3,6 +3,7 @@ import webpack from 'webpack';
 
 import Ez from '@ez-fe/core';
 import { BUILD_ENV } from '@ez-fe/core/lib/interface';
+import { message } from '@ez-fe/helper';
 import { sendTip, sendLog } from './message';
 
 const totalStep = 5;
@@ -50,26 +51,34 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 	const {
 		webpackConfig,
 		cwd,
-		config: { outputPath, publicPath },
+		config: { outputPath, publicPath, chainConfig },
 	} = ez;
 
+	if (!webpackConfig) {
+		return message.error('webpack build config error!');
+	}
+
 	/** 模式(mode) */
-	webpackConfig!.mode('production');
+	webpackConfig.mode('production');
 
 	/** SourceMap(devtool) */
-	webpackConfig!.devtool('source-map');
+	webpackConfig.devtool('source-map');
 
 	/** 输出(output) */
 	const output = resolve(cwd, outputPath as string);
-	webpackConfig!.output
+	webpackConfig.output
 		.path(output)
 		.filename('js/[chunkhash:8].js')
 		.publicPath(publicPath as string);
 
 	/** 统计信息(stats) */
-	webpackConfig!.stats('none');
+	webpackConfig.stats('none');
 
-	const webpackBuildConfig = webpackConfig!.toConfig();
+	if (chainConfig) {
+		chainConfig(webpackConfig);
+	}
+
+	const webpackBuildConfig = webpackConfig.toConfig();
 
 	webpack(webpackBuildConfig, (err, stats) => {
 		if (err) {

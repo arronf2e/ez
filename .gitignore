@@ -99,6 +99,9 @@ typings/
 yarn.lock
 package-lock.json
 
+# dist
+dist/
+
 # packages
 packages/*/yarn.lock
 packages/*/package-lock.json
@@ -108,5 +111,6 @@ packages/*/package-lock.json
 
 # template
 packages/cli/**/template/
+
 
 # End of https://www.gitignore.io/api/node

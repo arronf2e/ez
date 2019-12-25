@@ -7,6 +7,7 @@
 	},
 	"license": "MIT",
 	"devDependencies": {
+		"@ez-fe/cli": "^0.6.16",
 		"@ez-fe/config": "^0.6.16",
 		"@types/react": "^16.9.17",
 		"@types/react-dom": "^16.9.4",
