@@ -1,6 +1,6 @@
 {
 	"name": "@ez-fe/dev",
-	"version": "0.6.16",
+	"version": "0.6.17",
 	"description": "Running application using ez.",
 	"main": "./lib/index.js",
 	"scripts": {
@@ -30,8 +30,8 @@
 	"author": "daychongyang",
 	"license": "MIT",
 	"dependencies": {
-		"@ez-fe/core": "^0.6.16",
-		"@ez-fe/helper": "^0.6.16",
+		"@ez-fe/core": "^0.6.17",
+		"@ez-fe/helper": "^0.6.17",
 		"address": "^1.1.2",
 		"chalk": "^3.0.0",
 		"webpack": "^4.41.2",
