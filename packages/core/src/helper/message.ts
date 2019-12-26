@@ -35,7 +35,7 @@ export const tip: Signale = new Signale({
 	interactive: true,
 });
 
-const send = (msg: Log | Tip) => {
+export const send = (msg: Log | Tip) => {
 	if (process && process.send) {
 		process.send(msg);
 	}

@@ -35,7 +35,6 @@ export default class Ez implements EZ {
 		this.sourcePath = resolveSource(this);
 		/** 配置文件 babel 转码 */
 		this.registerBabel(getConfigPaths(this));
-		this.registerFileMonitor();
 	}
 
 	async getPkg() {
@@ -54,16 +53,14 @@ export default class Ez implements EZ {
 		this.webpackConfig = await getWebpackChainConfig(this);
 	}
 
-	registerFileMonitor() {
-		this.fileMonitor = chokidar
-			.watch([])
-			.on('ready', () => console.log('Initial scan complete. Ready for changes'))
-			.on('add', path => {
-				console.log(path, 'add');
-			})
-			.on('change', path => {
-				console.log(path, 'change');
-			});
+	registerFileMonitor({
+		add = () => {},
+		change = () => {},
+	}: {
+		add: (why: string) => void;
+		change: (why: string) => void;
+	}) {
+		this.fileMonitor.on('add', add).on('change', change);
 	}
 
 	watchFiles(files: string[]) {

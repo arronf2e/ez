@@ -22,6 +22,18 @@ export async function dev(argv: Arguments) {
 			const { type, content } = <Log['data']>data;
 			return logger[type](content as any);
 		}
+
+		if (exec === 'restart') {
+			const { type, content } = <Log['data']>data;
+
+			console.clear();
+			logger[type](content as any);
+
+			setTimeout(() => {
+				devServer.kill();
+				dev(argv);
+			}, 1000);
+		}
 	});
 
 	['SIGINT', 'SIGTERM'].forEach(signal => {

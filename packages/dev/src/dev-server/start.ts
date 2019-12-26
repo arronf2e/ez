@@ -4,6 +4,7 @@ import WebpackDevServer from 'webpack-dev-server';
 import formatMessages from 'webpack-format-messages';
 import address from 'address';
 import Ez, { sendTip, sendLog, done, error, warning } from '@ez-fe/core';
+import { em } from '@ez-fe/helper';
 import { BUILD_ENV } from '@ez-fe/core/lib/interface';
 import { getReady } from './get-ready';
 import { getDevConfig } from './webpack-config';
@@ -14,12 +15,35 @@ let devServer: WebpackDevServer | null;
 let hasCompiled = false;
 
 export async function startDevServer(BUILD_ENV: BUILD_ENV): Promise<WebpackDevServer> {
+	const restart = (why: string) => {
+		if (hasCompiled) {
+			if (process.send) {
+				process.send({
+					exec: 'restart',
+					data: {
+						type: 'info',
+						content: `Since ${why}, try to restart the server`,
+					},
+				});
+			}
+		}
+	};
+
 	const ez = new Ez({
 		NODE_ENV: 'development',
 		BUILD_ENV,
 	});
 
 	await getReady(ez);
+
+	ez.registerFileMonitor({
+		add: fileName => {
+			restart(`new configuration file (${em(fileName.split('/').pop())}) added`);
+		},
+		change: fileName => {
+			restart(`configuration file (${em(fileName.split('/').pop())}) changed`);
+		},
+	});
 
 	const { config, webpackConfig } = ez;
 	const { host, port, chainConfig } = config;
@@ -38,6 +62,8 @@ export async function startDevServer(BUILD_ENV: BUILD_ENV): Promise<WebpackDevSe
 
 		if (!messages.errors.length && !messages.warnings.length && hasCompiled) {
 			const { startTime = 0, endTime = 0 } = stats;
+			hasCompiled = true;
+
 			return done(endTime - startTime);
 		}
 
