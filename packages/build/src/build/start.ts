@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import rimraf from 'rimraf';
 import webpack from 'webpack';
 
 import Ez from '@ez-fe/core';
@@ -74,12 +75,30 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 	/** 统计信息(stats) */
 	webpackConfig.stats('none');
 
+	/** 模块(module) */
+	webpackConfig.module
+		.rule('css')
+		.test(/\.css$/)
+		.use('style-loader')
+		.loader(require.resolve('style-loader'))
+		.end()
+		.use('thread-loader')
+		.loader(require.resolve('thread-loader'))
+		.end()
+		.use('css-loader')
+		.loader(require.resolve('css-loader'));
+
 	if (chainConfig) {
 		chainConfig(webpackConfig);
 	}
 
 	const webpackBuildConfig = webpackConfig.toConfig();
 
+	rimraf.sync(output);
+	sendLog({
+		type: 'done',
+		content: `Clean output path ${output}`,
+	});
 	webpack(webpackBuildConfig, (err, stats) => {
 		if (err) {
 			sendLog({
@@ -88,9 +107,6 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 			});
 		} else {
 			const { startTime = 0, endTime = 0 } = stats;
-			sendLog({
-				type: 'clear',
-			});
 			sendLog({
 				type: 'success',
 				content: `Compiled successfully in ${endTime - startTime} ms`,

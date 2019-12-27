@@ -5,5 +5,6 @@ export default <Config>{
 	chainConfig(webpackChainConfig) {
 		webpackChainConfig.mode('development');
 		webpackChainConfig.optimization.minimize(false);
+		webpackChainConfig.optimization.runtimeChunk(true);
 	},
 };
