@@ -1,8 +1,3 @@
-# Webpack Bundle
-
-## Webpack Bootstrap
-
-```js
 (function(modules) {
 	/** @webpackJsonpCallback */
 	function webpackJsonpCallback(data) {
@@ -208,11 +203,7 @@
 	/** @加载入口模块并返回exports */
 	__wwebpack_require__((__webpack_require__.s = 0));
 })([]);
-```
 
-### runtime main
-
-```js
 /** @runtimemain */
 (window['jsonpArray'] = window['jsonpArray'] || []).push([
 	['main'],
@@ -227,20 +218,3 @@
 	},
 	[[0, 'runtime~main']],
 ]);
-```
-
-### 加载场景
-
-- dynamicImport
-
-  - `使用` 模块在 `webpackBootstrap` 装载函数执行时, **不**作为模块列表键传入, 模块生成独立文件, 且将 `import()`转化为`__webpack_require__.e = requireEnsure`加载目标脚本文件, 目标脚本文件内部由 `webpackJsonp`(`jsonpArray.push`的改写方法) 将模块装载到全局模块, 最后
-
-  - `未使用` 模块在 `webpackBootstrap` 装载函数执行时, 作为模块列表键传入,模块**不**生成独立文件, `__webpack_require__` 直接 从全局模块加载执行
-
-* optimization.runtimeChunk
-
-  - `true` 模块列表与 `webpackBootstrap` 装载函数分离
-
-  - `false` 模块列表**不**与 `webpackBootstrap` 装载函数分离
-
-* optimization.splitChunks

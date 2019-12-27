@@ -5,6 +5,13 @@ export default <Config>{
 	chainConfig(webpackChainConfig) {
 		webpackChainConfig.mode('development');
 		webpackChainConfig.optimization.minimize(false);
-		webpackChainConfig.optimization.runtimeChunk(true);
+		webpackChainConfig.devtool(false);
+		// webpackChainConfig.optimization.runtimeChunk(true);
+		// webpackChainConfig.optimization.splitChunks({
+		// 	chunks: 'all',
+		// 	minSize: 1000,
+		// 	maxSize: 0,
+		// 	minChunks: 1,
+		// });
 	},
 };

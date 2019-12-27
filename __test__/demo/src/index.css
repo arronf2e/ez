@@ -1,3 +1,14 @@
 body {
 	color: red;
 }
+
+/** A */
+a {
+	color: green;
+}
+
+@media (max-width: 200px) {
+	a {
+		color: blue;
+	}
+}
