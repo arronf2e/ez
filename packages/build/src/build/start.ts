@@ -5,9 +5,9 @@ import webpack from 'webpack';
 import Ez from '@ez-fe/core';
 import { BUILD_ENV } from '@ez-fe/core/lib/interface';
 import { message } from '@ez-fe/helper';
-import { sendTip, sendLog } from '@ez-fe/core';
+import { sendTip } from '@ez-fe/core';
 
-const totalStep = 5;
+const totalStep = 6;
 
 export async function start(BUILD_ENV: BUILD_ENV) {
 	const ez = new Ez({
@@ -94,20 +94,26 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 
 	const webpackBuildConfig = webpackConfig.toConfig();
 
-	rimraf.sync(output);
-	sendLog({
-		type: 'done',
-		content: `Clean output path ${output}`,
+	sendTip({
+		type: 'await',
+		content: `[5/${totalStep}] Clean output path ${output}`,
 	});
+	rimraf.sync(output);
+
+	sendTip({
+		type: 'pending',
+		content: `[6/${totalStep}] Building...`,
+	});
+
 	webpack(webpackBuildConfig, (err, stats) => {
 		if (err) {
-			sendLog({
+			sendTip({
 				type: 'error',
 				content: err.message,
 			});
 		} else {
 			const { startTime = 0, endTime = 0 } = stats;
-			sendLog({
+			sendTip({
 				type: 'success',
 				content: `Compiled successfully in ${endTime - startTime} ms`,
 			});
