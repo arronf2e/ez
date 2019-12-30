@@ -1,6 +1,7 @@
 import { GetDevConfig } from '../interface';
 
-export const getDevConfig: GetDevConfig = (webpackChainConfig, { host, port }) => {
+export const getDevConfig: GetDevConfig = (webpackChainConfig, extraConfig) => {
+	const { host, port, themeColors } = extraConfig;
 	/** 模式(mode) */
 	webpackChainConfig.mode('development');
 
@@ -38,7 +39,26 @@ export const getDevConfig: GetDevConfig = (webpackChainConfig, { host, port }) =
 		.loader(require.resolve('thread-loader'))
 		.end()
 		.use('css-loader')
-		.loader(require.resolve('css-loader'));
+		.loader(require.resolve('css-loader'))
+		.end();
+
+	webpackChainConfig.module
+		.rule('less')
+		.test(/\.css$/)
+		.use('style-loader')
+		.loader(require.resolve('style-loader'))
+		.end()
+		.use('thread-loader')
+		.loader(require.resolve('thread-loader'))
+		.end()
+		.use('css-loader')
+		.loader(require.resolve('css-loader'))
+		.end()
+		.use('less-loader')
+		.loader(require.resolve('less-loader'))
+		.options({
+			options: { javascriptEnabled: true, modifyVars: themeColors },
+		});
 
 	return webpackChainConfig;
 };

@@ -19,4 +19,6 @@ export interface Config {
 	disableDynamicImport?: boolean;
 	/** webpack chain  */
 	chainConfig?: (webpackChainConfig: WebpackChainConfig) => WebpackChainConfig;
+	/** 主题颜色 */
+	themeColors?: object;
 }

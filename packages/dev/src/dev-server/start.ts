@@ -15,20 +15,6 @@ let devServer: WebpackDevServer | null;
 let hasCompiled = false;
 
 export async function startDevServer(BUILD_ENV: BUILD_ENV): Promise<WebpackDevServer> {
-	const restart = (why: string) => {
-		if (hasCompiled) {
-			if (process.send) {
-				process.send({
-					exec: 'restart',
-					data: {
-						type: 'info',
-						content: `Since ${why}, try to restart the server`,
-					},
-				});
-			}
-		}
-	};
-
 	const ez = new Ez({
 		NODE_ENV: 'development',
 		BUILD_ENV,
@@ -37,17 +23,13 @@ export async function startDevServer(BUILD_ENV: BUILD_ENV): Promise<WebpackDevSe
 	await getReady(ez);
 
 	ez.registerFileMonitor({
-		add: fileName => {
-			restart(`new configuration file (${em(fileName.split('/').pop())}) added`);
-		},
-		change: fileName => {
-			restart(`configuration file (${em(fileName.split('/').pop())}) changed`);
-		},
+		add,
+		change,
 	});
 
 	const { config, webpackConfig } = ez;
-	const { host, port, chainConfig } = config;
-	const webpackDevChainConfig = getDevConfig(webpackConfig as WebpackChianConfig, { host, port });
+	const { host, port, themeColors = {}, chainConfig } = config;
+	const webpackDevChainConfig = getDevConfig(webpackConfig as WebpackChianConfig, { host, port, themeColors });
 
 	if (chainConfig) {
 		chainConfig(webpackDevChainConfig);
@@ -108,4 +90,26 @@ export async function startDevServer(BUILD_ENV: BUILD_ENV): Promise<WebpackDevSe
 	});
 
 	return devServer;
+}
+
+function restart(why: string) {
+	if (hasCompiled) {
+		if (process.send) {
+			process.send({
+				exec: 'restart',
+				data: {
+					type: 'info',
+					content: `Since ${why}, try to restart the server`,
+				},
+			});
+		}
+	}
+}
+
+function add(fileName: string) {
+	restart(`new configuration file (${em(fileName.split('/').pop())}) added`);
+}
+
+function change(fileName: string) {
+	restart(`configuration file (${em(fileName.split('/').pop())}) changed`);
 }

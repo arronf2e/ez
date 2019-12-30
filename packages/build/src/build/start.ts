@@ -1,11 +1,13 @@
-import { resolve } from 'path';
 import rimraf from 'rimraf';
+import { resolve } from 'path';
 import webpack from 'webpack';
+import WebpackChainConfig from 'webpack-chain';
 
 import Ez from '@ez-fe/core';
 import { BUILD_ENV } from '@ez-fe/core/lib/interface';
 import { message } from '@ez-fe/helper';
 import { sendTip } from '@ez-fe/core';
+import { getBuildConfig } from './webpack-config';
 
 const totalStep = 6;
 
@@ -52,41 +54,20 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 	const {
 		webpackConfig,
 		cwd,
-		config: { outputPath, publicPath, chainConfig },
+		config: { outputPath, publicPath = '/', chainConfig, themeColors = {} },
 	} = ez;
+	const output = resolve(cwd, outputPath as string);
 
 	if (!webpackConfig) {
 		return message.error('webpack build config error!');
 	}
 
-	/** 模式(mode) */
-	webpackConfig.mode('production');
-
-	/** SourceMap(devtool) */
-	webpackConfig.devtool('source-map');
-
-	/** 输出(output) */
-	const output = resolve(cwd, outputPath as string);
-	webpackConfig.output
-		.path(output)
-		.filename('js/[chunkhash:8].js')
-		.publicPath(publicPath as string);
-
-	/** 统计信息(stats) */
-	webpackConfig.stats('none');
-
-	/** 模块(module) */
-	webpackConfig.module
-		.rule('css')
-		.test(/\.css$/)
-		.use('style-loader')
-		.loader(require.resolve('style-loader'))
-		.end()
-		.use('thread-loader')
-		.loader(require.resolve('thread-loader'))
-		.end()
-		.use('css-loader')
-		.loader(require.resolve('css-loader'));
+	getBuildConfig(webpackConfig as WebpackChainConfig, {
+		cwd,
+		output,
+		publicPath,
+		themeColors,
+	});
 
 	if (chainConfig) {
 		chainConfig(webpackConfig);
