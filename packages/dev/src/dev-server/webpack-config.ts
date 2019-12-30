@@ -44,7 +44,7 @@ export const getDevConfig: GetDevConfig = (webpackChainConfig, extraConfig) => {
 
 	webpackChainConfig.module
 		.rule('less')
-		.test(/\.css$/)
+		.test(/\.less$/)
 		.use('style-loader')
 		.loader(require.resolve('style-loader'))
 		.end()

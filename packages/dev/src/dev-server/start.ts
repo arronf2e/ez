@@ -3,11 +3,12 @@ import WebpackChianConfig from 'webpack-chain';
 import WebpackDevServer from 'webpack-dev-server';
 import formatMessages from 'webpack-format-messages';
 import address from 'address';
-import Ez, { sendTip, sendLog, done, error, warning } from '@ez-fe/core';
+import Ez, { done, error, warning } from '@ez-fe/core';
 import { em } from '@ez-fe/helper';
 import { BUILD_ENV } from '@ez-fe/core/lib/interface';
 import { getReady } from './get-ready';
 import { getDevConfig } from './webpack-config';
+import { log, tip } from './message';
 
 const intranetAddress = address.ip();
 
@@ -64,29 +65,18 @@ export async function startDevServer(BUILD_ENV: BUILD_ENV): Promise<WebpackDevSe
 
 	devServer.listen(port, host, err => {
 		if (err) {
-			return sendTip({
-				type: 'error',
-				content: err.message,
-			});
+			return tip('error', err.message);
 		}
 
-		sendLog({
-			type: 'clear',
+		log('clear');
+
+		log('address', {
+			intranetAddress,
+			host,
+			port,
 		});
 
-		sendLog({
-			type: 'address',
-			content: {
-				intranetAddress,
-				host,
-				port,
-			},
-		});
-
-		sendLog({
-			type: 'notice',
-			content: `Some additionnal notes to be displayed unpon successful compilation!`,
-		});
+		log('notice', `Some additionnal notes to be displayed unpon successful compilation!`);
 	});
 
 	return devServer;

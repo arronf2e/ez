@@ -40,7 +40,7 @@ export interface Log {
 	exec: 'log';
 	data: {
 		type: CompilerLogType;
-		content?: string | object;
+		content?: any;
 	};
 }
 

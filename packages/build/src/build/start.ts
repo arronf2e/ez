@@ -5,11 +5,18 @@ import WebpackChainConfig from 'webpack-chain';
 
 import Ez from '@ez-fe/core';
 import { BUILD_ENV } from '@ez-fe/core/lib/interface';
-import { message } from '@ez-fe/helper';
+import { message, SignaleMethods } from '@ez-fe/helper';
 import { sendTip } from '@ez-fe/core';
 import { getBuildConfig } from './webpack-config';
 
 const totalStep = 6;
+
+const tip = (type: SignaleMethods, content: string) => {
+	sendTip({
+		type,
+		content,
+	});
+};
 
 export async function start(BUILD_ENV: BUILD_ENV) {
 	const ez = new Ez({
@@ -18,38 +25,22 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 	});
 
 	/** 获取包信息 */
-	sendTip({
-		type: 'await',
-		content: `[1/${totalStep}] Getting package information...`,
-	});
+	tip('await', `[1/${totalStep}] Getting package information...`);
 	await ez.getPkg();
 
 	/** 获取用户配置 */
-	sendTip({
-		type: 'await',
-		content: `[2/${totalStep}] Getting user configuration...`,
-	});
+	tip('await', `[2/${totalStep}] Getting user configuration...`);
 	await ez.getConfig();
 
 	/** 获取用户配置 */
-	sendTip({
-		type: 'await',
-		content: `[3/${totalStep}] Getting plugin configuration...`,
-	});
+
+	tip('await', `[3/${totalStep}] Getting plugin configuration...`);
 	await ez.getPlugins();
 
 	/** 获取 webpack 公用配置 */
-	sendTip({
-		type: 'await',
-		content: `[4/${totalStep}] Getting webpack configuration...`,
-	});
-	await ez.getWebpackConfig();
+	tip('await', `[4/${totalStep}] Getting webpack configuration...`);
 
-	/** 构建 */
-	sendTip({
-		type: 'pending',
-		content: `[5/${totalStep}] Building`,
-	});
+	await ez.getWebpackConfig();
 
 	const {
 		webpackConfig,
@@ -75,16 +66,12 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 
 	const webpackBuildConfig = webpackConfig.toConfig();
 
-	sendTip({
-		type: 'await',
-		content: `[5/${totalStep}] Clean output path ${output}`,
-	});
+	tip('await', `[5/${totalStep}] 🗑 Clean output path ${output}`);
+
 	rimraf.sync(output);
 
-	sendTip({
-		type: 'pending',
-		content: `[6/${totalStep}] Building...`,
-	});
+	/** 构建 */
+	tip('await', `[5/${totalStep}] 📦  Building`);
 
 	webpack(webpackBuildConfig, (err, stats) => {
 		if (err) {

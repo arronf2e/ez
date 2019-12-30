@@ -5,11 +5,22 @@ import { logger } from '@ez-fe/helper';
 import { tip } from '@ez-fe/core';
 import { Signals, Tip, Log, Msg } from './interface';
 
+let buildProcess: any;
+
+['SIGINT', 'SIGTERM'].forEach(signal => {
+	process.on(signal as Signals, () => {
+		if (buildProcess) {
+			buildProcess.kill();
+		}
+		process.exit(0);
+	});
+});
+
 export async function build(args: Arguments) {
 	const { target } = args;
 	tip.start(`Initializing production configuration...`);
 
-	const buildProcess = fork(resolve(__dirname, './build'), [], {
+	buildProcess = fork(resolve(__dirname, './build'), [], {
 		silent: false,
 	});
 
@@ -21,15 +32,8 @@ export async function build(args: Arguments) {
 
 		if (exec === 'log') {
 			const { type, content } = <Log['data']>data;
-			return logger[type](content as any);
+			return logger[type](content);
 		}
-	});
-
-	['SIGINT', 'SIGTERM'].forEach(signal => {
-		process.on(signal as Signals, () => {
-			buildProcess.kill();
-			process.exit(0);
-		});
 	});
 
 	buildProcess.send({
