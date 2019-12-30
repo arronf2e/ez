@@ -71,7 +71,7 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 	rimraf.sync(output);
 
 	/** 构建 */
-	tip('await', `[5/${totalStep}] 📦  Building`);
+	tip('await', `[6/${totalStep}] 📦  Building`);
 
 	webpack(webpackBuildConfig, (err, stats) => {
 		if (err) {

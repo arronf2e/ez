@@ -28,9 +28,9 @@ export async function dev(argv: Arguments) {
 
 			console.clear();
 			logger[type](content as any);
+			devServer.kill();
 
 			setTimeout(() => {
-				devServer.kill();
 				dev(argv);
 			}, 1000);
 		}
