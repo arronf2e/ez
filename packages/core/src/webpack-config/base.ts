@@ -9,7 +9,19 @@ import { getEslintConfig } from '../eslint';
 import { GetBaseConfig } from './interface';
 
 export const getBaseConfig: GetBaseConfig = config => {
-	const { name: title, sourcePath, outputPath, cwd, babelrc, disableDynamicImport } = config;
+	const {
+		alias,
+		babelrc,
+		cwd,
+		disableDynamicImport,
+		hash,
+		htmlMinify,
+		name: title,
+		outputPath,
+		sourcePath,
+		treeShaking,
+		themeColors,
+	} = config;
 	const webpackChainConfig = new Config();
 
 	/** 入口和上下文(entry and context) */
@@ -23,6 +35,7 @@ export const getBaseConfig: GetBaseConfig = config => {
 	webpackChainConfig.resolve.alias
 		.merge({
 			'@': sourcePath,
+			...alias,
 		})
 		.end()
 		.extensions.merge(['.ts', '.tsx', '.js'])
@@ -35,6 +48,8 @@ export const getBaseConfig: GetBaseConfig = config => {
 	/** 模块(module) */
 	const babelConfig = getBabelConfig({
 		babelrc,
+		themeColors,
+		treeShaking,
 		disableDynamicImport,
 		cwd,
 	});
@@ -101,12 +116,18 @@ export const getBaseConfig: GetBaseConfig = config => {
 	}
 
 	/** DefinePlugin */
-	const { BUILD_ENV, NODE_ENV } = config;
-	webpackChainConfig
-		.plugin('define')
-		.use(require('webpack').DefinePlugin, [
-			{ 'process.env': { NODE_ENV: JSON.stringify(NODE_ENV), BUILD_ENV: JSON.stringify(BUILD_ENV) } },
-		]);
+	const { BUILD_ENV, NODE_ENV, define } = config;
+
+	/** JSON.stringify 处理 */
+	for (let key in define) {
+		define[key] = JSON.stringify(define[key]);
+	}
+	webpackChainConfig.plugin('define').use(require('webpack').DefinePlugin, [
+		{
+			'process.env': { BUILD_ENV: JSON.stringify(BUILD_ENV), NODE_ENV: JSON.stringify(NODE_ENV) },
+			...define,
+		},
+	]);
 
 	/** HtmlWebpackPlugin */
 	webpackChainConfig.plugin('html').use(HtmlWebpackPlugin, [
@@ -114,14 +135,16 @@ export const getBaseConfig: GetBaseConfig = config => {
 			title,
 			filename: 'index.html',
 			template,
-			hash: true,
-			minify: {
-				removeRedundantAttributes: true,
-				collapseWhitespace: true,
-				removeAttributeQuotes: true,
-				removeComments: true,
-				collapseBooleanAttributes: true,
-			},
+			hash,
+			minify: htmlMinify
+				? {
+						removeRedundantAttributes: true,
+						collapseWhitespace: true,
+						removeAttributeQuotes: true,
+						removeComments: true,
+						collapseBooleanAttributes: true,
+				  }
+				: {},
 			favicon,
 		},
 	]);

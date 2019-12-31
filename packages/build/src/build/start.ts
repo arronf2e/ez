@@ -43,17 +43,18 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 	await ez.getWebpackConfig();
 
 	const {
-		webpackConfig,
+		webpackChainConfig,
 		cwd,
 		config: { outputPath, publicPath = '/', chainConfig, themeColors = {} },
 	} = ez;
 	const output = resolve(cwd, outputPath as string);
 
-	if (!webpackConfig) {
-		return message.error('webpack build config error!');
+	if (!webpackChainConfig) {
+		message.error('webpack build config error!');
+		process.exit(-1);
 	}
 
-	getBuildConfig(webpackConfig as WebpackChainConfig, {
+	getBuildConfig(webpackChainConfig as WebpackChainConfig, {
 		cwd,
 		output,
 		publicPath,
@@ -61,10 +62,10 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 	});
 
 	if (chainConfig) {
-		chainConfig(webpackConfig);
+		chainConfig(webpackChainConfig);
 	}
 
-	const webpackBuildConfig = webpackConfig.toConfig();
+	const webpackBuildConfig = webpackChainConfig.toConfig();
 
 	tip('await', `[5/${totalStep}] 🗑 Clean output path ${output}`);
 

@@ -22,7 +22,7 @@ export default class Ez implements EZ {
 	babelRegisterFiles: string[] = [];
 	config: Config = config;
 	plugins: Plugins = [];
-	webpackConfig?: WebpackChainConfig;
+	webpackChainConfig?: WebpackChainConfig;
 	fileMonitor: FSWatcher;
 
 	constructor({ NODE_ENV, BUILD_ENV }: ENV) {
@@ -50,7 +50,7 @@ export default class Ez implements EZ {
 	}
 
 	async getWebpackConfig() {
-		this.webpackConfig = await getWebpackChainConfig(this);
+		this.webpackChainConfig = await getWebpackChainConfig(this);
 	}
 
 	registerFileMonitor({

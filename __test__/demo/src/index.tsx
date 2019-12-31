@@ -1,3 +1,4 @@
-import('./index.css');
-import('./test.css');
-// import 'index.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+ReactDOM.render(<>{process.env.todo}</>, document.getElementById('root'));

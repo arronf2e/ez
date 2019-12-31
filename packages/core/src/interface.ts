@@ -30,7 +30,7 @@ export interface EZ {
 	/** 插件列表 */
 	plugins: Plugin[];
 	/** webpack 配置 */
-	webpackConfig?: WebpackChainConfig;
+	webpackChainConfig?: WebpackChainConfig;
 
 	/** 获取包信息 */
 	getPkg(): Promise<void>;

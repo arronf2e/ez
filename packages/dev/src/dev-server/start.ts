@@ -28,9 +28,9 @@ export async function startDevServer(BUILD_ENV: BUILD_ENV): Promise<WebpackDevSe
 		change,
 	});
 
-	const { config, webpackConfig } = ez;
+	const { config, webpackChainConfig } = ez;
 	const { host, port, themeColors = {}, chainConfig } = config;
-	const webpackDevChainConfig = getDevConfig(webpackConfig as WebpackChianConfig, { host, port, themeColors });
+	const webpackDevChainConfig = getDevConfig(webpackChainConfig as WebpackChianConfig, { host, port, themeColors });
 
 	if (chainConfig) {
 		chainConfig(webpackDevChainConfig);

@@ -1,7 +1,8 @@
-import { Config } from '@ez-fe/config';
+import { EzConfig } from '@ez-fe/config';
 
-export default <Config>{
-	port: 12130,
+export default <EzConfig>{
+	port: 12138,
+	htmlMinify: true,
 	chainConfig(webpackChainConfig) {
 		webpackChainConfig.mode('development');
 		webpackChainConfig.optimization.minimize(false);
@@ -13,5 +14,8 @@ export default <Config>{
 			maxSize: 0,
 			minChunks: 1,
 		});
+	},
+	define: {
+		'process.env.todo': '123',
 	},
 };

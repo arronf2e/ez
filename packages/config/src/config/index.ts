@@ -1,14 +1,19 @@
 import { Config } from './interface';
 
 export const config = <Config>{
-	name: 'react-admin',
+	alias: {},
+	babelrc: false,
+	define: {},
+	disableDynamicImport: false,
+	eslintrc: false,
+	hash: false,
+	htmlMinify: true,
 	host: '0.0.0.0',
+	name: 'react-admin',
+	outputPath: './dist',
 	port: 12138,
 	publicPath: '/',
-	outputPath: './dist',
-	babelrc: false,
-	eslintrc: false,
-	disableDynamicImport: false,
+	treeShaking: false,
 };
 
 export * from './interface';

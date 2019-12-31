@@ -1,7 +1,10 @@
 import { resolve } from 'path';
 import { GetBabelConfig } from './interface';
 
-export const getBabelConfig: GetBabelConfig = ({ babelrc, disableDynamicImport, cwd }) => {
+export const getBabelConfig: GetBabelConfig = config => {
+	const { babelrc, disableDynamicImport, treeShaking, cwd, themeColors = {} } = config;
+	const hasCustomTheme = Object.keys(themeColors).length;
+
 	return {
 		babelrc,
 		cacheDirectory: resolve(cwd, './node_modules/.cache/webpack_cache'),
@@ -11,7 +14,7 @@ export const getBabelConfig: GetBabelConfig = ({ babelrc, disableDynamicImport, 
 			[
 				require.resolve('@babel/preset-env'),
 				{
-					// modules: false,
+					...(treeShaking ? { modules: false } : {}),
 					corejs: '3',
 					useBuiltIns: 'usage',
 				},
@@ -38,7 +41,7 @@ export const getBabelConfig: GetBabelConfig = ({ babelrc, disableDynamicImport, 
 				{
 					libraryName: 'antd',
 					libraryDirectory: 'es',
-					style: 'css', // `style: true` 会加载 less 文件
+					style: hasCustomTheme ? true : 'css', // `style: true` 会加载 less 文件
 				},
 			],
 			...(disableDynamicImport ? [require.resolve('babel-plugin-dynamic-import-node')] : []),

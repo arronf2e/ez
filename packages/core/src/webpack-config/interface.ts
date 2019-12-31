@@ -10,6 +10,8 @@ interface BaseConfig extends Required<Config> {
 	BUILD_ENV: string;
 	/** NODE_ENV */
 	NODE_ENV: string;
+	/** treeShaking */
+	treeShaking: boolean;
 }
 
 interface DevConfig extends BaseConfig {}
