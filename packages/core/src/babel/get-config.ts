@@ -44,6 +44,7 @@ export const getBabelConfig: GetBabelConfig = config => {
 					style: hasCustomTheme ? true : 'css', // `style: true` 会加载 less 文件
 				},
 			],
+			require.resolve('@babel/plugin-transform-typescript'),
 			...(disableDynamicImport ? [require.resolve('babel-plugin-dynamic-import-node')] : []),
 		],
 	};

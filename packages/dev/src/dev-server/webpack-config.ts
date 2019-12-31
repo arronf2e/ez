@@ -29,6 +29,14 @@ export const getDevConfig: GetDevConfig = (webpackChainConfig, extraConfig) => {
 	webpackChainConfig.output.publicPath('/').pathinfo(true);
 
 	/** 模块(module) */
+	const postcssConfig = {
+		ident: 'postcss',
+		plugins: () => [
+			require('postcss-preset-env')({
+				browsers: ['Chrome >= 52', 'FireFox >= 44', 'Safari >= 7', 'last 2 Edge versions', 'IE 10'],
+			}),
+		],
+	};
 	webpackChainConfig.module
 		.rule('css')
 		.test(/\.css$/)
@@ -40,6 +48,10 @@ export const getDevConfig: GetDevConfig = (webpackChainConfig, extraConfig) => {
 		.end()
 		.use('css-loader')
 		.loader(require.resolve('css-loader'))
+		.end()
+		.use('postcss-loader')
+		.loader(require.resolve('postcss-loader'))
+		.options(postcssConfig)
 		.end();
 
 	webpackChainConfig.module
@@ -54,11 +66,17 @@ export const getDevConfig: GetDevConfig = (webpackChainConfig, extraConfig) => {
 		.use('css-loader')
 		.loader(require.resolve('css-loader'))
 		.end()
+		.use('postcss-loader')
+		.loader(require.resolve('postcss-loader'))
+		.options(postcssConfig)
+		.end()
 		.use('less-loader')
 		.loader(require.resolve('less-loader'))
 		.options({
-			options: { javascriptEnabled: true, modifyVars: themeColors },
-		});
+			javascriptEnabled: true,
+			modifyVars: themeColors,
+		})
+		.end();
 
 	return webpackChainConfig;
 };

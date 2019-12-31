@@ -31,6 +31,15 @@ export function getBuildConfig(
 	/** 统计信息(stats) */
 	webpackChainConfig.stats('none');
 
+	const postCssConfig = {
+		plugins: [
+			require('autoprefixer')({
+				overrideBrowserslist: ['Chrome >= 52', 'FireFox >= 44', 'Safari >= 7', 'last 2 Edge versions', 'IE 10'],
+			}),
+			require.resolve('postcss-cssnext'),
+		],
+	};
+
 	/** 模块(module) */
 	webpackChainConfig.module
 		.rule('css')
@@ -45,7 +54,11 @@ export function getBuildConfig(
 		.loader(require.resolve('thread-loader'))
 		.end()
 		.use('css-loader')
-		.loader(require.resolve('css-loader'));
+		.loader(require.resolve('css-loader'))
+		.end()
+		.use('postcss-loader')
+		.loader(require.resolve('postcss-loader'))
+		.options(postCssConfig);
 
 	webpackChainConfig.module
 		.rule('less')
@@ -61,6 +74,10 @@ export function getBuildConfig(
 		.end()
 		.use('css-loader')
 		.loader(require.resolve('css-loader'))
+		.end()
+		.use('postcss-loader')
+		.loader(require.resolve('postcss-loader'))
+		.options(postCssConfig)
 		.end()
 		.use('less-loader')
 		.loader(require.resolve('less-loader'))

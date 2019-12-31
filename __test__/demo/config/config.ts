@@ -6,6 +6,7 @@ export default <EzConfig>{
 	minimize: false,
 	devtool: false,
 	runtimeChunk: true,
+	outputPath: './dist',
 	chainConfig(webpackChainConfig) {
 		// webpackChainConfig.mode('development');
 	},

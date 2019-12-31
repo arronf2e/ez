@@ -40,6 +40,10 @@ export async function startDevServer(BUILD_ENV: BUILD_ENV): Promise<WebpackDevSe
 
 	const compiler = webpack(webpackDevConfig);
 
+	compiler.hooks.invalid.tap('invalid', function() {
+		return log('info', 'Compiling...');
+	});
+
 	compiler.hooks.done.tap('ez done', stats => {
 		const messages = formatMessages(stats);
 

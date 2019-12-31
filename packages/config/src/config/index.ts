@@ -13,7 +13,7 @@ export const config = <Config>{
 	host: '0.0.0.0',
 	name: 'react-admin',
 	minimize: true,
-	outputPath: 'dist',
+	outputPath: './dist',
 	port: 12138,
 	publicPath: '/',
 	runtimeChunk: false,

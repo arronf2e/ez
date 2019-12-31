@@ -2,6 +2,7 @@ import rimraf from 'rimraf';
 import { resolve } from 'path';
 import webpack from 'webpack';
 import WebpackChainConfig from 'webpack-chain';
+import formatMessages from 'webpack-format-messages';
 
 import Ez from '@ez-fe/core';
 import { BUILD_ENV } from '@ez-fe/core/lib/interface';
@@ -74,22 +75,26 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 	rimraf.sync(output);
 
 	/** 构建 */
-	tip('await', `[6/${totalStep}] 📦  Building`);
+	tip('pending', `[6/${totalStep}] 📦  Building`);
 
 	webpack(webpackBuildConfig, (err, stats) => {
-		if (err) {
-			sendTip({
-				type: 'error',
-				content: err.message,
+		const messages = formatMessages(stats);
+
+		if (messages.errors.length) {
+			messages.errors.forEach((msg: string) => {
+				message.error(msg);
 			});
-		} else {
-			const { startTime = 0, endTime = 0 } = stats;
-			sendTip({
-				type: 'success',
-				content: `Compiled successfully in ${endTime - startTime} ms`,
+			process.exit(-1);
+		}
+
+		if (messages.warnings.length) {
+			messages.warnings.forEach((msg: string) => {
+				message.warning(msg);
 			});
 		}
 
+		const { startTime = 0, endTime = 0 } = stats;
+		tip('success', `Compiled successfully in ${endTime - startTime} ms`);
 		process.exit(0);
 	});
 }
