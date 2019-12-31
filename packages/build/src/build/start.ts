@@ -43,9 +43,9 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 	await ez.getWebpackConfig();
 
 	const {
-		webpackChainConfig,
 		cwd,
-		config: { outputPath, publicPath = '/', chainConfig, themeColors = {} },
+		webpackChainConfig,
+		config: { outputPath, publicPath, chainConfig, themeColors, devtool, minimize, runtimeChunk },
 	} = ez;
 	const output = resolve(cwd, outputPath as string);
 
@@ -55,10 +55,12 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 	}
 
 	getBuildConfig(webpackChainConfig as WebpackChainConfig, {
-		cwd,
 		output,
 		publicPath,
 		themeColors,
+		devtool,
+		minimize,
+		runtimeChunk,
 	});
 
 	if (chainConfig) {

@@ -35,14 +35,20 @@
 		"css-loader": "^3.4.0",
 		"less": "^3.10.3",
 		"less-loader": "^5.0.0",
+		"mini-css-extract-plugin": "^0.9.0",
+		"optimize-css-assets-webpack-plugin": "^5.0.3",
 		"rimraf": "^3.0.0",
 		"style-loader": "^1.1.2",
+		"terser-webpack-plugin": "^2.3.1",
 		"thread-loader": "^2.1.3",
 		"webpack": "^4.41.4"
 	},
 	"gitHead": "e0da27ab58ccacacc42fe5702431bc969cfdad71",
 	"devDependencies": {
+		"@types/mini-css-extract-plugin": "^0.9.0",
+		"@types/optimize-css-assets-webpack-plugin": "^5.0.1",
 		"@types/rimraf": "^2.0.3",
+		"@types/terser-webpack-plugin": "^2.2.0",
 		"@types/webpack": "^4.41.0",
 		"@types/webpack-chain": "^5.2.0",
 		"@types/yargs": "^13.0.3"
