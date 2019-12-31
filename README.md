@@ -2,18 +2,8 @@
 
 # Ez
 
-### <strong>Ez</strong>
-
-[![npm][npm]][github-url]
-[![node][node]][node-url]
-
-[![star][star]][github-url]
-[![issue][issue]][issue-url]
-[![forks][forks]][github-url]
-
-<!-- [![downloads][downloads]][npm-url] -->
-
-</div>
+![download](https://img.shields.io/npm/dm/@ez-fe/cli)
+![version](https://img.shields.io/npm/v/@ez-fe/cli)
 
 ### Ez 是什么?
 
