@@ -7,8 +7,9 @@ Ez 是一个极速零配置的前端脚手架.
 ### Ez 有哪些特点?
 
 1. 集成了 `webpack` 的各种优化, 配置了项目开发常用到的 `loader` 和 `plugin`, 原则上可实现零配置开发.
-
 2. 使用 `webpack-chain` 的方式进行配置, 可以更加灵活的对 `webpack` 配置进行修改.
+3. 可拔插的生产环境、测试环境、开发环境切换(开发服务自动重启).
+4. 完善的 `typescript` 支持(包含配置文件).
 
 ## 安装
 
@@ -58,13 +59,15 @@ ez info # 查看项目及系统配置
 ### Dev
 
 ```bash
-ez dev --target uat
+# 基于测试环境启动开发服务
+ez dev --target test
 ```
 
 ### Build
 
 ```bash
-ez build --target uat
+# 构建生产环境代码
+ez build --target production
 ```
 
 ## Contributing
