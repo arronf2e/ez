@@ -1,6 +1,49 @@
 # Ez
 
-🌱 An attitude scaffolding.
+### Ez 是什么?
+
+Ez 是一个极速零配置的前端脚手架.
+
+### Ez 有哪些特点?
+
+1. 集成了 `webpack` 的各种优化, 配置了项目开发常用到的 `loader` 和 `plugin`, 原则上可实现零配置开发.
+
+2. 使用 `webpack-chain` 的方式进行配置, 可以更加灵活的对 `webpack` 配置进行修改.
+
+## 安装
+
+<details open=“open”>
+
+ <summary>点击关闭/打开安装</summary><br/>
+
+```bash
+# npm 全局安装
+npm i -g @ez-fe/cli
+# npm 本地安装
+npm i @ez-fe/cli -D
+```
+
+```bash
+# yarn 全局安装
+yarn global add @ez-fe/cli
+# yarn 本地安装
+yarn add @ez-fe/cli -D
+```
+
+</details>
+
+<details open=“open”>
+
+ <summary>点击关闭/打开配置/使用</summary><br/>
+
+```bash
+ez init <project-name> # 创建项目
+ez dev # 开发项目
+ez build # 构建项目
+ez info # 查看项目及系统配置
+```
+
+</details>
 
 ## Features
 
@@ -8,13 +51,21 @@
 
 可选择的初始化模板
 
-- [x] app (react-admin)
-- [x] package
+- [x] app (后台管理项目 react-admin)
+- [x] package (包)
 - [x] readme
 
 ### Dev
 
+```bash
+ez dev --target uat
+```
+
 ### Build
+
+```bash
+ez build --target uat
+```
 
 ## Contributing
 
