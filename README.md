@@ -5,6 +5,8 @@
 ![download](https://img.shields.io/npm/dm/@ez-fe/cli)
 ![version](https://img.shields.io/npm/v/@ez-fe/cli)
 
+</div>
+
 ### Ez 是什么?
 
 Ez 是一个极速零配置的前端脚手架.
