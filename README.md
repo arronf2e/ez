@@ -1,4 +1,19 @@
+<div align="center">
+
 # Ez
+
+### <strong>Ez</strong>
+
+[![npm][npm]][github-url]
+[![node][node]][node-url]
+
+[![star][star]][github-url]
+[![issue][issue]][issue-url]
+[![forks][forks]][github-url]
+
+<!-- [![downloads][downloads]][npm-url] -->
+
+</div>
 
 ### Ez 是什么?
 
@@ -15,7 +30,7 @@ Ez 是一个极速零配置的前端脚手架.
 
 <details open=“open”>
 
- <summary>点击关闭/打开安装</summary><br/>
+ <summary>安装</summary><br/>
 
 ```bash
 # npm 全局安装
@@ -35,7 +50,7 @@ yarn add @ez-fe/cli -D
 
 <details open=“open”>
 
- <summary>点击关闭/打开配置/使用</summary><br/>
+ <summary>配置/使用</summary><br/>
 
 ```bash
 ez init <project-name> # 创建项目
