@@ -42,6 +42,9 @@ export const getDevConfig: GetDevConfig = (webpackChainConfig, extraConfig) => {
 	webpackChainConfig.module
 		.rule('css')
 		.test(/\.css$/)
+		.use('thread-loader')
+		.loader(require.resolve('thread-loader'))
+		.end()
 		.use('style-loader')
 		.loader(require.resolve('style-loader'))
 		.end()
@@ -55,7 +58,7 @@ export const getDevConfig: GetDevConfig = (webpackChainConfig, extraConfig) => {
 		.loader(require.resolve('postcss-loader'))
 		.options({
 			config: {
-				path: hasPostCssConfig ? cwd : __dirname,
+				path: hasPostCssConfig ? cwd : resolve(__dirname, '../../../core/lib/postcss'),
 			},
 		})
 		.end();
@@ -63,11 +66,11 @@ export const getDevConfig: GetDevConfig = (webpackChainConfig, extraConfig) => {
 	webpackChainConfig.module
 		.rule('less')
 		.test(/\.less$/)
-		.use('style-loader')
-		.loader(require.resolve('style-loader'))
-		.end()
 		.use('thread-loader')
 		.loader(require.resolve('thread-loader'))
+		.end()
+		.use('style-loader')
+		.loader(require.resolve('style-loader'))
 		.end()
 		.use('css-loader')
 		.loader(require.resolve('css-loader'))
@@ -76,7 +79,7 @@ export const getDevConfig: GetDevConfig = (webpackChainConfig, extraConfig) => {
 		.loader(require.resolve('postcss-loader'))
 		.options({
 			config: {
-				path: hasPostCssConfig ? cwd : resolve('../../../core/lib/postcss'),
+				path: hasPostCssConfig ? cwd : resolve(__dirname, '../../../core/lib/postcss'),
 			},
 		})
 		.end()

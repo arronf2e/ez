@@ -44,14 +44,14 @@ export function getBuildConfig(webpackChainConfig: WebpackChainConfig, extraConf
 	webpackChainConfig.module
 		.rule('css')
 		.test(/\.css$/)
+		.use('thread-loader')
+		.loader(require.resolve('thread-loader'))
+		.end()
 		.use('mini-css')
 		.loader(MiniCssExtractPlugin.loader)
 		.options({
 			publicPath,
 		})
-		.end()
-		.use('thread-loader')
-		.loader(require.resolve('thread-loader'))
 		.end()
 		.use('css-loader')
 		.loader(require.resolve('css-loader'))
@@ -60,7 +60,7 @@ export function getBuildConfig(webpackChainConfig: WebpackChainConfig, extraConf
 		.loader(require.resolve('postcss-loader'))
 		.options({
 			config: {
-				path: hasPostCssConfig ? cwd : resolve('../../../core/lib/postcss'),
+				path: hasPostCssConfig ? cwd : resolve(__dirname, '../../../core/lib/postcss'),
 			},
 		});
 
@@ -73,9 +73,6 @@ export function getBuildConfig(webpackChainConfig: WebpackChainConfig, extraConf
 			publicPath,
 		})
 		.end()
-		.use('thread-loader')
-		.loader(require.resolve('thread-loader'))
-		.end()
 		.use('css-loader')
 		.loader(require.resolve('css-loader'))
 		.end()
@@ -83,7 +80,7 @@ export function getBuildConfig(webpackChainConfig: WebpackChainConfig, extraConf
 		.loader(require.resolve('postcss-loader'))
 		.options({
 			config: {
-				path: hasPostCssConfig ? cwd : __dirname,
+				path: hasPostCssConfig ? cwd : resolve(__dirname, '../../../core/lib/postcss'),
 			},
 		})
 		.end()
