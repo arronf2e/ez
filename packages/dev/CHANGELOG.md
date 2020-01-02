@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.24](https://github.com/ez-fe/ez/compare/v0.6.23...v0.6.24) (2020-01-02)
+
+
+### Bug Fixes
+
+* deps ([aa0b721](https://github.com/ez-fe/ez/commit/aa0b72112a36b9cfc90f6b36d10f46c5f30be982))
+
+
+
+
+
 ## [0.6.23](https://github.com/ez-fe/ez/compare/v0.6.22...v0.6.23) (2020-01-02)
 
 
