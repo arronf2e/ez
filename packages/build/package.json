@@ -1,6 +1,6 @@
 {
 	"name": "@ez-fe/build",
-	"version": "0.6.22",
+	"version": "0.6.23",
 	"description": "Building application using ez.",
 	"main": "./lib/index.js",
 	"scripts": {
@@ -30,7 +30,7 @@
 	"author": "daychongyang",
 	"license": "MIT",
 	"dependencies": {
-		"@ez-fe/core": "^0.6.22",
+		"@ez-fe/core": "^0.6.23",
 		"@ez-fe/helper": "^0.6.18",
 		"rimraf": "^3.0.0",
 		"terser-webpack-plugin": "^2.3.1",
