@@ -4,8 +4,10 @@ import WebpackChainConfig, { DevTool } from 'webpack-chain';
 import TerserPlugin from 'terser-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 interface ExtraConfig {
+	analyze: boolean;
 	cwd: string;
 	output: string;
 	publicPath: string;
@@ -16,7 +18,7 @@ interface ExtraConfig {
 }
 
 export function getBuildConfig(webpackChainConfig: WebpackChainConfig, extraConfig: ExtraConfig) {
-	const { cwd, output, themeColors, devtool, publicPath, minimize, runtimeChunk } = extraConfig;
+	const { analyze, cwd, output, themeColors, devtool, publicPath, minimize, runtimeChunk } = extraConfig;
 	/** 模式(mode) */
 	webpackChainConfig.mode('production');
 
@@ -97,6 +99,10 @@ export function getBuildConfig(webpackChainConfig: WebpackChainConfig, extraConf
 			ignoreOrder: true,
 		},
 	]);
+
+	if (analyze) {
+		webpackChainConfig.plugin('').use(BundleAnalyzerPlugin, []);
+	}
 
 	/** 优化(optimization) */
 	webpackChainConfig.optimization.minimize(minimize);

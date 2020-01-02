@@ -21,7 +21,7 @@ const tip = (type: SignaleMethods, content: string) => {
 
 export async function start(BUILD_ENV: BUILD_ENV) {
 	const ez = new Ez({
-		NODE_ENV: 'development',
+		NODE_ENV: 'production',
 		BUILD_ENV,
 	});
 
@@ -46,7 +46,7 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 	const {
 		cwd,
 		webpackChainConfig,
-		config: { outputPath, publicPath, chainConfig, themeColors, devtool, minimize, runtimeChunk },
+		config: { analyze, outputPath, publicPath, chainConfig, themeColors, devtool, minimize, runtimeChunk },
 	} = ez;
 	const output = resolve(cwd, outputPath as string);
 
@@ -56,6 +56,7 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 	}
 
 	getBuildConfig(webpackChainConfig as WebpackChainConfig, {
+		analyze,
 		cwd,
 		output,
 		publicPath,
@@ -96,6 +97,8 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 
 		const { startTime = 0, endTime = 0 } = stats;
 		tip('success', `Compiled successfully in ${endTime - startTime} ms`);
-		process.exit(0);
+		if (!analyze) {
+			process.exit(0);
+		}
 	});
 }
