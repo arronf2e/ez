@@ -28,9 +28,14 @@ export async function startDevServer(BUILD_ENV: BUILD_ENV): Promise<WebpackDevSe
 		change,
 	});
 
-	const { config, webpackChainConfig } = ez;
+	const { cwd, config, webpackChainConfig } = ez;
 	const { host, port, themeColors = {}, chainConfig } = config;
-	const webpackDevChainConfig = getDevConfig(webpackChainConfig as WebpackChianConfig, { host, port, themeColors });
+	const webpackDevChainConfig = getDevConfig(webpackChainConfig as WebpackChianConfig, {
+		cwd,
+		host,
+		port,
+		themeColors,
+	});
 
 	if (chainConfig) {
 		chainConfig(webpackDevChainConfig);

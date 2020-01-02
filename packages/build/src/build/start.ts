@@ -56,6 +56,7 @@ export async function start(BUILD_ENV: BUILD_ENV) {
 	}
 
 	getBuildConfig(webpackChainConfig as WebpackChainConfig, {
+		cwd,
 		output,
 		publicPath,
 		themeColors,

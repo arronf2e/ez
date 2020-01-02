@@ -1,7 +1,9 @@
+import { existsSync } from 'fs';
+import { resolve } from 'path';
 import { GetDevConfig } from '../interface';
 
 export const getDevConfig: GetDevConfig = (webpackChainConfig, extraConfig) => {
-	const { host, port, themeColors } = extraConfig;
+	const { cwd, host, port, themeColors } = extraConfig;
 	/** 模式(mode) */
 	webpackChainConfig.mode('development');
 
@@ -29,14 +31,14 @@ export const getDevConfig: GetDevConfig = (webpackChainConfig, extraConfig) => {
 	webpackChainConfig.output.publicPath('/').pathinfo(true);
 
 	/** 模块(module) */
-	const postcssConfig = {
-		ident: 'postcss',
-		plugins: () => [
-			require('postcss-preset-env')({
-				browsers: ['Chrome >= 52', 'FireFox >= 44', 'Safari >= 7', 'last 2 Edge versions', 'IE 10'],
-			}),
-		],
-	};
+	const hasPostCssConfig = [
+		'.postcssrc',
+		'.postcssrc.json',
+		'.postcssrc.yml',
+		'.postcssrc.js',
+		'postcss.config.js',
+	].some(fileName => existsSync(resolve(cwd, fileName)));
+
 	webpackChainConfig.module
 		.rule('css')
 		.test(/\.css$/)
@@ -51,7 +53,11 @@ export const getDevConfig: GetDevConfig = (webpackChainConfig, extraConfig) => {
 		.end()
 		.use('postcss-loader')
 		.loader(require.resolve('postcss-loader'))
-		.options(postcssConfig)
+		.options({
+			config: {
+				path: hasPostCssConfig ? cwd : __dirname,
+			},
+		})
 		.end();
 
 	webpackChainConfig.module
@@ -68,7 +74,11 @@ export const getDevConfig: GetDevConfig = (webpackChainConfig, extraConfig) => {
 		.end()
 		.use('postcss-loader')
 		.loader(require.resolve('postcss-loader'))
-		.options(postcssConfig)
+		.options({
+			config: {
+				path: hasPostCssConfig ? cwd : resolve('../../../core/lib/postcss'),
+			},
+		})
 		.end()
 		.use('less-loader')
 		.loader(require.resolve('less-loader'))

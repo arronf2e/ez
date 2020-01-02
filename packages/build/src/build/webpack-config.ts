@@ -1,9 +1,12 @@
+import { existsSync } from 'fs';
+import { resolve } from 'path';
 import WebpackChainConfig, { DevTool } from 'webpack-chain';
 import TerserPlugin from 'terser-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 
 interface ExtraConfig {
+	cwd: string;
 	output: string;
 	publicPath: string;
 	themeColors: object;
@@ -12,10 +15,8 @@ interface ExtraConfig {
 	runtimeChunk: boolean;
 }
 
-export function getBuildConfig(
-	webpackChainConfig: WebpackChainConfig,
-	{ output, themeColors, devtool, publicPath, minimize, runtimeChunk }: ExtraConfig
-) {
+export function getBuildConfig(webpackChainConfig: WebpackChainConfig, extraConfig: ExtraConfig) {
+	const { cwd, output, themeColors, devtool, publicPath, minimize, runtimeChunk } = extraConfig;
 	/** 模式(mode) */
 	webpackChainConfig.mode('production');
 
@@ -31,16 +32,15 @@ export function getBuildConfig(
 	/** 统计信息(stats) */
 	webpackChainConfig.stats('none');
 
-	const postCssConfig = {
-		plugins: [
-			require('autoprefixer')({
-				overrideBrowserslist: ['Chrome >= 52', 'FireFox >= 44', 'Safari >= 7', 'last 2 Edge versions', 'IE 10'],
-			}),
-			require.resolve('postcss-cssnext'),
-		],
-	};
-
 	/** 模块(module) */
+	const hasPostCssConfig = [
+		'.postcssrc',
+		'.postcssrc.json',
+		'.postcssrc.yml',
+		'.postcssrc.js',
+		'postcss.config.js',
+	].some(fileName => existsSync(resolve(cwd, fileName)));
+
 	webpackChainConfig.module
 		.rule('css')
 		.test(/\.css$/)
@@ -58,7 +58,11 @@ export function getBuildConfig(
 		.end()
 		.use('postcss-loader')
 		.loader(require.resolve('postcss-loader'))
-		.options(postCssConfig);
+		.options({
+			config: {
+				path: hasPostCssConfig ? cwd : resolve('../../../core/lib/postcss'),
+			},
+		});
 
 	webpackChainConfig.module
 		.rule('less')
@@ -77,7 +81,11 @@ export function getBuildConfig(
 		.end()
 		.use('postcss-loader')
 		.loader(require.resolve('postcss-loader'))
-		.options(postCssConfig)
+		.options({
+			config: {
+				path: hasPostCssConfig ? cwd : __dirname,
+			},
+		})
 		.end()
 		.use('less-loader')
 		.loader(require.resolve('less-loader'))

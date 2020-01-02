@@ -6,7 +6,7 @@ import { SignaleMethods } from '@ez-fe/helper';
 
 export type GetDevConfig = (
 	webpackChainConfig: WebpackChainConfig,
-	{ host, port }: { host: string; port: number; themeColors: object }
+	{ host, port }: { cwd: string; host: string; port: number; themeColors: object }
 ) => WebpackChainConfig;
 
 export type Sockets = Connection[];
