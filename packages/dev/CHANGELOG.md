@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.25](https://github.com/ez-fe/ez/compare/v0.6.24...v0.6.25) (2020-01-02)
+
+
+### Bug Fixes
+
+* loader ([d35f572](https://github.com/ez-fe/ez/commit/d35f572a106be55e852636271e7b838bc4b4a225))
+
+
+
+
+
 ## [0.6.24](https://github.com/ez-fe/ez/compare/v0.6.23...v0.6.24) (2020-01-02)
 
 
